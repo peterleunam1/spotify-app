@@ -1,5 +1,11 @@
 {
     "conventionalCommits.scopes": [
-        "global"
+        "global",
+        "profile",
+        "albums",
+        "auth",
+        "singers",
+        "playlists",
+        "tracks"
     ]
 }
