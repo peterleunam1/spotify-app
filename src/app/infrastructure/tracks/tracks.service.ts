@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TracksGateWay } from '../../domain/tracks/tracks.gateway';
 import { TracksModel } from '../../domain/tracks/tracks.entity';
+import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class TracksService implements TracksGateWay {
 
   getTracks(albumId: string, token: string): Observable<TracksModel> {
     return this.httpClient.get<TracksModel>(
-      `https://api.spotify.com/v1/albums/${albumId}/tracks`,
+      `${BASE_URL}/albums/${albumId}/tracks`,
       {
         headers: this.getHeaders(token)
       }

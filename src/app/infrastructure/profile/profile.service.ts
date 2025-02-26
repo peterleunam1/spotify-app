@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProfileGateWay } from '../../domain/profile/profile.gateway';
 import { ProfileModel } from '../../domain/profile/profile.entity';
+import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ProfileService implements ProfileGateWay {
 
   getProfile(token: string): Observable<ProfileModel> {
     return this.httpClient.get<ProfileModel>(
-      `https://api.spotify.com/v1/me`,
+      `${BASE_URL}/me`,
       {
         headers: this.getHeaders(token)
       }

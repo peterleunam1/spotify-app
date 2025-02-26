@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { TokenGateway } from '../../domain/token/token.gateway';
-import { SPOTIFY_APP_TOKEN } from '../../presentation/constants/cookies.storage';
+import { SPOTIFY_APP_TOKEN } from '../../presentation/constants/cookies-storage.constant';
 import { Router } from '@angular/router';
 
 @Injectable({

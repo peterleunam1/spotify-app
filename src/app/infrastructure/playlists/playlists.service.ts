@@ -5,6 +5,7 @@ import { ProfileGateWay } from '../../domain/profile/profile.gateway';
 import { ProfileModel } from '../../domain/profile/profile.entity';
 import { PlaylistsGateWay } from '../../domain/playlists/playlists.gateway';
 import { PlaylistsModel } from '../../domain/playlists/playlists.entity';
+import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class PlaylistsService implements PlaylistsGateWay {
 
   getPlaylists(token: string): Observable<PlaylistsModel> {
     return this.httpClient.get<PlaylistsModel>(
-      `https://api.spotify.com/v1/me/playlists`,
+      `${BASE_URL}/me/playlists`,
       {
         headers: this.getHeaders(token)
       }

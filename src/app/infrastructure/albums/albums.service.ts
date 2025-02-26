@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AlbumsModel } from '../../domain/albums/albums.entity';
+import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AlbumsService {
   }
 
     getAlbums(artistId: string, token: string): Observable<AlbumsModel> {
-      return this.httpClient.get<AlbumsModel>(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
+      return this.httpClient.get<AlbumsModel>(`${BASE_URL}/artists/${artistId}/albums`, {
         headers: this.getHeaders(token)
       });
     }

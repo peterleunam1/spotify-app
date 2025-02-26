@@ -3,7 +3,8 @@ import { SingerGateway } from '../../domain/singers/singer.gateway';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { SingerResponse } from '../../domain/singers/singer.entity';
 import { Observable } from 'rxjs';
-import { SPOTIFY_APP_TOKEN } from '../../presentation/constants/cookies.storage';
+import { SPOTIFY_APP_TOKEN } from '../../presentation/constants/cookies-storage.constant';
+import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,6 @@ export class SingersService implements SingerGateway {
     .set('type', 'artist')
     .set('limit', '10'); // Limitar resultados
 
-    return this.httpClient.get<SingerResponse>('https://api.spotify.com/v1/search', { headers: this.getHeaders(token) , params });
+    return this.httpClient.get<SingerResponse>(`${BASE_URL}/search`, { headers: this.getHeaders(token) , params });
   }
 }
