@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AlbumInfo } from '../../../../domain/albums/albums.entity';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../atoms/modal/modal.component';
-import { ListOfSongsComponent } from "../../organisms/list-of-songs/list-of-songs.component";
+import { ListOfSongsComponent } from '../../organisms/list-of-songs/list-of-songs.component';
 
 @Component({
   selector: 'app-album',

@@ -11,7 +11,7 @@ import { PlaylistItem } from '../../../../domain/playlists/playlists.entity';
 })
 export class ListOfPlaylistsComponent {
   @Input() playlists: PlaylistItem[] = [];
-  @Input() isLoading: boolean = false;
+  @Input() isLoading = false;
   @Input() isFollowed!: (id: string) => boolean;
   
   openPlaylist(url: string): void {

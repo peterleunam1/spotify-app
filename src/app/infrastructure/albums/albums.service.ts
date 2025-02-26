@@ -14,7 +14,7 @@ export class AlbumsService {
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
-    })
+    });
   }
 
     getAlbums(artistId: string, token: string): Observable<AlbumsModel> {

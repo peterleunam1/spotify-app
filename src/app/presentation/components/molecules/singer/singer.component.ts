@@ -16,7 +16,7 @@ export class SingerComponent {
     image: '',
     followers: 0,
     genres: []
-  }
+  };
 
   formatGenres(genres: string[]): string {
     if (!genres || genres.length === 0) return 'No genres specified';

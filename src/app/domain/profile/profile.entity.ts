@@ -7,6 +7,7 @@ export interface ProfileModel {
     followers:        Followers;
     href:             string;
     id:               string;
+    //eslint-disable-next-line
     images:           any[];
     product:          string;
     type:             string;

@@ -13,8 +13,8 @@ export class AuthService implements AuthGateway {
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    })
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
   }
   private scopes = 'user-read-private user-read-email';
   private redirectUri = 'http://localhost:4200/callback';

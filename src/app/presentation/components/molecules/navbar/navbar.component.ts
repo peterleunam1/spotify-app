@@ -4,7 +4,7 @@ import {
   inject,
   Input,
   Output,
-  signal
+  signal, OnInit
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputComponent } from '../../atoms/input/input.component';
@@ -27,7 +27,7 @@ import { PUBLIC_ROUTES } from '../../../constants/routes-storage.constant';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Input() isSearchVisible = true;
   @Input() keyword = '';
   @Output() keywordChange = new EventEmitter<string>();

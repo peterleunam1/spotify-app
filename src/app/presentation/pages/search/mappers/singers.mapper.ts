@@ -15,6 +15,6 @@ export class SingersMapper
         image: images[0].url,
         followers: followers.total,
         genres
-      }
+      };
   }
 }

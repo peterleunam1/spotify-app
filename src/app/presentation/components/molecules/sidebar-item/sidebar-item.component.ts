@@ -9,8 +9,8 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule, CommonModule]
 })
 export class SidebarItemComponent {
-  @Input() label: string = '';
-  @Input() icon: string = '';
-  @Input() route: string = '';
-  @Input() active: boolean = false;
+  @Input() label = '';
+  @Input() icon = '';
+  @Input() route = '';
+  @Input() active = false;
 }

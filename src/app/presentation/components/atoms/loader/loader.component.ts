@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './loader.component.css'
 })
 export class LoaderComponent {
-  @Input() size: string = 'w-10 h-10';
-  @Input() message: string = 'Loading...';
+  @Input() size = 'w-10 h-10';
+  @Input() message = 'Loading...';
 }

@@ -1,12 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
-import { NavbarComponent } from "../../components/molecules/navbar/navbar.component";
+import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { PlaylistsUseCase } from '../../../application/playlists/playlists.use-case';
 import { lastValueFrom } from 'rxjs';
 import { PlaylistsModel } from '../../../domain/playlists/playlists.entity';
 import { ListOfPlaylistsComponent } from '../../components/organisms/list-of-playlists/list-of-playlists.component';
-import { LoaderComponent } from "../../components/atoms/loader/loader.component";
+import { LoaderComponent } from '../../components/atoms/loader/loader.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,11 +14,11 @@ import { LoaderComponent } from "../../components/atoms/loader/loader.component"
   standalone: true,
   imports: [CommonModule, MainLayoutComponent, NavbarComponent, ListOfPlaylistsComponent, LoaderComponent]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   private playlistUseCase = inject(PlaylistsUseCase);
   playlists: PlaylistsModel = {} as PlaylistsModel;
-  isLoading: boolean = true;
-  followedPlaylists: Set<string> = new Set(); // Estado para playlists seguidas
+  isLoading = true;
+  followedPlaylists = new Set<string>(); // Estado para playlists seguidas
 
   async getPlaylists() {
     this.isLoading = true;

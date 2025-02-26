@@ -1,11 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { TracksUseCase } from '../../../../application/tracks/tracks.use-case';
 import { lastValueFrom } from 'rxjs';
 import { SingleSongModel, TracksModel } from '../../../../domain/tracks/tracks.entity';
 import { ListOfSongMapper } from './mappers/list-of-song.mapper';
 import { CommonModule } from '@angular/common';
-import { MainButtonComponent } from "../../atoms/main-button/main-button.component";
-import { LoaderComponent } from "../../atoms/loader/loader.component";
+import { MainButtonComponent } from '../../atoms/main-button/main-button.component';
+import { LoaderComponent } from '../../atoms/loader/loader.component';
 
 @Component({
   selector: 'app-list-of-songs',
@@ -13,21 +13,21 @@ import { LoaderComponent } from "../../atoms/loader/loader.component";
   templateUrl: './list-of-songs.component.html',
   styleUrl: './list-of-songs.component.css'
 })
-export class ListOfSongsComponent {
+export class ListOfSongsComponent implements OnInit {
   private tracksUseCase = inject(TracksUseCase);
   private mapper = new ListOfSongMapper();
 
   tracksResponse: TracksModel = {} as TracksModel;
   tracks: SingleSongModel[] = [];
-  isLoading: boolean = false;
-  albumName: string = 'Songs';
+  isLoading = false;
+  albumName = 'Songs';
 
-  @Input() albumId: string = '';
+  @Input() albumId = '';
 
   // 🔹 Paginación
-  currentPage: number = 1;
-  pageSize: number = 5;
-  totalPages: number = 0;
+  currentPage = 1;
+  pageSize = 5;
+  totalPages = 0;
 
   async getTracks(albumId: string) {
     this.isLoading = true;

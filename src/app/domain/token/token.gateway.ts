@@ -1,5 +1,3 @@
-import { Observable } from "rxjs";
-
 export abstract class TokenGateway {
     abstract saveToken(): void;
     abstract getToken(): string;

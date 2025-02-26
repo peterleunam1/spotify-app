@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MainButtonComponent } from "../../components/atoms/main-button/main-button.component";
+import { MainButtonComponent } from '../../components/atoms/main-button/main-button.component';
 import { Router } from '@angular/router';
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/routes-storage.constant';
 

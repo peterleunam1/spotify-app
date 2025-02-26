@@ -8,9 +8,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   imports: [CommonModule]
 })
 export class MainButtonComponent {
-  @Input() label: string = 'Button';
-  @Input() isLoading: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() label = 'Button';
+  @Input() isLoading = false;
+  @Input() disabled = false;
   @Output() buttonClick = new EventEmitter<void>();
 
   handleClick(): void {

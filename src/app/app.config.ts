@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
@@ -35,6 +35,6 @@ export const appConfig: ApplicationConfig = {
     { provide: AlbumsGateWay, useClass: AlbumsService },
     { provide: TracksGateWay, useClass: TracksService },
     { provide: ProfileGateWay, useClass: ProfileService },
-    { provide: PlaylistsGateWay, useClass: PlaylistsService },
-  ],
+    { provide: PlaylistsGateWay, useClass: PlaylistsService }
+  ]
 };

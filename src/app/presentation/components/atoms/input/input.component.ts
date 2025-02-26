@@ -4,12 +4,12 @@ import { ControlValueAccessor, FormControl, ReactiveFormsModule } from '@angular
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css'],
+  styleUrls: ['./input.component.css']
 })
 export class InputComponent {
-  @Input() type: string = 'text';
-  @Input() placeholder: string = '';
-  @Input() value: string = '';
+  @Input() type = 'text';
+  @Input() placeholder = '';
+  @Input() value = '';
   
   @Output() valueChange = new EventEmitter<string>();
 

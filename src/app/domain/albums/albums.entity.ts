@@ -26,15 +26,15 @@ export interface Item {
 }
 
 export enum AlbumGroup {
-    Album = "album",
-    AppearsOn = "appears_on",
-    Single = "single",
+    Album = 'album',
+    AppearsOn = 'appears_on',
+    Single = 'single',
 }
 
 export enum AlbumTypeEnum {
-    Album = "album",
-    Compilation = "compilation",
-    Single = "single",
+    Album = 'album',
+    Compilation = 'compilation',
+    Single = 'single',
 }
 
 export interface Artist {
@@ -51,7 +51,7 @@ export interface ExternalUrls {
 }
 
 export enum ArtistType {
-    Artist = "artist",
+    Artist = 'artist',
 }
 
 export interface Image {
@@ -61,7 +61,7 @@ export interface Image {
 }
 
 export enum ReleaseDatePrecision {
-    Day = "day",
+    Day = 'day',
 }
 
 export interface AlbumInfo {

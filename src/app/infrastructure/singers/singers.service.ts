@@ -16,7 +16,7 @@ export class SingersService implements SingerGateway {
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
-    })
+    });
   }
 
    getAnArtist(name: string, token: string): Observable<SingerResponse> {

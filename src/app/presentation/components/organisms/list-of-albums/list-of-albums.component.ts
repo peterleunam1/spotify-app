@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ListOfAlbumsComponent implements OnChanges {
   @Input() albums: AlbumInfo[] = [];
-  artistName: string = 'Unknown Artist';
+  artistName = 'Unknown Artist';
 
   ngOnChanges() {
     if (this.albums.length > 0) {

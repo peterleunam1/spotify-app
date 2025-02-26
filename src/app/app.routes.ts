@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: PUBLIC_ROUTES.CALLBACK,
-    component: CallbackComponent,
+    component: CallbackComponent
   },
   {
     path: '',
