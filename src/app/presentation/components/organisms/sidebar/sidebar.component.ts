@@ -18,10 +18,10 @@ export class SidebarComponent {
   private router = inject(Router);
   sidebarItems: SidebarItem[] = [
     { label: 'Home', icon: 'fa-home', route: '/dashboard' },
-    { label: 'Search', icon: 'fa-search', route: '/search' },
-    { label: 'Your Library', icon: 'fa-book', route: '/library' },
-    { label: 'Create Playlist', icon: 'fa-plus-square', route: '/create-playlist' },
-    { label: 'Liked Songs', icon: 'fa-heart', route: '/liked-songs' }
+    { label: 'Search', icon: 'fa-search', route: '/search' }
+    // { label: 'Your Library', icon: 'fa-book', route: '/library' },
+    // { label: 'Create Playlist', icon: 'fa-plus-square', route: '/create-playlist' },
+    // { label: 'Liked Songs', icon: 'fa-heart', route: '/liked-songs' }
   ];
   isActive(route: string): boolean {
     return this.router.url === route;

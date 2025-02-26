@@ -20,7 +20,7 @@ export class TokenService implements TokenGateway {
     this.accessToken = params.get('access_token');
     if (this.accessToken) {
       localStorage.setItem(SPOTIFY_APP_TOKEN, this.accessToken);
-      // this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
