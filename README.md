@@ -9,9 +9,13 @@
 - [How to Use](#how-to-use)
 
 ## Overview
-<!-- ![Auth](./src/assets/images/Diapositiva1.PNG)
-![Dashboard](./src/assets/images/Diapositiva2.PNG) -->
-![Search](/public/assets/images/search-init.PNG)
+![Auth](/public/assets/images/sign-in.PNG)
+![Dashboard](/public/assets/images/home.PNG)
+![Search](/public/assets/images/searched-init.PNG)
+![Search](/public/assets/images/searched-two.PNG)
+![Albums](/public/assets/images/albums.PNG)
+![Tracks](/public/assets/images/songs.PNG)
+
 
 ## Built With
 - [Angular](https://angular.io/)
