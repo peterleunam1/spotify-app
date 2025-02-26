@@ -1,0 +1,6 @@
+<!-- <p class="mb-6 text-red-500">{{albums[0]?.artistName}}</p> -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 cursor-pointer">
+    <div *ngFor="let album of albums" >
+     <app-album [album]="album"></app-album>
+    </div>
+  </div>

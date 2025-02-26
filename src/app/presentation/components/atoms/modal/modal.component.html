@@ -1,0 +1,11 @@
+<div *ngIf="isOpen" 
+     @fadeInOut 
+     class="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
+  <div @scaleIn class="bg-white p-6 rounded-2xl shadow-xl w-full max-w-lg transform transition-all duration-300 relative">
+    <button (click)="close()" 
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer">
+      <i class="fa-solid fa-times text-2xl"></i>
+    </button>
+    <ng-content></ng-content>
+  </div>
+</div>

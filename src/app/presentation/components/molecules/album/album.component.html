@@ -1,0 +1,11 @@
+<div (click)="openModal()" class="bg-white shadow-md rounded-lg p-4 transform transition duration-300 hover:scale-105 hover:shadow-xl">
+    <img [src]="album.coverImage" alt="Cover image" *ngIf="album.coverImage" class="w-full h-48 object-cover rounded-t-lg">
+    <div class="p-4">
+      <h3 class="text-lg font-bold text-gray-800">{{ album.name }}</h3>
+      <p class="text-sm text-gray-600">Released: {{ album.releaseYear }}</p>
+      <p class="text-sm text-gray-600">Artist: {{ album.artistName }}</p>
+    </div>
+  </div>
+<app-modal [isOpen]="isModalOpen" (closed)="closeModal()">
+   <app-list-of-songs *ngIf="isModalOpen" [albumId]="album.id" />
+</app-modal>
