@@ -1,0 +1,19 @@
+<a 
+  [routerLink]="'/albums/' + singer.id"
+  class="block transition-transform transform hover:scale-105 duration-300 ease-in-out"
+>
+  <div 
+    class="bg-gray-900 text-white rounded-lg p-6 shadow-lg flex flex-col items-center text-center cursor-pointer"
+  >
+    <img 
+      [src]="singer.image" 
+      [alt]="'Imagen de ' + singer.name" 
+      class="rounded-full object-cover mb-4 w-32 h-32"
+    />
+    <h2 class="text-lg font-bold text-green-400">
+      {{ singer.name }}
+    </h2>
+    <p class="text-sm text-gray-400">Seguidores: {{ singer.followers | number }}</p>
+    <p class="text-sm text-gray-400">Géneros: {{ singer.genres.join(', ') || 'No especificado' }}</p>
+  </div>
+</a>
