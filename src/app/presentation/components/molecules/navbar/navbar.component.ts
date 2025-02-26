@@ -1,0 +1,58 @@
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { InputComponent } from '../../atoms/input/input.component';
+import { FormControl, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, lastValueFrom } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ProfileModel } from '../../../../domain/profile/profile.entity';
+import { ProfileUseCase } from '../../../../application/profile/profile.use-case';
+import { TokenUseCase } from '../../../../application/token/token.use-case';
+
+@Component({
+  selector: 'app-navbar',
+  imports: [InputComponent, ReactiveFormsModule, CommonModule],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css'
+})
+export class NavbarComponent {
+  @Input() isSearchVisible = true;
+  @Input() keyword = '';
+  @Output() keywordChange = new EventEmitter<string>();
+  private profileUseCase = inject(ProfileUseCase);
+  private tokenUseCase = inject(TokenUseCase);
+  private router = inject(Router);
+    profile: ProfileModel = {} as ProfileModel;
+    isLoading = false;
+    isDropdownOpen = false;
+  
+    async getProfile() {
+      try {
+        this.isLoading = true;
+        const result = await lastValueFrom(this.profileUseCase.getProfile());
+        this.profile = result;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    }
+  
+    logout() {
+      this.tokenUseCase.removeToken();
+      this.router.navigate(['/sign-in']);
+    }
+  
+    ngOnInit() {
+      this.getProfile();
+    }
+
+  updateName(newValue: string) {
+    this.keyword = newValue;
+    this.keywordChange.emit(newValue);
+  }
+
+}
