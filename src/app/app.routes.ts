@@ -3,34 +3,35 @@ import { DashboardComponent } from './presentation/pages/dashboard/dashboard.com
 import { SignInComponent } from './presentation/pages/sign-in/sign-in.component';
 import { authGuard } from './presentation/guards/auth.guard';
 import { PageNotFoundComponent } from './presentation/pages/page-not-found/page-not-found.component';
-import { CallbackComponent } from './presentation/components/callback/callback.component';
+import { CallbackComponent } from './presentation/pages/callback/callback.component';
 import { SearchComponent } from './presentation/pages/search/search.component';
 import { AlbumsComponent } from './presentation/pages/albums/albums.component';
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './presentation/constants/routes-storage.constant';
 
 export const routes: Routes = [
-  { path: 'sign-in', component: SignInComponent },
+  { path: PUBLIC_ROUTES.SIGN_IN, component: SignInComponent },
   {
-    path: 'dashboard',
+    path: PRIVATE_ROUTES.DASHBOARD,
     component: DashboardComponent,
     canActivate: [authGuard]
   },
   {
-    path: 'search',
+    path: PRIVATE_ROUTES.SEARCH,
     component: SearchComponent,
     canActivate: [authGuard]
   },
   {
-    path: 'albums/:singerId',
+    path: PRIVATE_ROUTES.ALBUMS,
     component: AlbumsComponent,
     canActivate: [authGuard]
   },
   {
-    path: 'callback',
+    path: PUBLIC_ROUTES.CALLBACK,
     component: CallbackComponent,
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: PRIVATE_ROUTES.DASHBOARD,
     pathMatch: 'full'
   },
 

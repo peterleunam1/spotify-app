@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { TokenGateway } from '../../domain/token/token.gateway';
 import { SPOTIFY_APP_TOKEN } from '../../presentation/constants/cookies-storage.constant';
 import { Router } from '@angular/router';
+import { PRIVATE_ROUTES } from '../../presentation/constants/routes-storage.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class TokenService implements TokenGateway {
     this.accessToken = params.get('access_token');
     if (this.accessToken) {
       localStorage.setItem(SPOTIFY_APP_TOKEN, this.accessToken);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate([PRIVATE_ROUTES.DASHBOARD]);
     }
   }
 
