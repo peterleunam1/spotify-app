@@ -27,7 +27,6 @@
   </div>
 </div>
 
-<!-- 📌 Modal con Lista de Canciones -->
 <app-modal [isOpen]="isModalOpen" (closed)="closeModal()">
   <app-list-of-songs *ngIf="isModalOpen" [albumId]="album.id" />
 </app-modal>

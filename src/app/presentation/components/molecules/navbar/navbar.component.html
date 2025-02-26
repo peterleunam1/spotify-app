@@ -1,36 +1,50 @@
-<header class="h-[64px] bg-[#000] flex items-center px-2 sm:px-4 flex justify-between"
-[ngClass]="{'justify-end': !isSearchVisible}"
->
-    <app-input 
-    *ngIf="isSearchVisible"
-    [type]="'text'" 
-    [placeholder]="'Find your favorite artists...'"
-    (valueChange)="updateName($event)"
-    class="w-2/3"
-    >
-  </app-input>
+<header
+  class="h-[64px] bg-transparent flex items-center px-2 sm:px-4 justify-between text-white">
+  
+  <div class="flex items-center space-x-4 w-2/3">
+    <div class="space-x-4 hidden sm:flex">
+      <button (click)="goBack()" 
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-[#282828] 
+               hover:bg-[#3e3e3e] transition cursor-pointer">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button (click)="goForward()" 
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-[#282828] 
+               hover:bg-[#3e3e3e] transition cursor-pointer">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    
+    <app-input
+      *ngIf="isSearchVisible"
+      [type]="'text'"
+      [placeholder]="'Find your favorite artists...'"
+      (valueChange)="updateName($event)"
+      class="w-full sm:w-96">
+    </app-input>
+  </div>
+
   <div class="relative text-white">
-    <button (click)="toggleDropdown()" class="cursor-pointer flex items-center space-x-2 hover:bg-gray-800 p-2 rounded-lg">
-        <img 
-            *ngIf="profile.images.length > 0" 
-            [src]="profile.images[0].url" 
-            alt="Profile Picture" 
-            class="w-10 h-10 rounded-full"
-        />
-        <span class="font-semibold">{{ profile.display_name }}</span>
+    <button
+      (click)="toggleDropdown()"
+      class="cursor-pointer flex items-center space-x-2 hover:bg-[#282828] p-2 rounded-lg transition">
+      <img
+        *ngIf="profile.images.length > 0"
+        [src]="profile.images[0].url"
+        alt="Profile Picture"
+        class="w-10 h-10 rounded-full" />
+      <span class="font-semibold">{{ profile.display_name }}</span>
     </button>
 
-    <!-- Dropdown -->
-    <div 
-        *ngIf="isDropdownOpen" 
-        class="absolute right-0 mt-2 w-40 bg-white text-black shadow-md rounded-lg overflow-hidden z-10"
-    >
-        <button 
-            (click)="logout()" 
-            class="w-full text-left px-4 py-2 hover:bg-gray-200 cursor-pointer"
-        >
-            Logout
-        </button>
+    <!-- 📌 Dropdown estilizado tipo Spotify -->
+    <div
+      *ngIf="isDropdownOpen"
+      class="absolute right-0 mt-2 w-40 bg-[#282828] text-white shadow-lg rounded-lg overflow-hidden z-10">
+      <button
+        (click)="logout()"
+        class="w-full text-left px-4 py-2 hover:bg-[#3e3e3e] transition cursor-pointer">
+        Logout
+      </button>
     </div>
-</div>
-  </header>
+  </div>
+</header>
