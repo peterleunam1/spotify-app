@@ -1,0 +1,16 @@
+<section
+  class="w-full h-screen flex flex-col items-center justify-center sm:flex-row-reverse sm:justify-between sm:items-center sm:gap-6 max-w-[1440px] mx-auto">
+  <picture class="w-full h-[60vh] bg-gray-50 sm:w-[50%]">image</picture>
+  <article class="w-[80%] flex flex-col items-center justify-center gap-6">
+    <h1
+      class="text-white max-w-[246px] font-bold text text-[28px] text-center leading-normal">
+      Millions of Songs. Free on Spotify.
+    </h1>
+    <span class="w-[400px]">
+      <app-main-button
+        [label]="'Log In'"
+        class="w-full"
+        (buttonClick)="login()"></app-main-button>
+    </span>
+  </article>
+</section>
