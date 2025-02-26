@@ -17,4 +17,16 @@ export class SingerComponent {
     followers: 0,
     genres: []
   }
+
+  formatGenres(genres: string[]): string {
+    if (!genres || genres.length === 0) return 'No genres specified';
+  
+    // Capitaliza los géneros y limita la cantidad de palabras visibles
+    const formattedGenres = genres.map(g => g.charAt(0).toUpperCase() + g.slice(1));
+    
+    return formattedGenres.length > 3
+      ? `${formattedGenres.slice(0, 2).join(', ')} etc.` 
+      : formattedGenres.join(', ');
+  }
+  
 }

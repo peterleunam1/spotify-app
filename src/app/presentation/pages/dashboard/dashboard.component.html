@@ -1,48 +1,62 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
 
-  <div class="p-6 text-white">
-    <h2 class="text-2xl font-bold mb-6">Mis Playlists</h2>
+  <div class="px-6 py-4 text-white min-h-screen">
+    <!-- 🔥 Título -->
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">My Playlists</h2>
 
-    <!-- Estado de carga -->
-    <div *ngIf="isLoading" class="text-center text-lg font-semibold">Cargando playlists...</div>
+    <!-- 🔄 Estado de carga -->
+    <div
+      *ngIf="isLoading"
+      class="text-center text-lg font-semibold animate-pulse">
+      Cargando playlists...
+    </div>
 
-    <!-- Grid de playlists -->
-    <div *ngIf="!isLoading && playlists.items.length > 0" 
-         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-      
-      <div *ngFor="let playlist of playlists.items"
-           class="bg-gray-800 rounded-lg p-4 cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-lg relative"
-           (click)="openPlaylist(playlist.external_urls.spotify)">
-        
-        <!-- Imagen de la playlist -->
-        <div class="relative overflow-hidden rounded-lg">
-          <img [src]="playlist.images[0].url || 'assets/placeholder.png'" 
-               [alt]="playlist.name" 
-               class="w-full rounded-lg transition duration-300 hover:brightness-75">
+    <!-- 🎵 Grid de playlists -->
+    <div
+      *ngIf="!isLoading && playlists.items.length > 0"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+      <div
+        *ngFor="let playlist of playlists.items"
+        (click)="openPlaylist(playlist.external_urls.spotify)"
+        class="bg-[#181818] w-54 shadow-md rounded-lg p-4 transition-transform transform duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#282828] cursor-pointer flex flex-col">
+        <!-- 📌 Imagen de la Playlist -->
+        <div class="relative w-full h-52">
+          <img
+            [src]="playlist.images[0].url || 'assets/placeholder.png'"
+            [alt]="playlist.name"
+            class="w-full h-full object-cover rounded-md" />
         </div>
 
-        <!-- Información de la playlist -->
-        <div class="mt-3 text-center">
-          <h3 class="text-sm font-bold truncate">{{ playlist.name }}</h3>
-          <p class="text-xs text-gray-400 truncate">{{ playlist.owner.display_name }}</p>
+        <!-- 📌 Info de la Playlist -->
+        <div class="flex flex-col items-center justify-center text-center mt-2">
+          <h3 class="text-sm font-bold text-white truncate w-full px-2">
+            {{ playlist.name }}
+          </h3>
+          <p class="text-xs text-gray-400 truncate w-full px-2">
+            {{ playlist.owner.display_name }}
+          </p>
         </div>
 
-        <!-- Botón de Follow/Unfollow -->
-        <button (click)="toggleFollow(playlist.id); $event.stopPropagation()"
-                class="absolute top-2 right-2 px-3 py-1 text-xs font-bold rounded-full transition 
-                       duration-300"
-                [ngClass]="isFollowed(playlist.id) 
-                          ? 'bg-green-500 text-black hover:bg-green-400' 
-                          : 'bg-gray-700 text-white hover:bg-gray-600'">
+        <!-- ✅ Botón Follow/Unfollow -->
+        <button
+          (click)="toggleFollow(playlist.id); $event.stopPropagation()"
+          class="cursor-pointer absolute top-3 right-3 px-3 py-1 text-xs md:text-sm font-bold rounded-full transition duration-300"
+          [ngClass]="
+            isFollowed(playlist.id)
+              ? 'bg-green-500 text-black hover:bg-green-400'
+              : 'bg-gray-700 text-white hover:bg-gray-600'
+          ">
           {{ isFollowed(playlist.id) ? 'Unfollow' : 'Follow' }}
         </button>
       </div>
     </div>
 
-    <!-- Sin playlists -->
-    <div *ngIf="!isLoading && playlists.items?.length === 0" class="text-center text-lg mt-6">
-      No hay playlists disponibles.
+    <!-- 🚫 Sin playlists -->
+    <div
+      *ngIf="!isLoading && playlists.items?.length === 0"
+      class="text-center text-lg text-gray-400 mt-6">
+      No playlists available.
     </div>
   </div>
 </app-main-layout>

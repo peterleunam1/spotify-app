@@ -25,6 +25,13 @@ export class SearchComponent {
   listSingers: SingleSingerModel[] = [];
   isLoading = false; // 🔹 Nueva variable de estado para el loading
 
+  categories = [
+    { name: "Discover", color: "#1DB954" },  // Verde Spotify
+    { name: "Podcasts", color: "#E13300" },  // Rojo     // Rosa fuerte
+    { name: "Pop", color: "#148A08" },       // Verde claro
+    { name: "Electronic", color: "#009688" }, // Azul verdoso
+    { name: "Jazz", color: "#FF9800" }       // Naranja
+  ];
   constructor() {
     this.keywordSubject.asObservable()
       .pipe(

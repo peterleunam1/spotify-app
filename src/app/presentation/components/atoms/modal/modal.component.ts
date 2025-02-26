@@ -11,16 +11,19 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('200ms ease-in', style({ opacity: 1 }))
+        animate('250ms ease-out', style({ opacity: 1 }))
       ]),
       transition(':leave', [
-        animate('200ms ease-out', style({ opacity: 0 }))
+        animate('250ms ease-in', style({ opacity: 0 }))
       ])
     ]),
     trigger('scaleIn', [
       transition(':enter', [
-        style({ transform: 'scale(0.9)' }),
-        animate('200ms ease-out', style({ transform: 'scale(1)' }))
+        style({ transform: 'scale(0.85)', opacity: 0 }),
+        animate('250ms ease-out', style({ transform: 'scale(1)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ transform: 'scale(0.9)', opacity: 0 }))
       ])
     ])
   ]

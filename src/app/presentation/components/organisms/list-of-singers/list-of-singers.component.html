@@ -1,10 +1,13 @@
 <div *ngIf="singers.length > 0; else noResults">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      <app-singer *ngFor="let artist of singers.slice(1)" [singer]="artist"></app-singer>
-    </div>
+  <!-- 🔥 Grid Responsivo -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
+    <app-singer *ngFor="let artist of singers.slice(1)" [singer]="artist"></app-singer>
   </div>
-  
-  <ng-template #noResults>
-    <p class="text-center text-gray-500">No se encontraron artistas.</p>
-  </ng-template>
-  
+</div>
+
+<!-- 🔥 Mensaje si no hay artistas -->
+<ng-template #noResults>
+  <p class="text-center text-gray-400 text-lg font-medium py-10">
+    No se encontraron artistas.
+  </p>
+</ng-template>

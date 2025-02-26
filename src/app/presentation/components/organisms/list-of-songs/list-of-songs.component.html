@@ -1,59 +1,63 @@
-<section class="text-black p-4">
-    <h2 class="text-xl font-semibold mb-4">{{ albumName }}</h2>
-  
-    <div *ngIf="tracks.length > 0; else loading">
-      <table class="w-full border-collapse">
-        <thead>
-          <tr class="bg-gray-200 text-gray-700">
-            <th class="text-left p-3">#</th>
-            <th class="text-left p-3">Title</th>
-            <th class="text-left p-3">Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let track of paginatedTracks; let i = index"
-            class="border-b hover:bg-gray-100 transition duration-200"
-          >
-            <td class="p-3">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
-            <td class="p-3">
-              <a
-                [href]="track.link"
-                target="_blank"
-                class="text-blue-600 hover:underline"
-              >
-                {{ track.name }}
-              </a>
-            </td>
-            <td class="p-3">{{ formatDuration(track.duration) }}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <!-- Paginación -->
-      <div class="flex justify-center mt-4 space-x-2">
-        <button
-          (click)="changePage(currentPage - 1)"
-          [disabled]="currentPage === 1"
-          class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+<section class="text-white">
+  <h2 class="text-2xl font-bold mb-4">{{ albumName }}</h2>
+
+  <div *ngIf="tracks.length > 0; else loading">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="bg-[#282828] text-white">
+          <th class="text-left p-4">#</th>
+          <th class="text-left p-4">Title</th>
+          <th class="text-left p-4">Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let track of paginatedTracks; let i = index"
+          class="border-b border-gray-700 hover:bg-[#3a3a3a] transition duration-300 ease-in-out"
         >
-          Prev
-        </button>
-  
-        <span class="px-4 py-2 font-semibold">{{ currentPage }} / {{ totalPages }}</span>
-  
-        <button
-          (click)="changePage(currentPage + 1)"
-          [disabled]="currentPage === totalPages"
-          class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
+          <td class="p-4">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td class="p-4">
+            <a
+              [href]="track.link"
+              target="_blank"
+              class="cursor-pointer text-[#1db954] hover:text-[#1ed760] font-medium transition duration-300 ease-in-out 
+                     relative no-underline hover:border-b-2 border-[#1db954]"
+            >
+              {{ track.name }}
+            </a>
+          </td>
+          <td class="p-4">{{ formatDuration(track.duration) }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 📌 Paginación -->
+    <div class="flex justify-center mt-6 space-x-3">
+      <!-- <button
+        (click)="changePage(currentPage - 1)"
+        [disabled]="currentPage === 1"
+        class="px-5 py-2 rounded-full bg-[#1db954] text-white font-medium 
+               hover:bg-[#1ed760] transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Prev
+      </button> -->
+      <app-main-button [label]="'Prev'"  (buttonClick)="changePage(currentPage - 1)" [disabled]="currentPage === 1"  />
+
+      <span class="px-4 py-2 font-semibold">{{ currentPage }} / {{ totalPages }}</span>
+
+      <!-- <button
+        (click)="changePage(currentPage + 1)"
+        [disabled]="currentPage === totalPages"
+        class="px-5 py-2 rounded-full bg-[#1db954] text-white font-medium 
+               hover:bg-[#1ed760] transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button> -->
+      <app-main-button [label]="'Next'"  (buttonClick)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages"  />
     </div>
-  
-    <ng-template #loading>
-      <p class="text-gray-500">Loading songs...</p>
-    </ng-template>
-  </section>
-  
+  </div>
+
+  <ng-template #loading>
+    <p class="text-gray-400 text-center mt-4">Loading songs...</p>
+  </ng-template>
+</section>

@@ -4,10 +4,11 @@ import { lastValueFrom } from 'rxjs';
 import { SingleSongModel, TracksModel } from '../../../../domain/tracks/tracks.entity';
 import { ListOfSongMapper } from './mappers/list-of-song.mapper';
 import { CommonModule } from '@angular/common';
+import { MainButtonComponent } from "../../atoms/main-button/main-button.component";
 
 @Component({
   selector: 'app-list-of-songs',
-  imports: [CommonModule],
+  imports: [CommonModule, MainButtonComponent],
   templateUrl: './list-of-songs.component.html',
   styleUrl: './list-of-songs.component.css'
 })

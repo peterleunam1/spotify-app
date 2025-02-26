@@ -1,11 +1,12 @@
-<header class="h-[64px] bg-[#000] flex items-center px-4 flex justify-between"
+<header class="h-[64px] bg-[#000] flex items-center px-2 sm:px-4 flex justify-between"
 [ngClass]="{'justify-end': !isSearchVisible}"
 >
     <app-input 
     *ngIf="isSearchVisible"
     [type]="'text'" 
-    [placeholder]="'Search artists...'" 
+    [placeholder]="'Find your favorite artists...'"
     (valueChange)="updateName($event)"
+    class="w-2/3"
     >
   </app-input>
   <div class="relative text-white">

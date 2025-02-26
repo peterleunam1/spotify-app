@@ -1,6 +1,13 @@
-<!-- <p class="mb-6 text-red-500">{{albums[0]?.artistName}}</p> -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 cursor-pointer">
-    <div *ngFor="let album of albums" >
-     <app-album [album]="album"></app-album>
+<div class="p-6">
+  <!-- 🔥 Título dinámico -->
+  <h2 class="text-2xl font-bold text-white mb-4">
+    Albums - {{ artistName }}
+  </h2>
+
+  <!-- 🔥 Grid Responsivo -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div *ngFor="let album of albums" class="mx-auto sm:mx-0">
+      <app-album [album]="album"></app-album>
     </div>
   </div>
+</div>

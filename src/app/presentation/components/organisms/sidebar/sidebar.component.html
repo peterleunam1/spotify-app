@@ -1,8 +1,14 @@
 <div
-  class="fixed md:inset-y-0 md:left-0 bottom-0 md:w-[245px] w-full bg-[#000] text-white h-16 md:h-full flex md:flex-col">
+  class="fixed md:inset-y-0 md:left-0 bottom-0 md:w-[245px] w-full bg-[#000] text-white h-16 md:h-full flex md:flex-col z-50">
   <nav
     class="flex md:flex-col justify-around md:justify-start md:space-y-4 w-full p-4">
-    <p class="font-bold text-[24px]">LOGO</p>
+    
+    <!-- 🎵 Logo (solo visible en desktop) -->
+    <picture class="hidden md:block">
+      <img src="../../../../../assets/images/spotify-logo.svg" alt="logo" />
+    </picture>
+
+    <!-- 📌 Sidebar Items -->
     <app-sidebar-item
       *ngFor="let item of sidebarItems"
       [label]="item.label"
