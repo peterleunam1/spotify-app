@@ -20,7 +20,7 @@ export class ListOfSongsComponent {
   tracksResponse: TracksModel = {} as TracksModel;
   tracks: SingleSongModel[] = [];
   isLoading: boolean = false;
-  albumName: string = '';
+  albumName: string = 'Songs';
 
   @Input() albumId: string = '';
 
@@ -35,7 +35,6 @@ export class ListOfSongsComponent {
       const result = await lastValueFrom(this.tracksUseCase.getTracks(albumId));
       this.tracksResponse = result;
       this.tracks = this.mapper.mapTo(result); // Se aplica el mapper
-      this.albumName = result.items[0]?.name || 'Unknown Album'; // ✅ Guarda el nombre del álbum
       this.totalPages = Math.ceil(this.tracks.length / this.pageSize); // ✅ Calcula total de páginas
     } catch (error) {
       console.error(error);

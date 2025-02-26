@@ -3,12 +3,10 @@
   <nav
     class="flex md:flex-col justify-around md:justify-start md:space-y-4 w-full p-4">
     
-    <!-- 🎵 Logo (solo visible en desktop) -->
-    <picture class="hidden md:block">
-      <img src="../../../../../../public/assets/images/spotify-logo.svg" alt="logo" />
+    <picture class="hidden md:block w-[80%] mx-auto object-contain my-8">
+      <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Full_Logo_RGB_White.png" alt="logo" />
     </picture>
 
-    <!-- 📌 Sidebar Items -->
     <app-sidebar-item
       *ngFor="let item of sidebarItems"
       [label]="item.label"

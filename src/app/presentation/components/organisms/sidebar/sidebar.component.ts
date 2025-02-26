@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SidebarItemComponent } from '../../molecules/sidebar-item/sidebar-item.component';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +12,7 @@ interface SidebarItem {
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
-  imports: [SidebarItemComponent, CommonModule]
+  imports: [SidebarItemComponent, CommonModule, RouterModule]
 })
 export class SidebarComponent {
   private router = inject(Router);
