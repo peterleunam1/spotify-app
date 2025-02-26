@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ControlValueAccessor, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input',

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { AlbumsUseCase } from '../../../application/albums/albums.use-case';
 import { lastValueFrom } from 'rxjs';

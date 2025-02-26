@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { MainButtonComponent } from '../../components/atoms/main-button/main-button.component';
 import { Router } from '@angular/router';
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/routes-storage.constant';
+import { PRIVATE_ROUTES } from '../../constants/routes-storage.constant';
 
 @Component({
   selector: 'app-page-not-found',

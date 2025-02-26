@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PlaylistItem, PlaylistsModel } from '../../../../domain/playlists/playlists.entity';
+import { PlaylistItem } from '../../../../domain/playlists/playlists.entity';
 import { CommonModule } from '@angular/common';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SingleSingerModel } from '../../../../domain/singers/singer.entity';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({

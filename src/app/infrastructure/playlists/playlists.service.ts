@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProfileGateWay } from '../../domain/profile/profile.gateway';
-import { ProfileModel } from '../../domain/profile/profile.entity';
 import { PlaylistsGateWay } from '../../domain/playlists/playlists.gateway';
 import { PlaylistsModel } from '../../domain/playlists/playlists.entity';
 import { BASE_URL } from '../../presentation/constants/base-url.constant';

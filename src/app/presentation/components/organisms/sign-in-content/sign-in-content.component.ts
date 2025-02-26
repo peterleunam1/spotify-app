@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MainButtonComponent } from '../../atoms/main-button/main-button.component';
 import { AuthUseCase } from '../../../../application/auth/auth.use-case';
 
