@@ -5,10 +5,10 @@ export interface PlaylistsModel {
     offset:   number;
     previous: null;
     total:    number;
-    items:    Item[];
+    items:    PlaylistItem[];
 }
 
-export interface Item {
+export interface PlaylistItem {
     collaborative: boolean;
     description:   string;
     external_urls: ExternalUrls;

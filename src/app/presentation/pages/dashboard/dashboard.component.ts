@@ -5,12 +5,13 @@ import { NavbarComponent } from "../../components/molecules/navbar/navbar.compon
 import { PlaylistsUseCase } from '../../../application/playlists/playlists.use-case';
 import { lastValueFrom } from 'rxjs';
 import { PlaylistsModel } from '../../../domain/playlists/playlists.entity';
+import { ListOfPlaylistsComponent } from '../../components/organisms/list-of-playlists/list-of-playlists.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   standalone: true,
-  imports: [CommonModule, MainLayoutComponent, NavbarComponent]
+  imports: [CommonModule, MainLayoutComponent, NavbarComponent, ListOfPlaylistsComponent]
 })
 export class DashboardComponent {
   private playlistUseCase = inject(PlaylistsUseCase);
