@@ -1,0 +1,59 @@
+<section class="text-black p-4">
+    <h2 class="text-xl font-semibold mb-4">{{ albumName }}</h2>
+  
+    <div *ngIf="tracks.length > 0; else loading">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-gray-200 text-gray-700">
+            <th class="text-left p-3">#</th>
+            <th class="text-left p-3">Title</th>
+            <th class="text-left p-3">Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let track of paginatedTracks; let i = index"
+            class="border-b hover:bg-gray-100 transition duration-200"
+          >
+            <td class="p-3">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+            <td class="p-3">
+              <a
+                [href]="track.link"
+                target="_blank"
+                class="text-blue-600 hover:underline"
+              >
+                {{ track.name }}
+              </a>
+            </td>
+            <td class="p-3">{{ formatDuration(track.duration) }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Paginación -->
+      <div class="flex justify-center mt-4 space-x-2">
+        <button
+          (click)="changePage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Prev
+        </button>
+  
+        <span class="px-4 py-2 font-semibold">{{ currentPage }} / {{ totalPages }}</span>
+  
+        <button
+          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+          class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  
+    <ng-template #loading>
+      <p class="text-gray-500">Loading songs...</p>
+    </ng-template>
+  </section>
+  
