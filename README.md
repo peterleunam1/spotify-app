@@ -45,7 +45,7 @@ This app is inspired by the [Spotify UI Kit](https://www.figma.com/design/eFrlbC
 
 ```bash
    # Clone this repository
-   $ git clone https://github.com/yourusername/spotify-app
+   $ git clone https://github.com/peterleunam1/spotify-app
 
    # Navigate to the project folder
    $ cd spotify-app
