@@ -10,12 +10,14 @@ import { SingersMapper } from './mappers/singers.mapper';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { ListOfSingersComponent } from '../../components/organisms/list-of-singers/list-of-singers.component';
+import { LoaderComponent } from '../../components/atoms/loader/loader.component';
+import { categories } from '../../constants/categories.constant';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrl: './search.component.css',
-  imports: [MainLayoutComponent, CommonModule, NavbarComponent, ListOfSingersComponent]
+  imports: [MainLayoutComponent, CommonModule, NavbarComponent, ListOfSingersComponent, LoaderComponent]
 })
 export class SearchComponent {
   private singerUseCase = inject(SingerUseCase);
@@ -23,23 +25,17 @@ export class SearchComponent {
 
   private keywordSubject = new BehaviorSubject<string>('');
   listSingers: SingleSingerModel[] = [];
-  isLoading = false; // 🔹 Nueva variable de estado para el loading
-
-  categories = [
-    { name: "Discover", color: "#1DB954" },  // Verde Spotify
-    { name: "Podcasts", color: "#E13300" },  // Rojo     // Rosa fuerte
-    { name: "Pop", color: "#148A08" },       // Verde claro
-    { name: "Electronic", color: "#009688" }, // Azul verdoso
-    { name: "Jazz", color: "#FF9800" }       // Naranja
-  ];
+  isLoading = false; 
+  categories = categories;
+  
   constructor() {
     this.keywordSubject.asObservable()
       .pipe(
-        debounceTime(500), // Espera 500ms antes de hacer la petición
+        debounceTime(500), 
         switchMap(keyword => {
-          this.isLoading = true; // ⬆ Activa el loading antes de la petición
+          this.isLoading = true; 
           return this.singerUseCase.getAnArtist(keyword).pipe(
-            finalize(() => (this.isLoading = false)), // ⬇ Desactiva el loading cuando termina la petición
+            finalize(() => (this.isLoading = false)),
             catchError(error => {
               console.error(error);
               return [];
@@ -52,7 +48,6 @@ export class SearchComponent {
       });
   }
 
-  // Getter y setter para [(keyword)]
   get keyword(): string {
     return this.keywordSubject.value;
   }

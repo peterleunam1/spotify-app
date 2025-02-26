@@ -5,21 +5,22 @@ import { SingleSongModel, TracksModel } from '../../../../domain/tracks/tracks.e
 import { ListOfSongMapper } from './mappers/list-of-song.mapper';
 import { CommonModule } from '@angular/common';
 import { MainButtonComponent } from "../../atoms/main-button/main-button.component";
+import { LoaderComponent } from "../../atoms/loader/loader.component";
 
 @Component({
   selector: 'app-list-of-songs',
-  imports: [CommonModule, MainButtonComponent],
+  imports: [CommonModule, MainButtonComponent, LoaderComponent],
   templateUrl: './list-of-songs.component.html',
   styleUrl: './list-of-songs.component.css'
 })
 export class ListOfSongsComponent {
   private tracksUseCase = inject(TracksUseCase);
-  private mapper = new ListOfSongMapper(); // Instancia del mapper
+  private mapper = new ListOfSongMapper();
 
   tracksResponse: TracksModel = {} as TracksModel;
   tracks: SingleSongModel[] = [];
   isLoading: boolean = false;
-  albumName: string = ''; // ✅ Guardamos el nombre del álbum
+  albumName: string = '';
 
   @Input() albumId: string = '';
 
@@ -34,7 +35,7 @@ export class ListOfSongsComponent {
       const result = await lastValueFrom(this.tracksUseCase.getTracks(albumId));
       this.tracksResponse = result;
       this.tracks = this.mapper.mapTo(result); // Se aplica el mapper
-      this.albumName = result.items[0]?.artists[0]?.name || 'Unknown Album'; // ✅ Guarda el nombre del álbum
+      this.albumName = result.items[0]?.name || 'Unknown Album'; // ✅ Guarda el nombre del álbum
       this.totalPages = Math.ceil(this.tracks.length / this.pageSize); // ✅ Calcula total de páginas
     } catch (error) {
       console.error(error);
