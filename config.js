@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config({ path: 'src/.env' });;
+require('dotenv').config({path: 'src/.env'});
 
 const successColor = '\x1b[32m%s\x1b[0m';
 const checkSign = '\u{2705}';
@@ -11,8 +11,9 @@ const envFile = `export const environment = {
     REDIRECT_URI: '${process.env.REDIRECT_URI || ''}'
 };
 `;
-console.log(envFile
-);
+
+console.log(envFile);
+
 const targetPath = path.join(
   __dirname,
   './src/environments/environment.development.ts'
