@@ -1,0 +1,12 @@
+<app-main-layout>
+  <app-navbar [isSearchVisible]="false" />
+  <h2 *ngIf="!isLoading" class="text-2xl font-bold text-white px-6 pt-6">
+    {{artistName}} - {{ albums.length }} albums
+  </h2>
+  <div *ngIf="isLoading" class="my-4">
+    <app-loader [message]="'Loading albums...'" />
+  </div>
+  <app-list-of-albums [albums]="albums">
+    <app-loader *ngIf="isLoading" [message]="'Loading albums...'" />
+  </app-list-of-albums>
+</app-main-layout>

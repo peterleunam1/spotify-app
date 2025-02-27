@@ -1,0 +1,4 @@
+.template-container {
+    width: calc(100% - 245px);
+    margin-left: 245px;
+}

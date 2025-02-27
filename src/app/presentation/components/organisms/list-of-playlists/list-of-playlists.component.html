@@ -1,0 +1,10 @@
+<div class="p-6 text-white min-h-screen">
+  <div *ngIf="!isLoading && playlists.length > 0" class="flex flex-wrap gap-4">
+    <app-playlist *ngFor="let playlist of playlists" [playlist]="playlist" (playlistClick)="openPlaylist($event)">
+    </app-playlist>
+  </div>
+
+  <div *ngIf="!isLoading && playlists.length === 0" class="text-center text-lg text-gray-400 mt-6">
+    There are no playlists available.
+  </div>
+</div>

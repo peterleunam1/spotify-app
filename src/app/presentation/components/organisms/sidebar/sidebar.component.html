@@ -1,0 +1,13 @@
+<div
+  class="fixed md:inset-y-0 md:left-0 bottom-0 md:w-[245px] w-full bg-[#000] text-white h-16 md:h-full flex md:flex-col z-50">
+  <nav class="flex md:flex-col justify-around md:justify-start md:space-y-4 w-full p-4">
+
+    <picture class="hidden md:block w-[80%] mx-auto object-contain my-8">
+      <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Full_Logo_RGB_White.png" alt="logo" />
+    </picture>
+
+    <app-sidebar-item *ngFor="let item of sidebarItems" [label]="item.label" [icon]="item.icon" [route]="item.route"
+      [active]="isActive(item.route)">
+    </app-sidebar-item>
+  </nav>
+</div>
