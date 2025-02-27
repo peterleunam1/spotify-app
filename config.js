@@ -11,6 +11,7 @@ const envFile = `export const environment = {
     REDIRECT_URI: '${process.env.REDIRECT_URI || ''}'
 };
 `;
+
 console.log(envFile);
 
 const targetPath = path.join(
