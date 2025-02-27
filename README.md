@@ -7,6 +7,12 @@ This application is part of a technical test and is currently in **development m
 
 To evaluate it without restrictions, the production access request must be approved in the Spotify dashboard. The application will not be used in a real production environment but solely for testing purposes, allowing any Spotify account to authenticate and test its functionality.  
 
+Login Test: 
+
+Email: ntesting797@gmail.com
+
+Password: 4QKL3z#sSeJ@c6^
+
 
 ## Table of Contents
 - [Overview](#overview)
