@@ -33,12 +33,14 @@ module.exports = tseslint.config(
       ],
       '@typescript-eslint/ban-ts-comment': 'warn',
       'comma-dangle': ['error', 'never'],
-      'no-console': 'warn',
+      'no-console': 'off',
       'multiline-ternary': 'off',
       'no-use-before-define': 'off',
       'space-before-function-paren': 'off',
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/no-unused-vars': 'warn',
+      "@angular-eslint/template/click-events-have-key-events": "off",
+      "@angular-eslint/template/interactive-supports-focus": "off",
       semi: ['error', 'always'],
       quotes: ['error', 'single']
     }
@@ -49,7 +51,10 @@ module.exports = tseslint.config(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility
     ],
-    rules: {},
+    rules: {
+      "@angular-eslint/template/click-events-have-key-events": "off",
+      "@angular-eslint/template/interactive-supports-focus": "off"
+    },
     ignores: ['dist/', 'node_modules/', 'coverage/']
   }
 );

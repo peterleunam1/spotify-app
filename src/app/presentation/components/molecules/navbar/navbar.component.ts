@@ -4,18 +4,12 @@ import {
   inject,
   Input,
   Output,
-  signal,
   OnInit
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputComponent } from '../../atoms/input/input.component';
-import {
-  FormControl,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators
-} from '@angular/forms';
-import { debounceTime, distinctUntilChanged, lastValueFrom } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProfileModel } from '../../../../domain/profile/profile.entity';
 import { ProfileUseCase } from '../../../../application/profile/profile.use-case';

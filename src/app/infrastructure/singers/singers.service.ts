@@ -3,7 +3,6 @@ import { SingerGateway } from '../../domain/singers/singer.gateway';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { SingerResponse } from '../../domain/singers/singer.entity';
 import { Observable } from 'rxjs';
-import { SPOTIFY_APP_TOKEN } from '../../presentation/constants/cookies-storage.constant';
 import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
