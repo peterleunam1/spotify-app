@@ -1,6 +1,13 @@
 
 # SPOTIFY-APP
 
+## Note on Spotify API Access
+
+This application is part of a technical test and is currently in **development mode**, which restricts access to approved users in the **Spotify Developer Dashboard**.  
+
+To evaluate it without restrictions, the production access request must be approved in the Spotify dashboard. The application will not be used in a real production environment but solely for testing purposes, allowing any Spotify account to authenticate and test its functionality.  
+
+
 ## Table of Contents
 - [Overview](#overview)
 - [Built With](#built-with)
