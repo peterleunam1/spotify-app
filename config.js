@@ -6,12 +6,13 @@ const successColor = '\x1b[32m%s\x1b[0m';
 const checkSign = '\u{2705}';
 
 const envFile = `export const environment = {
-    CLIENT_ID: ${process.env.CLIENT_ID || ''}
-    CLIENT_SECRET: ${process.env.CLIENT_SECRET || ''}
+    CLIENT_ID: '${process.env.CLIENT_ID || ''}',
+    CLIENT_SECRET: '${process.env.CLIENT_SECRET || ''}',
     REDIRECT_URI: '${process.env.REDIRECT_URI || ''}'
 };
 `;
-
+console.log(envFile
+);
 const targetPath = path.join(
   __dirname,
   './src/environments/environment.development.ts'
