@@ -13,8 +13,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
-  styleUrl: './albums.component.css',
-  imports: [MainLayoutComponent, ListOfAlbumsComponent, NavbarComponent, LoaderComponent, CommonModule]
+  imports: [
+    MainLayoutComponent,
+    ListOfAlbumsComponent,
+    NavbarComponent,
+    LoaderComponent,
+    CommonModule
+  ]
 })
 export class AlbumsComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -27,13 +32,15 @@ export class AlbumsComponent implements OnInit {
   async getAlbums(singerId: string) {
     try {
       this.isLoading = true;
-      const result = await lastValueFrom(this.albumsUseCase.getAlbums(singerId));
+      const result = await lastValueFrom(
+        this.albumsUseCase.getAlbums(singerId)
+      );
       this.albumsResponse = result;
       this.albums = extractAlbumInfo(this.albumsResponse);
       this.artistName = this.albums[0]?.artistName || 'Unknown Artist';
-    } catch (error) {
-      console.error(error);
-    } finally{
+    } catch {
+      throw new Error('An unexpected error has been ocurred.');
+    } finally {
       this.isLoading = false;
     }
   }

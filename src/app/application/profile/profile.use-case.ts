@@ -6,8 +6,9 @@ import { ProfileGateWay } from '../../domain/profile/profile.gateway';
   providedIn: 'root'
 })
 export class ProfileUseCase {
-private profileGateWay = inject(ProfileGateWay);
+  private profileGateWay = inject(ProfileGateWay);
   private tokenGateWay = inject(TokenGateway);
+
   getProfile() {
     const token = this.tokenGateWay.getToken();
     return this.profileGateWay.getProfile(token);

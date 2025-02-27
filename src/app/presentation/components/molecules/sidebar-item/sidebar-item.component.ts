@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-sidebar-item',
   templateUrl: './sidebar-item.component.html',
-  styleUrl: './sidebar-item.component.css',
   imports: [RouterModule, CommonModule]
 })
 export class SidebarItemComponent {

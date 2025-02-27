@@ -1,6 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, catchError, debounceTime, switchMap, finalize } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  switchMap,
+  finalize,
+  of
+} from 'rxjs';
 import { SingerUseCase } from '../../../application/singers/singers.use-case';
 import {
   SingerResponse,
@@ -16,8 +23,13 @@ import { categories } from '../../constants/categories.constant';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css',
-  imports: [MainLayoutComponent, CommonModule, NavbarComponent, ListOfSingersComponent, LoaderComponent]
+  imports: [
+    MainLayoutComponent,
+    CommonModule,
+    NavbarComponent,
+    ListOfSingersComponent,
+    LoaderComponent
+  ]
 })
 export class SearchComponent {
   private singerUseCase = inject(SingerUseCase);
@@ -25,26 +37,28 @@ export class SearchComponent {
 
   private keywordSubject = new BehaviorSubject<string>('');
   listSingers: SingleSingerModel[] = [];
-  isLoading = false; 
+  isLoading = false;
   categories = categories;
-  
+
   constructor() {
-    this.keywordSubject.asObservable()
+    this.keywordSubject
+      .asObservable()
       .pipe(
-        debounceTime(500), 
+        debounceTime(500),
         switchMap(keyword => {
-          this.isLoading = true; 
+          this.isLoading = true;
           return this.singerUseCase.getAnArtist(keyword).pipe(
             finalize(() => (this.isLoading = false)),
-            catchError(error => {
-              console.error(error);
-              return [];
+            catchError(() => {
+              this.listSingers = [];
+              return of({} as SingerResponse);
             })
           );
         })
       )
       .subscribe((result: SingerResponse) => {
-        this.listSingers = result?.artists?.items?.map(this.singerMapper.mapTo) ?? [];
+        this.listSingers =
+          result?.artists?.items?.map(this.singerMapper.mapTo) ?? [];
       });
   }
 

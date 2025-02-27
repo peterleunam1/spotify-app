@@ -7,6 +7,7 @@ import { TokenGateway } from '../../domain/token/token.gateway';
 export class AlbumsUseCase {
   private albumGateWay = inject(AlbumsGateWay);
   private tokenGateWay = inject(TokenGateway);
+
   getAlbums(singerId: string) {
     return this.albumGateWay.getAlbums(singerId, this.tokenGateWay.getToken());
   }

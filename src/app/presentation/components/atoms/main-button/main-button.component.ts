@@ -4,7 +4,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-main-button',
   templateUrl: './main-button.component.html',
-  styleUrl: './main-button.component.css',
   imports: [CommonModule]
 })
 export class MainButtonComponent {
@@ -18,5 +17,4 @@ export class MainButtonComponent {
       this.buttonClick.emit();
     }
   }
-
 }

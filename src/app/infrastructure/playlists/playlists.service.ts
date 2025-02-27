@@ -19,11 +19,8 @@ export class PlaylistsService implements PlaylistsGateWay {
   }
 
   getPlaylists(token: string): Observable<PlaylistsModel> {
-    return this.httpClient.get<PlaylistsModel>(
-      `${BASE_URL}/me/playlists`,
-      {
-        headers: this.getHeaders(token)
-      }
-    );
+    return this.httpClient.get<PlaylistsModel>(`${BASE_URL}/me/playlists`, {
+      headers: this.getHeaders(token)
+    });
   }
 }

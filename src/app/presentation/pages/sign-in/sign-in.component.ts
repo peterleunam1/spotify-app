@@ -7,6 +7,4 @@ import { SignInContentComponent } from '../../components/organisms/sign-in-conte
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
-export class SignInComponent {
-
-}
+export class SignInComponent {}

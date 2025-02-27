@@ -1,19 +1,10 @@
-<div 
-  (click)="openModal()" 
-  class="bg-[#181818] shadow-md rounded-lg p-4 transition-transform transform duration-300 
-         hover:scale-105 hover:shadow-xl hover:bg-[#282828] cursor-pointer flex flex-col"
->
-  <!-- 📌 Imagen del Álbum -->
+<div (click)="openModal()" (keydown)="openModal()" tabindex="0" class="bg-[#181818] shadow-md rounded-lg p-4 transition-transform transform duration-300 
+         hover:scale-105 hover:shadow-xl hover:bg-[#282828] cursor-pointer flex flex-col">
   <div class="relative w-full h-52">
-    <img 
-      [src]="album.coverImage" 
-      alt="Cover image of {{ album.name }}" 
-      *ngIf="album.coverImage" 
-      class="w-full h-full object-cover rounded-md"
-    />
+    <img [src]="album.coverImage" alt="Cover image of {{ album.name }}" *ngIf="album.coverImage"
+      class="w-full h-full object-cover rounded-md" />
   </div>
 
-  <!-- 📌 Info del Álbum -->
   <div class="flex flex-col items-center justify-center text-center mt-2">
     <h3 class="text-sm font-bold text-white truncate w-full px-2">
       {{ album.name }}

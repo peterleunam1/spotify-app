@@ -6,6 +6,7 @@ import { PUBLIC_ROUTES } from '../constants/routes-storage.constant';
 export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
   const tokenUseCase = inject(TokenUseCase);
+
   const token = tokenUseCase.getToken();
   if (token) {
     return true;

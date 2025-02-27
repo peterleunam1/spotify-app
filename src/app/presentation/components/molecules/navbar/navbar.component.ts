@@ -4,13 +4,11 @@ import {
   inject,
   Input,
   Output,
-   OnInit
+  OnInit
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputComponent } from '../../atoms/input/input.component';
-import {
-  ReactiveFormsModule
-} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProfileModel } from '../../../../domain/profile/profile.entity';
@@ -21,8 +19,7 @@ import { PUBLIC_ROUTES } from '../../../constants/routes-storage.constant';
 @Component({
   selector: 'app-navbar',
   imports: [InputComponent, ReactiveFormsModule, CommonModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
   @Input() isSearchVisible = true;
@@ -40,8 +37,8 @@ export class NavbarComponent implements OnInit {
       this.isLoading = true;
       const result = await lastValueFrom(this.profileUseCase.getProfile());
       this.profile = result;
-    } catch (error) {
-      console.error(error);
+    } catch {
+      throw new Error('Error getting the profile info');
     } finally {
       this.isLoading = false;
     }
@@ -67,7 +64,7 @@ export class NavbarComponent implements OnInit {
   goForward() {
     window.history.forward();
   }
-  
+
   updateName(newValue: string) {
     this.keyword = newValue;
     this.keywordChange.emit(newValue);

@@ -19,11 +19,8 @@ export class ProfileService implements ProfileGateWay {
   }
 
   getProfile(token: string): Observable<ProfileModel> {
-    return this.httpClient.get<ProfileModel>(
-      `${BASE_URL}/me`,
-      {
-        headers: this.getHeaders(token)
-      }
-    );
+    return this.httpClient.get<ProfileModel>(`${BASE_URL}/me`, {
+      headers: this.getHeaders(token)
+    });
   }
 }

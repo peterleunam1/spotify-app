@@ -6,7 +6,10 @@ import { PageNotFoundComponent } from './presentation/pages/page-not-found/page-
 import { CallbackComponent } from './presentation/pages/callback/callback.component';
 import { SearchComponent } from './presentation/pages/search/search.component';
 import { AlbumsComponent } from './presentation/pages/albums/albums.component';
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './presentation/constants/routes-storage.constant';
+import {
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES
+} from './presentation/constants/routes-storage.constant';
 
 export const routes: Routes = [
   { path: PUBLIC_ROUTES.SIGN_IN, component: SignInComponent },
