@@ -14,7 +14,7 @@ export class TokenService implements TokenGateway {
   getToken(): string {
     return localStorage.getItem(SPOTIFY_APP_TOKEN) || '';
   }
-  
+
   saveToken(): void {
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
@@ -30,8 +30,6 @@ export class TokenService implements TokenGateway {
   }
 
   updateToken(token: string): void {
-    localStorage
-      .setItem('token', token);
+    localStorage.setItem('token', token);
   }
-
 }

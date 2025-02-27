@@ -9,18 +9,20 @@ import { BASE_URL } from '../../presentation/constants/base-url.constant';
 })
 export class AlbumsService {
   private httpClient = inject(HttpClient);
-  
+
   private getHeaders(token: string): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     });
   }
 
-    getAlbums(artistId: string, token: string): Observable<AlbumsModel> {
-      return this.httpClient.get<AlbumsModel>(`${BASE_URL}/artists/${artistId}/albums`, {
+  getAlbums(artistId: string, token: string): Observable<AlbumsModel> {
+    return this.httpClient.get<AlbumsModel>(
+      `${BASE_URL}/artists/${artistId}/albums`,
+      {
         headers: this.getHeaders(token)
-      });
-    }
-
+      }
+    );
+  }
 }

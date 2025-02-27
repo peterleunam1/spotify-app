@@ -11,7 +11,6 @@ interface SidebarItem {
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css',
   imports: [SidebarItemComponent, CommonModule, RouterModule]
 })
 export class SidebarComponent {
@@ -19,9 +18,6 @@ export class SidebarComponent {
   sidebarItems: SidebarItem[] = [
     { label: 'Home', icon: 'fa-home', route: '/dashboard' },
     { label: 'Search', icon: 'fa-search', route: '/search' }
-    // { label: 'Your Library', icon: 'fa-book', route: '/library' },
-    // { label: 'Create Playlist', icon: 'fa-plus-square', route: '/create-playlist' },
-    // { label: 'Liked Songs', icon: 'fa-heart', route: '/liked-songs' }
   ];
   isActive(route: string): boolean {
     return this.router.url === route;

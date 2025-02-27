@@ -1,17 +1,8 @@
-<div 
-  *ngIf="isOpen"
-  @fadeInOut
-  class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-md z-50"
->
-  <div 
-    @scaleIn
-    class="bg-[#181818] text-white p-8 rounded-2xl shadow-2xl w-full max-w-lg 
-           transform transition-all duration-300 relative"
-  >
-    <button 
-      (click)="close()" 
-      class="absolute cursor-pointer top-8 right-8 text-gray-400 hover:text-white transition duration-200"
-    >
+<div *ngIf="isOpen" class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-md z-50">
+  <div
+    class="bg-[#181818] text-white p-8 rounded-2xl shadow-2xl w-full max-w-lg transform transition-all duration-300 relative">
+    <button (click)="close()"
+      class="absolute cursor-pointer top-8 right-8 text-gray-400 hover:text-white transition duration-200">
       <i class="fa-solid fa-times text-2xl"></i>
     </button>
     <ng-content></ng-content>

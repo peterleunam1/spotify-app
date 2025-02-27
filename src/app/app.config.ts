@@ -8,7 +8,7 @@ import {
 } from '@angular/platform-browser';
 import { AuthGateway } from './domain/auth/auth.gateway';
 import { AuthService } from './infrastructure/auth/auth.service';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TokenGateway } from './domain/token/token.gateway';
 import { TokenService } from './infrastructure/token/token.service';
 import { SingerGateway } from './domain/singers/singer.gateway';
@@ -21,11 +21,11 @@ import { ProfileGateWay } from './domain/profile/profile.gateway';
 import { ProfileService } from './infrastructure/profile/profile.service';
 import { PlaylistsGateWay } from './domain/playlists/playlists.gateway';
 import { PlaylistsService } from './infrastructure/playlists/playlists.service';
-
+import { httpInterceptor } from './infrastructure/interceptors/http/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),

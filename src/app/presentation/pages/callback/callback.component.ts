@@ -4,9 +4,8 @@ import { LoaderComponent } from '../../components/atoms/loader/loader.component'
 
 @Component({
   selector: 'app-callback',
-  imports: [LoaderComponent],
   templateUrl: './callback.component.html',
-  styleUrl: './callback.component.css'
+  imports: [LoaderComponent]
 })
 export class CallbackComponent implements OnInit {
   private tokeUseCase = inject(TokenUseCase);

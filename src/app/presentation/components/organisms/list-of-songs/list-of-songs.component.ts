@@ -1,7 +1,10 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { TracksUseCase } from '../../../../application/tracks/tracks.use-case';
 import { lastValueFrom } from 'rxjs';
-import { SingleSongModel, TracksModel } from '../../../../domain/tracks/tracks.entity';
+import {
+  SingleSongModel,
+  TracksModel
+} from '../../../../domain/tracks/tracks.entity';
 import { ListOfSongMapper } from './mappers/list-of-song.mapper';
 import { CommonModule } from '@angular/common';
 import { MainButtonComponent } from '../../atoms/main-button/main-button.component';
@@ -10,8 +13,7 @@ import { LoaderComponent } from '../../atoms/loader/loader.component';
 @Component({
   selector: 'app-list-of-songs',
   imports: [CommonModule, MainButtonComponent, LoaderComponent],
-  templateUrl: './list-of-songs.component.html',
-  styleUrl: './list-of-songs.component.css'
+  templateUrl: './list-of-songs.component.html'
 })
 export class ListOfSongsComponent implements OnInit {
   private tracksUseCase = inject(TracksUseCase);
@@ -34,10 +36,10 @@ export class ListOfSongsComponent implements OnInit {
     try {
       const result = await lastValueFrom(this.tracksUseCase.getTracks(albumId));
       this.tracksResponse = result;
-      this.tracks = this.mapper.mapTo(result); // Se aplica el mapper
-      this.totalPages = Math.ceil(this.tracks.length / this.pageSize); // ✅ Calcula total de páginas
-    } catch (error) {
-      console.error(error);
+      this.tracks = this.mapper.mapTo(result);
+      this.totalPages = Math.ceil(this.tracks.length / this.pageSize);
+    } catch {
+      throw new Error('An error ocurred, try again later');
     } finally {
       this.isLoading = false;
     }

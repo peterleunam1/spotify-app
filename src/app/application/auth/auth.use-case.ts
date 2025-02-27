@@ -6,6 +6,7 @@ import { AuthGateway } from '../../domain/auth/auth.gateway';
 })
 export class AuthUseCase {
   private authGateway = inject(AuthGateway);
+
   login() {
     const response = this.authGateway.login();
     return response;

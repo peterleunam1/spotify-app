@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-list-of-singers',
   templateUrl: './list-of-singers.component.html',
-  styleUrl: './list-of-singers.component.css',
   imports: [SingerComponent, CommonModule]
 })
 export class ListOfSingersComponent {

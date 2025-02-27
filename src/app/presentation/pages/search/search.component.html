@@ -1,12 +1,12 @@
 <app-main-layout>
   <app-navbar [(keyword)]="keyword"></app-navbar>
-  <div *ngIf="isLoading"  class="my-4">    
+  <div *ngIf="isLoading" class="my-4">
     <app-loader [message]="'Loading singers...'" />
   </div>
   <div *ngIf="!isLoading && listSingers.length === 0" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 ">
-    <div *ngFor="let category of categories" 
-         class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
-         [ngStyle]="{'background-color': category.color}">
+    <div *ngFor="let category of categories"
+      class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
+      [ngStyle]="{'background-color': category.color}">
       {{ category.name }}
     </div>
   </div>

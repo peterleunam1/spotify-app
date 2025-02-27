@@ -15,16 +15,19 @@ export class SingersService implements SingerGateway {
   private getHeaders(token: string): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     });
   }
 
-   getAnArtist(name: string, token: string): Observable<SingerResponse> {
+  getAnArtist(name: string, token: string): Observable<SingerResponse> {
     const params = new HttpParams()
-    .set('q', name)
-    .set('type', 'artist')
-    .set('limit', '10'); // Limitar resultados
+      .set('q', name)
+      .set('type', 'artist')
+      .set('limit', '10'); // Limitar resultados
 
-    return this.httpClient.get<SingerResponse>(`${BASE_URL}/search`, { headers: this.getHeaders(token) , params });
+    return this.httpClient.get<SingerResponse>(`${BASE_URL}/search`, {
+      headers: this.getHeaders(token),
+      params
+    });
   }
 }

@@ -7,7 +7,6 @@ import { ListOfSongsComponent } from '../../organisms/list-of-songs/list-of-song
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
-  styleUrl: './album.component.css',
   imports: [CommonModule, ModalComponent, ListOfSongsComponent]
 })
 export class AlbumComponent {
@@ -15,11 +14,11 @@ export class AlbumComponent {
     id: '',
     name: '',
     coverImage: '',
-    releaseYear:0,
+    releaseYear: 0,
     artistName: ''
   };
   isModalOpen = false;
-  
+
   openModal(): void {
     this.isModalOpen = true;
   }

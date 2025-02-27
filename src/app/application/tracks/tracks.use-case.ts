@@ -8,6 +8,7 @@ import { TokenGateway } from '../../domain/token/token.gateway';
 export class TracksUseCase {
   private tracksGateWay = inject(TracksGateWay);
   private tokenGateWay = inject(TokenGateway);
+
   getTracks(albumId: string) {
     const token = this.tokenGateWay.getToken();
     return this.tracksGateWay.getTracks(albumId, token);

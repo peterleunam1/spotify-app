@@ -1,32 +1,16 @@
-<div
-        (click)="openPlaylist(playlist.external_urls.spotify)"
-        class="relative bg-[#181818] w-54 shadow-md rounded-lg p-4 transition-transform transform duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#282828] cursor-pointer flex flex-col">
-        <!-- 📌 Imagen de la Playlist -->
-        <div class="relative w-full h-52">
-          <img
-            [src]="playlist.images[0].url || 'assets/placeholder.png'"
-            [alt]="playlist.name"
-            class="w-full h-full object-cover rounded-md" />
-        </div>
+<div (click)="openPlaylist(playlist.external_urls.spotify)" (keydown)="openPlaylist(playlist.external_urls.spotify)"
+  tabindex="0"
+  class="relative bg-[#181818] w-54 shadow-md rounded-lg p-4 transition-transform transform duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#282828] cursor-pointer flex flex-col">
+  <div class="relative w-full h-52">
+    <img [src]="playlistImage()" [alt]="playlist.name" class="w-full h-full object-cover rounded-md" />
+  </div>
 
-        <!-- 📌 Info de la Playlist -->
-        <div class="flex flex-col items-center justify-center text-center mt-2">
-          <h3 class="text-sm font-bold text-white truncate w-full px-2">
-            {{ playlist.name }}
-          </h3>
-          <p class="text-xs text-gray-400 truncate w-full px-2">
-            {{ playlist.owner.display_name }}
-          </p>
-        </div>
-
-        <button
-          (click)="toggleFollow($event); $event.stopPropagation()"
-          class="cursor-pointer absolute top-3 right-3 px-3 py-1 text-xs md:text-sm font-bold rounded-full transition duration-300 z-50"
-          [ngClass]="
-            isFollowed(playlist.id)
-              ? 'bg-green-500 text-black hover:bg-green-400'
-              : 'bg-gray-700 text-white hover:bg-gray-600'
-          ">
-          {{ isFollowed(playlist.id) ? 'Unfollow' : 'Follow' }}
-        </button>
+  <div class="flex flex-col items-center justify-center text-center mt-2">
+    <h3 class="text-sm font-bold text-white truncate w-full px-2">
+      {{ playlist.name }}
+    </h3>
+    <p class="text-xs text-gray-400 truncate w-full px-2">
+      {{ playlist.owner.display_name }}
+    </p>
+  </div>
 </div>
