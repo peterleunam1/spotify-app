@@ -1,0 +1,60 @@
+<app-main-layout>
+  <app-navbar
+    [isSearchVisible]="false"
+    [spotifyEffect]="true"
+    [dominantColor]="dominantColor">
+  </app-navbar>
+
+  <app-spotify-hero
+    [img]="artistInfo.images[0].url"
+    [title]="artistInfo.name"
+    [contentType]="'artist'"
+    [description]="artistInfo.followers?.total + ' followers'">
+    <!-- ===== YOUR LIKED SONGS ===== -->
+    <!-- ===== YOUR LIKED SONGS ===== -->
+    <app-loader *ngIf="isLoadingTracks" [message]="'Loading liked songs...'">
+    </app-loader>
+<app-list-of-songs
+  [tracks]="likedTracksFromArtist"
+  [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
+  [isLoading]="isLoadingTracks">
+</app-list-of-songs>
+  
+      <!-- ===== ACTION BUTTON ===== -->
+      <!-- <div class="flex items-center gap-6">
+
+        <button
+          (click)="openArtist()"
+          class="w-12 h-12 flex items-center justify-center rounded-full bg-[#1db954] hover:bg-[#1ed760] hover:scale-110 transition shadow-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="black"
+            class="w-7 h-7 ml-1"
+          >
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+      </div> -->
+
+      <!-- ===== ARTIST INFO ===== -->
+       <app-percentage-bar
+        *ngIf="artistInfo.popularity !== undefined"
+        [title]="'Artist popularity'"
+        [percentage]="artistInfo.popularity">
+      </app-percentage-bar>
+
+
+      <!-- ===== DISCOGRAPHY ===== -->
+      <div>
+        <h2 class="text-2xl font-bold mb-6">Discography</h2>
+
+        <app-list-of-albums [albums]="albums">
+          <app-loader *ngIf="isLoadingAlbum" [message]="'Loading albums...'">
+          </app-loader>
+        </app-list-of-albums>
+      </div>
+  </app-spotify-hero>
+</app-main-layout>
