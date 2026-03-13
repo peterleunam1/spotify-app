@@ -14,8 +14,4 @@ export class MusicDnaComponent {
   @Input() data!: RadarChartData | null;
   @Input() insights: string[] = [];
   @Input() personality: MusicPersonality | null = null;
-
-  constructor() {
-    console.log('MusicDnaComponent initialized with data:', this.data);
-  }
 }

@@ -66,7 +66,7 @@ export class AlbumsComponent implements OnInit {
     }));
 
   } catch (error) {
-    console.error('Error loading album:', error);
+    throw new Error('An unexpected error has been ocurred.');
   } finally {
     this.isLoading = false;
   }

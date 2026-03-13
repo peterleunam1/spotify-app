@@ -8,9 +8,7 @@ import { environment } from '../../../environments/environment';
 export class AuthService implements AuthGateway {
   private scopes = 'user-read-private user-read-email user-library-read user-top-read';
   private redirectUri = environment.REDIRECT_URI;
-  constructor() {
-    console.log(this.redirectUri);
-  }
+
   login(): void {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${
       environment.CLIENT_ID
