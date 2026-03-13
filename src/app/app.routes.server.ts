@@ -6,7 +6,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender
   },
   {
-    path: 'albums/:singerId',
+    path: 'album/:albumId',
     renderMode: RenderMode.Client
   }
 ];

@@ -6,13 +6,15 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService implements AuthGateway {
-  private scopes = 'user-read-private user-read-email';
+  private scopes = 'user-read-private user-read-email user-library-read user-top-read';
   private redirectUri = environment.REDIRECT_URI;
-
+  constructor() {
+    console.log(this.redirectUri);
+  }
   login(): void {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${
       environment.CLIENT_ID
-    }&response_type=token&redirect_uri=${encodeURIComponent(
+    }&response_type=code&redirect_uri=${encodeURIComponent(
       this.redirectUri
     )}&scope=${encodeURIComponent(this.scopes)}`;
     window.location.href = authUrl;

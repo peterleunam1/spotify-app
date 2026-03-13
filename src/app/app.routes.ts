@@ -10,9 +10,20 @@ import {
   PRIVATE_ROUTES,
   PUBLIC_ROUTES
 } from './presentation/constants/routes-storage.constant';
+import { ArtistComponent } from './presentation/pages/artist/artist.component';
+import { TrackComponent } from './presentation/pages/track/track.component';
 
 export const routes: Routes = [
   { path: PUBLIC_ROUTES.SIGN_IN, component: SignInComponent },
+  {
+    path: PUBLIC_ROUTES.CALLBACK,
+    component: CallbackComponent
+  },
+  {
+    path: '',
+    redirectTo: PRIVATE_ROUTES.DASHBOARD,
+    pathMatch: 'full'
+  },
   {
     path: PRIVATE_ROUTES.DASHBOARD,
     component: DashboardComponent,
@@ -29,14 +40,14 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: PUBLIC_ROUTES.CALLBACK,
-    component: CallbackComponent
+    path: PRIVATE_ROUTES.ARTIST,
+    component: ArtistComponent,
+    canActivate: [authGuard]
   },
   {
-    path: '',
-    redirectTo: PRIVATE_ROUTES.DASHBOARD,
-    pathMatch: 'full'
+    path: PRIVATE_ROUTES.TRACK,
+    component: TrackComponent,
+    canActivate: [authGuard]
   },
-
   { path: '**', component: PageNotFoundComponent }
 ];

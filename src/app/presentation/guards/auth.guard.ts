@@ -3,11 +3,11 @@ import { CanActivateFn, Router } from '@angular/router';
 import { TokenUseCase } from '../../application/token/token.use-case';
 import { PUBLIC_ROUTES } from '../constants/routes-storage.constant';
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = async () => {
   const router = inject(Router);
   const tokenUseCase = inject(TokenUseCase);
 
-  const token = tokenUseCase.getToken();
+  const token = await tokenUseCase.getToken();
   if (token) {
     return true;
   }

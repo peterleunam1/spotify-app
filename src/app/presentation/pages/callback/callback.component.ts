@@ -7,7 +7,7 @@ import { LoaderComponent } from '../../components/atoms/loader/loader.component'
   templateUrl: './callback.component.html',
   imports: [LoaderComponent]
 })
-export class CallbackComponent implements OnInit {
+export class CallbackComponent  implements OnInit {
   private tokeUseCase = inject(TokenUseCase);
 
   ngOnInit() {

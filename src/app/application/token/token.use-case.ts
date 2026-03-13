@@ -7,7 +7,7 @@ import { TokenGateway } from '../../domain/token/token.gateway';
 export class TokenUseCase {
   private tokenGateway = inject(TokenGateway);
 
-  getToken(): string {
+  getToken(): Promise<string>  {
     return this.tokenGateway.getToken();
   }
 
