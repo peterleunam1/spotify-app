@@ -1,6 +1,9 @@
 import { Observable } from 'rxjs';
-import { ProfileModel } from './profile.entity';
+import { GetTopItemsParams, ProfileModel } from './profile.entity';
+import { TopTracksModel } from '../tracks/tracks.entity';
+import { TopArtistsModel } from '../artist/artist.entity';
 
 export abstract class ProfileGateWay {
-  abstract getProfile(token: string): Observable<ProfileModel>;
+  abstract getProfile(): Observable<ProfileModel>;
+  abstract getTopItems(props: GetTopItemsParams): Observable<TopArtistsModel | TopTracksModel>;
 }

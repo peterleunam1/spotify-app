@@ -22,6 +22,8 @@ import { ProfileService } from './infrastructure/profile/profile.service';
 import { PlaylistsGateWay } from './domain/playlists/playlists.gateway';
 import { PlaylistsService } from './infrastructure/playlists/playlists.service';
 import { httpInterceptor } from './infrastructure/interceptors/http/http.interceptor';
+import { ArtistGateWay } from './domain/artist/artist.gateway';
+import { ArtistService } from './infrastructure/artist/artist.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +37,7 @@ export const appConfig: ApplicationConfig = {
     { provide: AlbumsGateWay, useClass: AlbumsService },
     { provide: TracksGateWay, useClass: TracksService },
     { provide: ProfileGateWay, useClass: ProfileService },
-    { provide: PlaylistsGateWay, useClass: PlaylistsService }
+    { provide: PlaylistsGateWay, useClass: PlaylistsService },
+    { provide: ArtistGateWay, useClass: ArtistService }
   ]
 };

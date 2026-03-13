@@ -1,0 +1,21 @@
+import { Component, Input } from '@angular/core';
+import { CardComponent } from '../../atoms/card/card.component';
+import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
+import { RadarChartComponent, RadarChartData } from '../../atoms/radar-chart/radar-chart/radar-chart.component';
+import { MusicPersonality } from '../../../../domain/tracks/tracks.entity';
+
+@Component({
+  selector: 'app-music-dna',
+  imports: [CardComponent, SectionHeaderComponent, RadarChartComponent],
+  templateUrl: './music-dna.component.html',
+  styleUrl: './music-dna.component.css'
+})
+export class MusicDnaComponent {
+  @Input() data!: RadarChartData | null;
+  @Input() insights: string[] = [];
+  @Input() personality: MusicPersonality | null = null;
+
+  constructor() {
+    console.log('MusicDnaComponent initialized with data:', this.data);
+  }
+}

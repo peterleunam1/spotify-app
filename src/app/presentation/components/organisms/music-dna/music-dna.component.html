@@ -1,0 +1,58 @@
+<section
+  class="px-6 mt-10 flex flex-col lg:flex-row gap-8 items-star">
+
+  <app-card>
+    <app-section-header
+      title="Your Music DNA"
+      description="Generated from your top tracks in this time range.">
+    </app-section-header>
+
+        <app-radar-chart
+            [data]="data!">
+        </app-radar-chart>
+  </app-card>
+
+  <div class="w-full flex flex-col gap-4">
+    <!-- INSIGHTS -->
+
+    <app-card>
+      <app-section-header
+        title="Your music profile"
+        description="Insights generated from your listening behavior.">
+      </app-section-header>
+
+      <ul class="space-y-2">
+        @for (insight of insights; track insight) {
+          <li class="text-[#b3b3b3] text-sm flex items-center gap-2">
+            {{ insight }}
+          </li>
+        }
+      </ul>
+    </app-card>
+
+    <!-- PERSONALITY -->
+
+    <app-card>
+      <app-section-header
+        title="Your Listening Personality"
+        description="A summary of your music taste.">
+      </app-section-header>
+
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">
+          {{ personality?.emoji }}
+        </span>
+
+        <div>
+          <p class="text-white font-semibold">
+            {{ personality?.type }}
+          </p>
+
+          <p class="text-[#b3b3b3] text-sm mt-1">
+            {{ personality?.description }}
+          </p>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</section>

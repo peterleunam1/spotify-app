@@ -11,16 +11,15 @@ import { BASE_URL } from '../../presentation/constants/base-url.constant';
 export class PlaylistsService implements PlaylistsGateWay {
   private httpClient = inject(HttpClient);
 
-  private getHeaders(token: string): HttpHeaders {
+  private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      'Content-Type': 'application/json'
     });
   }
 
-  getPlaylists(token: string): Observable<PlaylistsModel> {
+  getPlaylists(): Observable<PlaylistsModel> {
     return this.httpClient.get<PlaylistsModel>(`${BASE_URL}/me/playlists`, {
-      headers: this.getHeaders(token)
+      headers: this.getHeaders()
     });
   }
 }

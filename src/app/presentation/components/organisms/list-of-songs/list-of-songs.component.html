@@ -1,38 +1,167 @@
-<section class="text-white">
-  <h2 class="text-2xl font-bold mb-4">{{ albumName }}</h2>
+<!-- <section class="text-white">
+  <h2 class="text-2xl font-bold mb-6">{{ albumName }}</h2>
 
   <div *ngIf="tracks.length > 0; else loading">
     <table class="w-full border-collapse">
       <thead>
-        <tr class="bg-[#282828] text-white">
-          <th class="text-left p-4">#</th>
-          <th class="text-left p-4">Title</th>
-          <th class="text-left p-4">Duration</th>
+        <tr class="text-sm text-gray-400 border-b border-[#2a2a2a]">
+          <th class="text-left p-3 w-12">#</th>
+          <th class="text-left p-3">Title</th>
+          <th class="text-right p-3 w-24">Duration</th>
         </tr>
       </thead>
+
       <tbody>
-        <tr *ngFor="let track of paginatedTracks; let i = index"
-          class="border-b border-gray-700 hover:bg-[#3a3a3a] transition duration-300 ease-in-out">
-          <td class="p-4">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
-          <td class="p-4">
-            <a [href]="track.link" target="_blank" class="cursor-pointer text-[#1db954] hover:text-[#1ed760] font-medium transition duration-300 ease-in-out 
-                     relative no-underline hover:border-b-2 border-[#1db954]">
+        <tr
+          *ngFor="let track of visibleTracks; let i = index"
+          class="group hover:bg-[#2a2a2a] transition-colors duration-200 cursor-pointer"
+          (click)="openTrack(track.link)"
+          >
+          <td class="p-3 text-gray-400 w-12 relative">
+            <div class="flex items-center justify-center">
+              <span class="group-hover:hidden">
+                {{ i + 1 }}
+              </span>
+
+              <button
+                class="hidden group-hover:flex items-center justify-center w-6 h-6 text-white hover:scale-110 transition">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-5 h-5">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+            </div>
+          </td>
+
+          <td class="p-3">
+            <a
+              target="_blank"
+              class="text-white group-hover:text-[#1db954] transition-colors">
               {{ track.name }}
             </a>
           </td>
-          <td class="p-4">{{ formatDuration(track.duration) }}</td>
+
+          <td class="p-3 text-right text-gray-400">
+            {{ formatDuration(track.duration) }}
+          </td>
         </tr>
       </tbody>
     </table>
-    <div class="flex justify-center mt-6 space-x-3">
-      <app-main-button [label]="'Prev'" (buttonClick)="changePage(currentPage - 1)" [disabled]="currentPage === 1" />
-      <span class="px-4 py-2 font-semibold">{{ currentPage }} / {{ totalPages }}</span>
-      <app-main-button [label]="'Next'" (buttonClick)="changePage(currentPage + 1)"
-        [disabled]="currentPage === totalPages" />
+
+    <div
+      *ngIf="tracks.length > minTracks"
+      class="mt-4 text-sm font-semibold text-gray-400 hover:text-white cursor-pointer transition-colors"
+      (click)="toggleTracks()">
+      {{ showAll ? 'Show less' : 'Show more' }}
     </div>
   </div>
 
   <ng-template #loading>
     <app-loader [message]="'Loading tracks...'" />
   </ng-template>
-</section>
+</section> -->
+
+<div *ngIf="tracks.length || !isLoading">
+
+  <h2 class="text-2xl font-bold mb-6">
+    {{ albumName }}
+  </h2>
+
+  <div *ngIf="!isLoading; else loading">
+
+    <div class="space-y-1">
+
+      <div
+        *ngFor="let item of visibleTracks; let i = index"
+class="group grid items-center gap-4 px-4 py-2 rounded-md hover:bg-white/10 cursor-pointer transition"
+[ngClass]="showLike 
+  ? 'grid-cols-[40px_48px_1fr_40px_80px]' 
+  : 'grid-cols-[40px_48px_1fr_80px]'"      >
+
+        <!-- NUMBER / PLAY -->
+        <div class="flex items-center justify-center text-gray-400">
+
+          <span class="group-hover:hidden">
+            {{ i + 1 }}
+          </span>
+
+          <svg
+            class="hidden group-hover:block w-4 h-4 fill-white"
+            viewBox="0 0 24 24">
+
+            <path d="M8 5v14l11-7z"/>
+
+          </svg>
+
+        </div>
+
+        <!-- ALBUM COVER -->
+        <img
+          [src]="
+            item.albumImage
+          "
+          class="w-10 h-10 object-cover rounded"
+          alt="album cover"
+        />
+
+        <!-- TRACK INFO -->
+        <div class="truncate">
+
+          <p class="truncate font-medium">
+            {{ item.title}}
+          </p>
+
+          <p class="text-sm text-gray-400 truncate">
+            {{ item.albumName }}
+          </p>
+
+        </div>
+
+        <!-- LIKE -->
+<div
+  *ngIf="showLike"
+  class="flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+>
+  <svg
+    class="w-4 h-4 fill-gray-400 hover:fill-green-500 cursor-pointer"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+             2 6 4 4 6.5 4 
+             c1.74 0 3.41 1.01 4.22 2.59 
+             C11.09 5.01 12.76 4 14.5 4 
+             17 4 19 6 19 8.5 
+             c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+</div>
+
+        <!-- DURATION -->
+        <div class="text-sm text-gray-400 text-right">
+          {{ formatDuration(item.duration) }}
+        </div>
+
+      </div>
+
+      
+
+    </div>
+
+    <!-- SHOW MORE / LESS -->
+    <button
+      *ngIf="tracks.length > minTracks"
+      (click)="toggleTracks()"
+      class="mt-4 text-sm font-semibold text-gray-400 hover:text-white transition cursor-pointer"
+    >
+      {{ showAllTracks ? 'Show less' : 'Show more' }}
+    </button>
+
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <app-loader [message]="'Loading liked songs...'" />
+</ng-template>

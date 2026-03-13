@@ -1,14 +1,48 @@
 <app-main-layout>
   <app-navbar [(keyword)]="keyword"></app-navbar>
   <div *ngIf="isLoading" class="my-4">
-    <app-loader [message]="'Loading singers...'" />
+    <app-loader [message]="'Loading ...'" />
   </div>
-  <div *ngIf="!isLoading && listSingers.length === 0" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 ">
+    <div *ngIf="!keyword && recentSearches.length > 0">
+
+<div
+  *ngIf="!keyword && recentSearches.length > 0 && !isLoading && listSingers.length === 0" 
+  class="px-6 pt-6"
+>
+
+  <div class="flex justify-between items-center mb-4">
+
+    <h2 class="text-white text-2xl font-bold">
+      Recent searches
+    </h2>
+
+    <button
+      (click)="clearRecentSearches()"
+      class="text-sm text-gray-400 hover:text-white transition cursor-pointer"
+    >
+      Clear all
+    </button>
+
+  </div>
+
+  <app-list-of-singers
+    [singers]="recentSearches"
+    [showRemoveButton]="true"
+    (remove)="removeRecentSearch($event)"
+  ></app-list-of-singers>
+
+</div>
+
+</div>
+  <div *ngIf="!keyword && !isLoading && listSingers.length === 0" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 ">
     <div *ngFor="let category of categories"
       class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
       [ngStyle]="{'background-color': category.color}">
       {{ category.name }}
     </div>
   </div>
-  <app-list-of-singers *ngIf="listSingers.length > 0" [singers]="listSingers"></app-list-of-singers>
+  <app-list-of-singers *ngIf="listSingers.length > 0" [singers]="listSingers"
+    [showRemoveButton]="false"
+    
+    ></app-list-of-singers>
 </app-main-layout>

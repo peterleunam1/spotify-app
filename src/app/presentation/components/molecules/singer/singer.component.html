@@ -1,19 +1,67 @@
-<a [routerLink]="'/albums/' + singer.id"
-  class="block transition-transform transform hover:scale-105 duration-300 ease-in-out">
-  <div class="bg-[#181818] text-white rounded-lg p-4 shadow-md flex flex-col items-center text-center 
-           cursor-pointer hover:bg-[#282828] transition-colors duration-300">
-    <img [src]="singer.image" [alt]="'Imagen de ' + singer.name" class="rounded-full object-cover w-36 h-36 mb-4" />
+<a
+  (click)="handleClick()"
+  [routerLink]="['/', singer.type, singer.id]"
+  [attr.aria-label]="'Ir a ' + singer.id"
+  class="relative block transition-transform transform"
+  [ngClass]="{ 'hover:scale-105 duration-300 ease-in-out': highlightOnHover }"
+>
+  <div
+    class="text-white rounded-lg p-4 flex flex-col items-center text-center cursor-pointer hover:bg-[#282828] transition-colors duration-300"
+    [ngClass]="{
+      'bg-[#181818] shadow-md': singer.type !== 'artist',
+      'bg-transparent': singer.type === 'artist'
+    }"
+  >
+    <!-- Ranking opcional -->
+    <div *ngIf="showRank && rank" class="absolute top-2 left-3 text-green-400 font-bold text-lg">
+      {{ rank }}
+    </div>
 
-    <h2 class="text-lg font-bold text-white hover:text-green-400 transition-colors duration-200">
+    <button
+      *ngIf="showRemoveButton"
+      (click)="handleRemove($event)"
+      class="absolute top-2 right-2 bg-black/70 hover:bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"
+      aria-label="Eliminar"
+    >
+      ✕
+    </button>
+
+    <img
+      [src]="singer.image"
+      [alt]="'Imagen de ' + singer.name"
+      class="object-cover"
+      [ngClass]="{
+        'rounded-lg mb-2': singer.type !== 'artist',
+        'rounded-full mb-4 w-36 h-36': singer.type === 'artist'
+      }"
+    />
+
+    <h2
+      class="text-lg font-bold text-white hover:text-green-400 transition-colors duration-200"
+      [ngClass]="{ 'text-sm': singer.type !== 'artist' }"
+    >
       {{ singer.name }}
+      <span *ngIf="showLinkIcon" class="ml-1 text-green-400 text-xs">🔗</span>
     </h2>
 
-    <p class="text-sm text-gray-400">
+    <!-- Followers solo para artista -->
+    <p class="text-sm text-gray-400" *ngIf="singer.type === 'artist'">
       {{ singer.followers | number }} followers
     </p>
 
-    <p class="text-sm text-gray-400">
+    <!-- Géneros opcionales -->
+    <p class="text-xs text-gray-400" *ngIf="showGenres && singer.genres?.length">
       {{ formatGenres(singer.genres) }}
     </p>
+
+    <p class="text-xs text-gray-400" *ngIf="singer.type === 'track'">
+      {{ singer.singerNameFromTrack }}
+    </p>
+
+    <p class="text-xs text-gray-400" *ngIf="singer.type === 'album'">
+      {{ singer.artistNamefromAlbum }}
+    </p>
+
+    <p class="text-xs text-gray-400">{{ singer.type | titlecase }}</p>
   </div>
 </a>

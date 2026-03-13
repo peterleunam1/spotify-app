@@ -1,0 +1,13 @@
+<div class="flex gap-2 mb-4 py-2 text-sm rounded-lg">
+  <button
+    *ngFor="let range of ['short_term', 'medium_term', 'long_term']"
+    (click)="onChange(range)"
+    [ngClass]="{
+      'bg-green-500 text-black': selectedRange === range,
+      'bg-[#282828] text-white hover:bg-[#3e3e3e]': selectedRange !== range
+    }"
+    class="px-4 py-2 rounded-full font-semibold transition-colors duration-200 cursor-pointer"
+  >
+    {{ range === 'short_term' ? '4 Weeks' : range === 'medium_term' ? '6 Months' : 'All Time' }}
+  </button>
+</div>

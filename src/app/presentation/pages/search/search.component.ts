@@ -13,12 +13,15 @@ import {
   SingerResponse,
   SingleSingerModel
 } from '../../../domain/singers/singer.entity';
-import { SingersMapper } from './mappers/singers.mapper';
+import { AlbumsMapper, AudiobooksMapper, SingersMapper, TracksMapper } from './mappers/singers.mapper';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { ListOfSingersComponent } from '../../components/organisms/list-of-singers/list-of-singers.component';
 import { LoaderComponent } from '../../components/atoms/loader/loader.component';
 import { categories } from '../../constants/categories.constant';
+import { mergeSearchResults } from '../../helpers/get-merged-result';
+   import { tap, filter } from 'rxjs';
+import { getRecentSearches } from '../../helpers/get-recent-searches';
 
 @Component({
   selector: 'app-search',
@@ -34,31 +37,74 @@ import { categories } from '../../constants/categories.constant';
 export class SearchComponent {
   private singerUseCase = inject(SingerUseCase);
   private singerMapper = new SingersMapper();
+  private albumsMapper = new AlbumsMapper();
+  private tracksMapper = new TracksMapper();
+  private audioBooksMapper = new AudiobooksMapper();
+  recentSearches: SingleSingerModel[] = [];
 
   private keywordSubject = new BehaviorSubject<string>('');
   listSingers: SingleSingerModel[] = [];
   isLoading = false;
   categories = categories;
 
+removeRecentSearch(id: string) {
+
+  this.recentSearches = this.recentSearches.filter(
+    item => item.id !== id
+  );
+
+  localStorage.setItem(
+    'recent_searches',
+    JSON.stringify(this.recentSearches)
+  );
+}
+
+clearRecentSearches() {
+
+  this.recentSearches = [];
+
+  localStorage.removeItem('recent_searches');
+}
+
   constructor() {
-    this.keywordSubject
-      .asObservable()
-      .pipe(
-        debounceTime(500),
-        switchMap(keyword => {
-          this.isLoading = true;
-          return this.singerUseCase.getAnArtist(keyword).pipe(
-            finalize(() => (this.isLoading = false)),
-            catchError(() => {
-              this.listSingers = [];
-              return of({} as SingerResponse);
-            })
-          );
+      this.recentSearches = getRecentSearches();
+
+   this.keywordSubject
+  .asObservable()
+  .pipe(
+    debounceTime(500),
+
+    tap(keyword => {
+      if (!keyword.trim()) {
+        this.listSingers = [];
+      }
+    }),
+
+    filter(keyword => keyword.trim().length > 0),
+
+    switchMap(keyword => {
+      this.isLoading = true;
+
+      return this.singerUseCase.getAnArtist(keyword).pipe(
+        finalize(() => (this.isLoading = false)),
+        catchError(() => {
+          this.listSingers = [];
+          return of({} as SingerResponse);
         })
-      )
-      .subscribe((result: SingerResponse) => {
-        this.listSingers =
-          result?.artists?.items?.map(this.singerMapper.mapTo) ?? [];
+      );
+    })
+  ).subscribe((result: SingerResponse) => {
+        const artists = result?.artists?.items?.map(this.singerMapper.mapTo) ?? [];
+        const albums = result?.albums?.items?.map(this.albumsMapper.mapTo) ?? [];
+        const tracks = result?.tracks?.items?.map(this.tracksMapper.mapTo) ?? [];
+
+  this.listSingers = mergeSearchResults(
+    artists,
+    albums,
+    tracks
+  );
+        // this.listSingers =
+        //   result?.artists?.items?.map(this.singerMapper.mapTo) ?? [];
       });
   }
 

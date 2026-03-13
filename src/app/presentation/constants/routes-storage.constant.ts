@@ -7,5 +7,7 @@ export const PUBLIC_ROUTES = {
 export const PRIVATE_ROUTES = {
   DASHBOARD: 'dashboard',
   SEARCH: 'search',
-  ALBUMS: 'albums/:singerId'
+  ALBUMS: 'album/:albumId',
+  ARTIST: 'artist/:artistId',
+  TRACK: 'track/:trackId'
 };
