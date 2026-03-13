@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AlbumsModel } from '../../domain/albums/albums.entity';
+import { AlbumModel, AlbumsModel } from '../../domain/albums/albums.entity';
 import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
@@ -10,18 +10,26 @@ import { BASE_URL } from '../../presentation/constants/base-url.constant';
 export class AlbumsService {
   private httpClient = inject(HttpClient);
 
-  private getHeaders(token: string): HttpHeaders {
+  private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      'Content-Type': 'application/json'
     });
   }
 
-  getAlbums(artistId: string, token: string): Observable<AlbumsModel> {
+  getAlbums(artistId: string): Observable<AlbumsModel> {
     return this.httpClient.get<AlbumsModel>(
       `${BASE_URL}/artists/${artistId}/albums`,
       {
-        headers: this.getHeaders(token)
+        headers: this.getHeaders()
+      }
+    );
+  }
+
+  getOneAlbum(albumId: string): Observable<AlbumModel> {
+    return this.httpClient.get<AlbumModel>(
+      `${BASE_URL}/albums/${albumId}`,
+      {
+        headers: this.getHeaders()
       }
     );
   }

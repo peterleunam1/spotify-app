@@ -3,11 +3,12 @@ import { AlbumInfo } from '../../../../domain/albums/albums.entity';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../atoms/modal/modal.component';
 import { ListOfSongsComponent } from '../../organisms/list-of-songs/list-of-songs.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
-  imports: [CommonModule, ModalComponent, ListOfSongsComponent]
+  imports: [CommonModule, ModalComponent, ListOfSongsComponent, RouterModule]
 })
 export class AlbumComponent {
   @Input() album: AlbumInfo = {
@@ -17,13 +18,15 @@ export class AlbumComponent {
     releaseYear: 0,
     artistName: ''
   };
-  isModalOpen = false;
+  // isModalOpen = false;
 
-  openModal(): void {
-    this.isModalOpen = true;
-  }
+  // openModal(): void {
+  //   this.isModalOpen = true;
+  // }
 
-  closeModal(): void {
-    this.isModalOpen = false;
-  }
+  // closeModal(): void {
+  //   this.isModalOpen = false;
+  // }
+
+ 
 }
