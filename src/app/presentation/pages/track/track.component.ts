@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TracksUseCase } from '../../../application/tracks/tracks.use-case';
 import { lastValueFrom } from 'rxjs';
 import { SingleTrackModel } from '../../../domain/tracks/tracks.entity';
-import { SpotifyHeroComponent } from '../../organisms/spotify-hero/spotify-hero.component';
+import { SpotifyHeroComponent } from '../../components/organisms/spotify-hero/spotify-hero.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar/percentage-bar.component';

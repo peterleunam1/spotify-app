@@ -10,7 +10,7 @@ import { ListOfAlbumsComponent } from '../../components/organisms/list-of-albums
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { LoaderComponent } from '../../components/atoms/loader/loader.component';
 import { CommonModule } from '@angular/common';
-import { SpotifyHeroComponent } from '../../organisms/spotify-hero/spotify-hero.component';
+import { SpotifyHeroComponent } from '../../components/organisms/spotify-hero/spotify-hero.component';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
 import { TrackUIModel } from '../../../domain/tracks/tracks.entity';
 import { AlbumTrackMapper } from '../../components/organisms/list-of-songs/mappers/list-of-song.mapper';

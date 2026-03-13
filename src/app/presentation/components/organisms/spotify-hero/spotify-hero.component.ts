@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { getColorSync } from 'colorthief';
-import { DominantColorState } from '../../states/dominantColor/dominant-color.service';
+import { DominantColorState } from '../../../states/dominantColor/dominant-color.service';
 
 @Component({
   selector: 'app-spotify-hero',

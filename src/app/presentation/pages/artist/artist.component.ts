@@ -6,7 +6,7 @@ import { ArtistUseCase } from '../../../application/artist/artist.use-case';
 import { OneArtistModel } from '../../../domain/artist/artist.entity';
 import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { SpotifyHeroComponent } from '../../organisms/spotify-hero/spotify-hero.component';
+import { SpotifyHeroComponent } from '../../components/organisms/spotify-hero/spotify-hero.component';
 import { AlbumInfo, AlbumsModel } from '../../../domain/albums/albums.entity';
 import { AlbumsUseCase } from '../../../application/albums/albums.use-case';
 import { extractAlbumInfo } from '../../helpers/get-filtered-albums-data';
