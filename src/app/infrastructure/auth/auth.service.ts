@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService implements AuthGateway {
-  private scopes = 'user-read-private user-read-email user-library-read user-top-read';
+  private scopes = 'user-read-private user-read-email user-library-read user-top-read user-read-recently-played';
   private redirectUri = environment.REDIRECT_URI;
 
   login(): void {

@@ -1,31 +1,51 @@
 <app-main-layout>
-
   <app-navbar [isSearchVisible]="false"></app-navbar>
+  <section class="flex gap-6 px-6 w-full ">
+    <app-card>
+      <app-section-header
+        title="Top Genres"
+        description="The genres that shape your musical taste.">
+      </app-section-header>
+
+      <div class="w-[378px]">
+        <app-radar-chart 
+        *ngIf="radarChartTopGenres()"
+        [data]="radarChartTopGenres()!"> </app-radar-chart>
+      </div>
+    </app-card>
+<div class="w-full ">
+      <app-list-of-songs
+      [tracks]="recentlyPlayed()"
+      [albumName]="'Recently Played'"
+      [showLike]="false"
+      [minTracks]="7"
+      >
+    </app-list-of-songs>
+</div>
+  </section>
 
   <app-top-items
     type="artists"
     title="Top Artists"
+    description="Your most played artists for the selected time range."
     [artists]="artists()"
     [isLoading]="artistsLoading()"
     (rangeChange)="getTopArtists($event)">
   </app-top-items>
 
-  <hr class="border-[#2a2a2a] my-8">
+  <hr class="border-[#2a2a2a] my-8" />
 
   <app-top-items
     type="tracks"
     title="Top Tracks"
+    description="The songs you’ve listened to the most during the selected time range."
     [tracks]="tracks()"
     [isLoading]="tracksLoading()"
     (rangeChange)="getTopTracks($event)">
   </app-top-items>
-  <app-radar-chart
-    [data]="radarChartTopGenres()!">
-  </app-radar-chart>
   <app-music-dna
     [data]="radarChartData()!"
     [insights]="musicInsights()"
     [personality]="personality()">
   </app-music-dna>
-
 </app-main-layout>

@@ -5,8 +5,6 @@ import { NavbarComponent } from '../../components/molecules/navbar/navbar.compon
 import { PlaylistsUseCase } from '../../../application/playlists/playlists.use-case';
 import { lastValueFrom } from 'rxjs';
 import { PlaylistItem } from '../../../domain/playlists/playlists.entity';
-import { ListOfPlaylistsComponent } from '../../components/organisms/list-of-playlists/list-of-playlists.component';
-import { LoaderComponent } from '../../components/atoms/loader/loader.component';
 import { PlaylistsError } from '../../../domain/playlists/playlists.errors';
 import { ProfileUseCase } from '../../../application/profile/profile.use-case';
 import { GetTopItemsParams } from '../../../domain/profile/profile.entity';
@@ -14,9 +12,9 @@ import { TimeRange } from '../../components/molecules/timer-ranger-selector/time
 import { TopItemsComponent } from '../../components/organisms/top-items/top-items/top-items.component';
 import { TopArtistsModel } from '../../../domain/artist/artist.entity';
 import {
-  AudioFeaturesModel,
   MusicPersonality,
-  TopTracksModel
+  TopTracksModel,
+  TrackUIModel
 } from '../../../domain/tracks/tracks.entity';
 import { mapTracksToMusicDNA } from '../../../application/tracks/music-dna-mapper';
 import {
@@ -26,6 +24,13 @@ import {
 import { getMusicPersonality } from '../../helpers/get-music-personality';
 import { MusicDnaComponent } from '../../components/organisms/music-dna/music-dna.component';
 import { getTopGenres } from '../../helpers/get-top-genres';
+import { CardComponent } from '../../components/atoms/card/card.component';
+import { SectionHeaderComponent } from '../../components/atoms/section-header/section-header.component';
+import { RecentlyPlayedTrackModel } from '../../../domain/player/player.entity';
+import { PlayerUseCase } from '../../../application/player/player.use-case';
+import { RecentlyPlayedMapper } from '../../../application/player/recently-player-mapper';
+import { title } from 'process';
+import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,16 +40,18 @@ import { getTopGenres } from '../../helpers/get-top-genres';
     CommonModule,
     MainLayoutComponent,
     NavbarComponent,
-    ListOfPlaylistsComponent,
-    LoaderComponent,
     TopItemsComponent,
     MusicDnaComponent,
-    RadarChartComponent
+    RadarChartComponent,
+    CardComponent,
+    SectionHeaderComponent,
+    ListOfSongsComponent
   ]
 })
 export class DashboardComponent implements OnInit {
   private playlistUseCase = inject(PlaylistsUseCase);
   public playlists = signal<PlaylistItem[]>([]);
+  public playerUseCase = inject(PlayerUseCase);
   public isLoading = signal<boolean>(false);
   public errorMessages = signal<string>('');
   isLoadingTop = false;
@@ -66,38 +73,39 @@ export class DashboardComponent implements OnInit {
 
   personality = signal<MusicPersonality | null>(null);
 
-topGenres: { genre: string; count: number }[] = []; 
+  topGenres: { genre: string; count: number }[] = [];
 
-async getTopArtists(range: TimeRange) {
-  this.artistsLoading.set(true);
+  recentlyPlayed = signal<TrackUIModel[]>([]);
+  recentPlayedLoading = signal(false);
 
-  try {
-    const params: GetTopItemsParams = {
-      item: 'artists',
-      timeRange: range
-    };
+  async getTopArtists(range: TimeRange) {
+    this.artistsLoading.set(true);
 
-    const result = await lastValueFrom(
-      this.profileUseCase.getTopItems(params)
-    );
+    try {
+      const params: GetTopItemsParams = {
+        item: 'artists',
+        timeRange: range
+      };
 
-    const topArtists = result as TopArtistsModel;
+      const result = await lastValueFrom(
+        this.profileUseCase.getTopItems(params)
+      );
 
-    this.topGenres = getTopGenres(topArtists.items);
+      const topArtists = result as TopArtistsModel;
 
-    this.radarChartTopGenres.set({
-      title: 'Top Genres',
-      labels: this.topGenres.map(genre => genre.genre),
-      values: this.topGenres.map(genre => genre.count)
-    });
+      this.topGenres = getTopGenres(topArtists.items);
 
+      this.radarChartTopGenres.set({
+        title: 'Top Genres',
+        labels: this.topGenres.map(genre => genre.genre),
+        values: this.topGenres.map(genre => genre.count)
+      });
 
-    this.artists.set(topArtists);
-
-  } finally {
-    this.artistsLoading.set(false);
+      this.artists.set(topArtists);
+    } finally {
+      this.artistsLoading.set(false);
+    }
   }
-}
 
   async getTopTracks(range: TimeRange) {
     this.tracksLoading.set(true);
@@ -169,12 +177,36 @@ async getTopArtists(range: TimeRange) {
     this.errorMessages.set('');
 
     try {
+      this.recentPlayedLoading.set(true);
       const result = await lastValueFrom(this.playlistUseCase.getPlaylists());
       this.playlists.set(result.items);
     } catch (error) {
       this.errorMessages.set((error as PlaylistsError).message);
     } finally {
       this.isLoading.set(false);
+      this.recentPlayedLoading.set(false);
+    }
+  }
+
+  async getRecentlyPlayed() {
+    try {
+      const result = await lastValueFrom(
+        this.playerUseCase.getRecentlyPlayed()
+      );
+      const recently = RecentlyPlayedMapper.toModel(result);
+      const normalizedTracks: TrackUIModel[] = recently.map(track => ({
+        id: track.id,
+        title: track.name,
+        albumName: track.artist,
+        albumImage: track.albumImage,
+        artists: track.artist,
+        link: track.spotifyUrl,
+        timeAgo: track.playedAgo
+      }));
+
+      this.recentlyPlayed.set(normalizedTracks);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -186,6 +218,7 @@ async getTopArtists(range: TimeRange) {
     this.getPlaylists();
     this.getTopTracks('short_term');
     this.getTopArtists('short_term');
+    this.getRecentlyPlayed();
     // this.getTopTracks();
   }
 }

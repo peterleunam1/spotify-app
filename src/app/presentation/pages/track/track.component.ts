@@ -7,10 +7,11 @@ import { SpotifyHeroComponent } from '../../components/organisms/spotify-hero/sp
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar/percentage-bar.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-track',
-  imports: [MainLayoutComponent, NavbarComponent, SpotifyHeroComponent, PercentageBarComponent],
+  imports: [CommonModule, MainLayoutComponent, NavbarComponent, SpotifyHeroComponent, PercentageBarComponent],
   templateUrl: './track.component.html',
   styleUrl: './track.component.css'
 })

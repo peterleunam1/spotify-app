@@ -24,6 +24,8 @@ import { PlaylistsService } from './infrastructure/playlists/playlists.service';
 import { httpInterceptor } from './infrastructure/interceptors/http/http.interceptor';
 import { ArtistGateWay } from './domain/artist/artist.gateway';
 import { ArtistService } from './infrastructure/artist/artist.service';
+import { PlayerGateway } from './domain/player/player.gateway';
+import { PlayerService } from './infrastructure/player/player.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,6 +40,7 @@ export const appConfig: ApplicationConfig = {
     { provide: TracksGateWay, useClass: TracksService },
     { provide: ProfileGateWay, useClass: ProfileService },
     { provide: PlaylistsGateWay, useClass: PlaylistsService },
-    { provide: ArtistGateWay, useClass: ArtistService }
+    { provide: ArtistGateWay, useClass: ArtistService },
+    { provide: PlayerGateway, useClass: PlayerService}
   ]
 };

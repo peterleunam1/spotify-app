@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
-  imports: [CommonModule, ModalComponent, ListOfSongsComponent, RouterModule]
+  imports: [CommonModule, RouterModule]
 })
 export class AlbumComponent {
   @Input() album: AlbumInfo = {

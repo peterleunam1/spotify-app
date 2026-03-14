@@ -3,7 +3,9 @@ import {
   ElementRef,
   Input,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import Chart from 'chart.js/auto';
 
@@ -12,26 +14,41 @@ export interface RadarChartData {
   values: number[];
   title?: string;
 }
+
 @Component({
   selector: 'app-radar-chart',
-  imports: [],
   templateUrl: './radar-chart.component.html',
   styleUrl: './radar-chart.component.css'
 })
-export class RadarChartComponent implements AfterViewInit {
+export class RadarChartComponent implements AfterViewInit, OnChanges {
+
   @Input({ required: true })
   data!: RadarChartData;
 
   @ViewChild('chartCanvas')
   chartCanvas!: ElementRef<HTMLCanvasElement>;
 
-  chart!: Chart;
+  chart?: Chart;
+  viewReady = false;
 
   ngAfterViewInit() {
-    this.createChart();
+    this.viewReady = true;
+    this.tryCreateChart();
   }
 
-  createChart() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['data']) {
+      this.tryCreateChart();
+    }
+  }
+
+  private tryCreateChart() {
+    if (!this.viewReady || !this.data) return;
+
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
     const ctx = this.chartCanvas.nativeElement;
 
     this.chart = new Chart(ctx, {
@@ -42,49 +59,94 @@ export class RadarChartComponent implements AfterViewInit {
           {
             label: this.data.title ?? 'Music DNA',
             data: this.data.values,
+
             backgroundColor: 'rgba(29,185,84,0.15)',
             borderColor: '#1DB954',
             borderWidth: 2,
+
             pointBackgroundColor: '#1DB954',
             pointBorderColor: '#1DB954',
-            pointRadius: 4,
-            pointHoverRadius: 6
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: '#1ed760'
           }
         ]
       },
+
       options: {
         responsive: true,
-        plugins: {
-          legend: {
-            labels: {
-              color: '#ffffff'
-            }
+        maintainAspectRatio: false,
+
+        animation: {
+          duration: 1400,
+          easing: 'easeOutQuart'
+        },
+
+        elements: {
+          line: {
+            tension: 0.35
           }
         },
+
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+
         scales: {
           r: {
-            angleLines: {
-              color: 'rgba(255,255,255,0.08)'
-            },
-            grid: {
-              color: 'rgba(255,255,255,0.05)'
-            },
-            pointLabels: {
-              color: '#b3b3b3',
-              font: {
-                size: 11
-              }
-            },
-            ticks: {
-              backdropColor: 'transparent',
-              color: '#666',
-              stepSize: 0.2
-            },
             suggestedMin: 0,
-            suggestedMax: 1
+            suggestedMax: 1,
+
+            grid: {
+              circular: true,
+              color: 'rgba(255,255,255,0.06)'
+            },
+
+            angleLines: {
+  display: false
+},
+
+     pointLabels: {
+  color: '#9ca3af',
+  font: {
+    size: 12,
+    weight: 'bold'
+  }
+},
+
+            ticks: {
+              display: false,
+              stepSize: 0.25
+            }
           }
         }
-      }
+      },
+
+    plugins: [
+  {
+    id: 'lineGlow',
+    beforeDatasetDraw(chart, args) {
+      const { ctx } = chart;
+
+      if (args.index !== 0) return;
+
+      ctx.save();
+      ctx.shadowColor = '#1DB954';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    },
+    afterDatasetDraw(chart, args) {
+      const { ctx } = chart;
+
+      if (args.index !== 0) return;
+
+      ctx.restore();
+    }
+  }
+]
     });
   }
 }

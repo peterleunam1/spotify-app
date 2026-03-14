@@ -6,9 +6,7 @@ import { lastValueFrom } from 'rxjs';
 import {
   AlbumModel
 } from '../../../domain/albums/albums.entity';
-import { ListOfAlbumsComponent } from '../../components/organisms/list-of-albums/list-of-albums.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { LoaderComponent } from '../../components/atoms/loader/loader.component';
 import { CommonModule } from '@angular/common';
 import { SpotifyHeroComponent } from '../../components/organisms/spotify-hero/spotify-hero.component';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
@@ -21,9 +19,7 @@ import { PercentageBarComponent } from '../../components/atoms/percentage-bar/pe
   templateUrl: './albums.component.html',
   imports: [
     MainLayoutComponent,
-    ListOfAlbumsComponent,
     NavbarComponent,
-    LoaderComponent,
     CommonModule,
     SpotifyHeroComponent,
     ListOfSongsComponent,

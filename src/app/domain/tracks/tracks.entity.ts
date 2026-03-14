@@ -140,11 +140,12 @@ export type LikedTrackItem = MeTrarcksModel['items'][number];
 export interface TrackUIModel {
   id: string
   title: string
-  duration: number
+  duration?: number
   albumName: string
   albumImage: string
   artists: string
   link: string
+  timeAgo?: string
 }
 
 export interface SingleTrackModel {

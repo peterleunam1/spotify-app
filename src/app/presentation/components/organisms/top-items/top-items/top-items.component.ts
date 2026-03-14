@@ -20,6 +20,9 @@ export class TopItemsComponent {
   @Input({ required: true })
   title!: string;
 
+  @Input({ required: true })
+  description!: string;
+
   @Input()
   artists: TopArtistsModel | null = null;
 
