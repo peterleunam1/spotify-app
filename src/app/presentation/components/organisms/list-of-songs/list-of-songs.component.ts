@@ -23,6 +23,7 @@ export class ListOfSongsComponent {
   @Input() albumName = 'Songs';
   @Input() showLike = false;
   @Input() minTracks = 3;
+  @Input () titleSmall = false;
   showAllTracks = false;
 
   get visibleTracks() {

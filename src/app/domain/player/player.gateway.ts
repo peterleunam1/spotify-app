@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
-import { RecentlyPlayed } from './player.entity';
+import { CurrentlyPlayingTrackModel, RecentlyPlayed } from './player.entity';
 
 export abstract class PlayerGateway {
   abstract getRecentlyPlayed(): Observable<RecentlyPlayed>;
+  abstract getCurrentlyPlayingTrack(): Observable<CurrentlyPlayingTrackModel>;
 }

@@ -6,6 +6,7 @@
         "auth",
         "singers",
         "playlists",
-        "tracks"
+        "tracks",
+        "dashboard"
     ]
 }

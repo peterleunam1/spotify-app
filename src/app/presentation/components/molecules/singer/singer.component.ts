@@ -28,6 +28,7 @@ export class SingerComponent {
 @Input() highlightOnHover?: boolean = true; // escala y sombra al hover
 @Input() showGenres?: boolean = false; // mostrar géneros del artista
 @Input() showLinkIcon?: boolean = false; // ícono de Spotify al lado del nombre
+@Input() isSmall?: boolean = false; // versión más compacta para playlists
   // 🔹 evento para eliminar
   @Output()
   remove = new EventEmitter<string>();

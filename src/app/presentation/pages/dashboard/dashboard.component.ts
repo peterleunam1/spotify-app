@@ -26,11 +26,15 @@ import { MusicDnaComponent } from '../../components/organisms/music-dna/music-dn
 import { getTopGenres } from '../../helpers/get-top-genres';
 import { CardComponent } from '../../components/atoms/card/card.component';
 import { SectionHeaderComponent } from '../../components/atoms/section-header/section-header.component';
-import { RecentlyPlayedTrackModel } from '../../../domain/player/player.entity';
+import { CurrentlyPlayingModel, CurrentlyPlayingTrackModel, RecentlyPlayedTrackModel } from '../../../domain/player/player.entity';
 import { PlayerUseCase } from '../../../application/player/player.use-case';
 import { RecentlyPlayedMapper } from '../../../application/player/recently-player-mapper';
 import { title } from 'process';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
+import { CurrentlyPlayingMapper } from '../../../application/player/currently-playing-mapper';
+import { CurrentlyPlayingComponent } from '../../components/molecules/currently-playing/currently-playing/currently-playing.component';
+import { ListeningHeatmapComponent } from '../../components/organisms/listening-heatmap/listening-heatmap.component';
+import { RepeatAndStatsComponent } from '../../components/organisms/repeat-and-stats/repeat-and-stats.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,10 +46,13 @@ import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/l
     NavbarComponent,
     TopItemsComponent,
     MusicDnaComponent,
+    RepeatAndStatsComponent,
     RadarChartComponent,
     CardComponent,
     SectionHeaderComponent,
-    ListOfSongsComponent
+    ListOfSongsComponent,
+    CurrentlyPlayingComponent,
+    ListeningHeatmapComponent
   ]
 })
 export class DashboardComponent implements OnInit {
@@ -76,7 +83,10 @@ export class DashboardComponent implements OnInit {
   topGenres: { genre: string; count: number }[] = [];
 
   recentlyPlayed = signal<TrackUIModel[]>([]);
+  recentlyPlayedTracks = signal<RecentlyPlayedTrackModel[]>([]);
   recentPlayedLoading = signal(false);
+
+  currentlyPlaying = signal<CurrentlyPlayingModel | null>(null);
 
   async getTopArtists(range: TimeRange) {
     this.artistsLoading.set(true);
@@ -194,6 +204,7 @@ export class DashboardComponent implements OnInit {
         this.playerUseCase.getRecentlyPlayed()
       );
       const recently = RecentlyPlayedMapper.toModel(result);
+      this.recentlyPlayedTracks.set(recently);
       const normalizedTracks: TrackUIModel[] = recently.map(track => ({
         id: track.id,
         title: track.name,
@@ -210,6 +221,16 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  async getCurrentlyPlaying() {
+    try {
+      const result = await lastValueFrom(this.playerUseCase.getCurrentlyPlayingTrack());
+      const currentPlaying = CurrentlyPlayingMapper.toModel(result);
+      this.currentlyPlaying.set(currentPlaying);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   openPlaylist(url: string) {
     window.open(url, '_blank');
   }
@@ -219,6 +240,7 @@ export class DashboardComponent implements OnInit {
     this.getTopTracks('short_term');
     this.getTopArtists('short_term');
     this.getRecentlyPlayed();
+    this.getCurrentlyPlaying();
     // this.getTopTracks();
   }
 }

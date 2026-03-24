@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { PlayerGateway } from '../../domain/player/player.gateway';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RecentlyPlayed } from '../../domain/player/player.entity';
+import { CurrentlyPlayingTrackModel, RecentlyPlayed } from '../../domain/player/player.entity';
 import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
@@ -19,7 +19,16 @@ export class PlayerService implements PlayerGateway {
 
   getRecentlyPlayed(): Observable<RecentlyPlayed> {
     return this.httpClient.get<RecentlyPlayed>(
-      `${BASE_URL}/me/player/recently-played?limit=6`,
+      `${BASE_URL}/me/player/recently-played?limit=50`,
+      {
+        headers: this.getHeaders()
+      }
+    );
+  }
+
+  getCurrentlyPlayingTrack(): Observable<CurrentlyPlayingTrackModel> {
+    return this.httpClient.get<CurrentlyPlayingTrackModel>(
+      `${BASE_URL}/me/player/currently-playing`,
       {
         headers: this.getHeaders()
       }

@@ -1,51 +1,67 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
-  <section class="flex gap-6 px-6 w-full ">
-    <app-card>
-      <app-section-header
-        title="Top Genres"
-        description="The genres that shape your musical taste.">
-      </app-section-header>
+  <section class="px-8 flex flex-col gap-8 pb-8">
+    <!-- HEADER -->
+    <header>
+      <h1 class="text-3xl font-semibold">Dashboard</h1>
+      <p class="text-neutral-400 text-sm">Your music at a glance.</p>
+    </header>
 
-      <div class="w-[378px]">
-        <app-radar-chart 
-        *ngIf="radarChartTopGenres()"
-        [data]="radarChartTopGenres()!"> </app-radar-chart>
-      </div>
-    </app-card>
-<div class="w-full ">
-      <app-list-of-songs
-      [tracks]="recentlyPlayed()"
+    <!-- HERO -->
+    <section class="flex gap-8 w-full">
+      <!-- CURRENTLY PLAYING -->
+      <article class="flex flex-col gap-8 w-[45%]">
+        <app-currently-playing
+          class="w-full"
+          [track]="currentlyPlaying"
+          [refresh]="getCurrentlyPlaying.bind(this)">
+        </app-currently-playing>
+
+        <app-card class="w-full">
+          <app-section-header
+            title="Top Genres"
+            description="Your core sound profile">
+          </app-section-header>
+
+          <app-radar-chart
+            *ngIf="radarChartTopGenres()"
+            [data]="radarChartTopGenres()!">
+          </app-radar-chart>
+        </app-card>
+      </article>
+      <app-repeat-and-stats class="w-[55%]" [tracks]="recentlyPlayedTracks()!">
+      </app-repeat-and-stats>
+      <!-- TOP GENRES -->
+    </section>
+
+    <app-list-of-songs
+      [tracks]="recentlyPlayed().slice(0, 5)"
       [albumName]="'Recently Played'"
       [showLike]="false"
       [minTracks]="7"
-      >
+      [titleSmall]="true">
     </app-list-of-songs>
-</div>
+
+    <!-- TOP PREVIEW -->
+
+    <app-top-items
+      mode="compact"
+      type="artists"
+      title="Top Artists"
+      description="Your favorites right now"
+      [artists]="artists()"
+      [isLoading]="artistsLoading()"
+      (rangeChange)="getTopArtists($event)">
+    </app-top-items>
+
+    <app-top-items
+      mode="compact"
+      type="tracks"
+      title="Top Tracks"
+      description="Your most played songs"
+      [tracks]="tracks()"
+      [isLoading]="tracksLoading()"
+      (rangeChange)="getTopTracks($event)">
+    </app-top-items>
   </section>
-
-  <app-top-items
-    type="artists"
-    title="Top Artists"
-    description="Your most played artists for the selected time range."
-    [artists]="artists()"
-    [isLoading]="artistsLoading()"
-    (rangeChange)="getTopArtists($event)">
-  </app-top-items>
-
-  <hr class="border-[#2a2a2a] my-8" />
-
-  <app-top-items
-    type="tracks"
-    title="Top Tracks"
-    description="The songs you’ve listened to the most during the selected time range."
-    [tracks]="tracks()"
-    [isLoading]="tracksLoading()"
-    (rangeChange)="getTopTracks($event)">
-  </app-top-items>
-  <app-music-dna
-    [data]="radarChartData()!"
-    [insights]="musicInsights()"
-    [personality]="personality()">
-  </app-music-dna>
 </app-main-layout>

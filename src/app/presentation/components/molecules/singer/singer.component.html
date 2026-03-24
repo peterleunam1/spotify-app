@@ -3,16 +3,17 @@
   [routerLink]="['/', singer.type, singer.id]"
   [attr.aria-label]="'Ir a ' + singer.id"
   class="relative block transition-transform transform"
-  [ngClass]="{ 'hover:scale-105 duration-300 ease-in-out': highlightOnHover }"
->
+  [ngClass]="{ 'hover:scale-105 duration-300 ease-in-out': highlightOnHover }">
   <div
     class="text-white rounded-lg p-4 flex flex-col items-center text-center cursor-pointer hover:bg-[#282828] transition-colors duration-300"
     [ngClass]="{
       'bg-[#181818] shadow-md': singer.type !== 'artist',
-      'bg-transparent': singer.type === 'artist'
-    }"
-  >
-    <div *ngIf="showRank && rank" class="absolute top-4 left-5 text-green-400 font-bold text-lg">
+      'bg-transparent': singer.type === 'artist',
+      'bg-transparent shadow-none': isSmall
+    }">
+    <div
+      *ngIf="showRank && rank"
+      class="absolute top-5 left-5 text-white font-bold text-base bg-green-500 w-6 h-6 rounded-full flex items-center justify-center">
       {{ rank }}
     </div>
 
@@ -20,8 +21,7 @@
       *ngIf="showRemoveButton"
       (click)="handleRemove($event)"
       class="absolute top-2 right-2 bg-black/70 hover:bg-black text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"
-      aria-label="Eliminar"
-    >
+      aria-label="Eliminar">
       ✕
     </button>
 
@@ -31,14 +31,16 @@
       class="object-cover"
       [ngClass]="{
         'rounded-lg mb-2': singer.type !== 'artist',
-        'rounded-full mb-4 w-36 h-36': singer.type === 'artist'
-      }"
-    />
+        'rounded-full mb-4 w-36 h-36': singer.type === 'artist',
+        'w-34 h-34': isSmall
+      }" />
 
     <h2
       class="text-lg font-bold text-white hover:text-green-400 transition-colors duration-200"
-      [ngClass]="{ 'text-sm': singer.type !== 'artist' }"
-    >
+      [ngClass]="{
+        'text-sm': singer.type !== 'artist',
+        'max-w-[125px]': isSmall
+      }">
       {{ singer.name }}
       <span *ngIf="showLinkIcon" class="ml-1 text-green-400 text-xs">🔗</span>
     </h2>
@@ -47,7 +49,9 @@
       {{ singer.followers | number }} followers
     </p>
 
-    <p class="text-xs text-gray-400" *ngIf="showGenres && singer.genres?.length">
+    <p
+      class="text-xs text-gray-400"
+      *ngIf="showGenres && singer.genres?.length">
       {{ formatGenres(singer.genres) }}
     </p>
 

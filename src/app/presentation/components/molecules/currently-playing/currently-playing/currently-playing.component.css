@@ -1,0 +1,36 @@
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.equalizer span {
+  width: 3px;
+  background: #1db954;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.equalizer span:nth-child(1) {
+  height: 6px;
+  animation-delay: 0s;
+}
+
+.equalizer span:nth-child(2) {
+  height: 12px;
+  animation-delay: 0.2s;
+}
+
+.equalizer span:nth-child(3) {
+  height: 8px;
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

@@ -1,0 +1,106 @@
+<section class="bg-neutral-900 rounded-2xl p-6 w-full relative">
+
+  <!-- HEADER -->
+  <div class="mb-5">
+
+    <h2 class="text-white text-xl font-semibold">
+      Listening activity
+    </h2>
+
+    <p class="text-sm text-neutral-400">
+      Based on recent listening · estimated over the last year
+    </p>
+
+  </div>
+
+  <!-- STATS -->
+  <div class="flex gap-6 mb-6 text-sm">
+
+    <div>
+      <p class="text-neutral-400">Total plays</p>
+      <p class="text-white font-semibold text-lg">
+        {{ totalPlays }}
+      </p>
+    </div>
+
+    <div>
+      <p class="text-neutral-400">Longest streak</p>
+      <p class="text-white font-semibold text-lg">
+        🔥 {{ longestStreak }} days
+      </p>
+    </div>
+
+  </div>
+
+  <!-- 🔥 PERSONALITY -->
+  <div class="mb-6">
+
+    <p class="text-neutral-400 text-sm mb-2">
+      Listening personality
+    </p>
+
+    <div class="flex flex-wrap gap-2 text-xs">
+
+      <span
+        *ngIf="isNightListener"
+        class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300"
+      >
+        🌙 Night listener
+      </span>
+
+      <span
+        *ngIf="isWeekendListener"
+        class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300"
+      >
+        🎉 Weekend heavy listener
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- MONTHS -->
+  <div class="flex text-[10px] text-neutral-500 mb-2">
+
+    <div class="w-6"></div>
+
+    <div class="flex gap-[3px] w-full overflow-hidden">
+      <span *ngFor="let m of months" class="w-[12px] text-center">
+        {{ m }}
+      </span>
+    </div>
+
+  </div>
+
+  <!-- HEATMAP -->
+  <div class="w-full overflow-x-auto">
+
+    <div class="flex gap-[4px] min-w-max">
+
+      <div *ngFor="let week of weeks" class="flex flex-col gap-[4px]">
+
+        <div
+          *ngFor="let day of week"
+          class="w-[11px] h-[11px] rounded-sm transition hover:scale-125 hover:ring-1 hover:ring-white/30"
+          [ngClass]="color(day.count)"
+          (mouseenter)="day.count !== -1 && showTooltip(day,$event)"
+          (mouseleave)="hideTooltip()"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TOOLTIP -->
+  <div
+    *ngIf="hoveredDay"
+    class="fixed z-50 bg-neutral-800 text-xs px-2 py-1 rounded shadow pointer-events-none backdrop-blur-sm"
+    [style.left.px]="tooltipX"
+    [style.top.px]="tooltipY"
+  >
+    {{ tooltipText(hoveredDay) }}
+  </div>
+
+</section>

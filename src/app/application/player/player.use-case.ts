@@ -9,4 +9,7 @@ export class PlayerUseCase {
   getRecentlyPlayed() {
     return this.playerGateway.getRecentlyPlayed();
   }
+  getCurrentlyPlayingTrack() {
+    return this.playerGateway.getCurrentlyPlayingTrack();
+  }
 }
