@@ -1,15 +1,12 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
   <section class="px-8 flex flex-col gap-8 pb-8">
-    <!-- HEADER -->
     <header>
       <h1 class="text-3xl font-semibold">Dashboard</h1>
       <p class="text-neutral-400 text-sm">Your music at a glance.</p>
     </header>
 
-    <!-- HERO -->
     <section class="flex gap-8 w-full">
-      <!-- CURRENTLY PLAYING -->
       <article class="flex flex-col gap-8 w-[45%]">
         <app-currently-playing
           class="w-full"
@@ -31,7 +28,6 @@
       </article>
       <app-repeat-and-stats class="w-[55%]" [tracks]="recentlyPlayedTracks()!">
       </app-repeat-and-stats>
-      <!-- TOP GENRES -->
     </section>
 
     <app-list-of-songs
@@ -42,7 +38,6 @@
       [titleSmall]="true">
     </app-list-of-songs>
 
-    <!-- TOP PREVIEW -->
 
     <app-top-items
       mode="compact"

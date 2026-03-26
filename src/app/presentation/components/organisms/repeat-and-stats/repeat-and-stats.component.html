@@ -1,8 +1,9 @@
 <section class="flex flex-col gap-8 w-full">
+
   <!-- 🔁 ON REPEAT -->
-   <app-card>
+  <app-card>
     <app-section-header
-      title="On Repeat 🔁"
+      title="On Repeat"
       description="Your most played tracks right now">
     </app-section-header>
 
@@ -22,44 +23,16 @@
         [isSmall]="true">
       </app-singer>
     </div>
-    </app-card>
+  </app-card>
 
-  <!-- 📊 QUICK STATS -->
+  <!-- 📊 STATS (REUTILIZABLE) -->
   <app-card>
     <app-section-header 
-        title="Your Stats"
-        description="Your activity for {{ todayLabel }}">
+      title="Your Stats"
+      description="Your activity for {{ todayLabel }}">
     </app-section-header>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div class="bg-neutral-800 rounded-lg p-3">
-        <p class="text-xs text-neutral-400">Tracks</p>
-        <p class="text-lg font-semibold">{{ stats.totalTracks }}</p>
-      </div>
+    <app-stats [tracks]="tracks"></app-stats>
+  </app-card>
 
-      <div class="bg-neutral-800 rounded-lg p-3">
-        <p class="text-xs text-neutral-400">Hours</p>
-        <p class="text-lg font-semibold">{{ stats.totalHours }}</p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-lg p-3">
-        <p class="text-xs text-neutral-400">Artists</p>
-        <p class="text-lg font-semibold">{{ stats.totalArtists }}</p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-lg p-3">
-        <p class="text-xs text-neutral-400">Peak Day</p>
-        <p class="text-lg font-semibold">{{ stats.peakDay }}</p>
-      </div>
-      <div class="bg-neutral-800 rounded-lg p-3">
-        <p class="text-xs text-neutral-400">Top Artist</p>
-        <p class="text-lg font-semibold truncate">{{ stats.topArtist }}</p>
-      </div>
-
-      <div class="bg-neutral-800 rounded-lg p-3">
-        <p class="text-xs text-neutral-400">Avg Session</p>
-        <p class="text-lg font-semibold">{{ stats.avgSessionMinutes }} min</p>
-      </div>
-    </div>
- </app-card>
 </section>

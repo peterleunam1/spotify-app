@@ -1,0 +1,43 @@
+<div class="bg-neutral-900 rounded-xl p-4">
+  <div class="mb-4">
+    <p class="text-sm text-neutral-400">
+      Your activity for {{ todayLabel }}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div class="bg-neutral-800 rounded-lg p-3">
+      <p class="text-xs text-neutral-400">Tracks</p>
+      <p class="text-lg font-semibold">{{ stats.totalTracks }}</p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-3">
+      <p class="text-xs text-neutral-400">Hours</p>
+      <p class="text-lg font-semibold">{{ stats.totalHours }}</p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-3">
+      <p class="text-xs text-neutral-400">Artists</p>
+      <p class="text-lg font-semibold">{{ stats.totalArtists }}</p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-3">
+      <p class="text-xs text-neutral-400">Peak Day</p>
+      <p class="text-lg font-semibold">{{ stats.peakDay }}</p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-3">
+      <p class="text-xs text-neutral-400">Top Artist</p>
+      <p class="text-lg font-semibold truncate">
+        {{ stats.topArtist }}
+      </p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-3">
+      <p class="text-xs text-neutral-400">Avg Session</p>
+      <p class="text-lg font-semibold">
+        {{ stats.avgSessionMinutes }} min
+      </p>
+    </div>
+  </div>
+</div>
