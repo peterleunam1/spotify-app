@@ -17,7 +17,8 @@ export class SidebarComponent {
   private router = inject(Router);
   sidebarItems: SidebarItem[] = [
     { label: 'Home', icon: 'fa-home', route: '/dashboard' },
-    { label: 'Search', icon: 'fa-search', route: '/search' }
+    { label: 'Search', icon: 'fa-search', route: '/search' },
+    { label: 'Your Music DNA', icon: 'fa-dna', route: '/music-dna' }
   ];
   isActive(route: string): boolean {
     return this.router.url === route;

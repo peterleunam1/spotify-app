@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeatmapRowComponent } from './heatmap-row.component';
+import { MusicDnaComponent } from './music-dna.component';
 
-describe('HeatmapRowComponent', () => {
-  let component: HeatmapRowComponent;
-  let fixture: ComponentFixture<HeatmapRowComponent>;
+describe('MusicDnaComponent', () => {
+  let component: MusicDnaComponent;
+  let fixture: ComponentFixture<MusicDnaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeatmapRowComponent]
+      imports: [MusicDnaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HeatmapRowComponent);
+    fixture = TestBed.createComponent(MusicDnaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

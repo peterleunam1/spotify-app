@@ -12,28 +12,22 @@ import { TimeRange } from '../../components/molecules/timer-ranger-selector/time
 import { TopItemsComponent } from '../../components/organisms/top-items/top-items/top-items.component';
 import { TopArtistsModel } from '../../../domain/artist/artist.entity';
 import {
-  MusicPersonality,
   TopTracksModel,
   TrackUIModel
 } from '../../../domain/tracks/tracks.entity';
-import { mapTracksToMusicDNA } from '../../../application/tracks/music-dna-mapper';
 import {
   RadarChartComponent,
   RadarChartData
 } from '../../components/atoms/radar-chart/radar-chart/radar-chart.component';
-import { getMusicPersonality } from '../../helpers/get-music-personality';
-import { MusicDnaComponent } from '../../components/organisms/music-dna/music-dna.component';
 import { getTopGenres } from '../../helpers/get-top-genres';
 import { CardComponent } from '../../components/atoms/card/card.component';
 import { SectionHeaderComponent } from '../../components/atoms/section-header/section-header.component';
-import { CurrentlyPlayingModel, CurrentlyPlayingTrackModel, RecentlyPlayedTrackModel } from '../../../domain/player/player.entity';
+import { CurrentlyPlayingModel, RecentlyPlayedTrackModel } from '../../../domain/player/player.entity';
 import { PlayerUseCase } from '../../../application/player/player.use-case';
 import { RecentlyPlayedMapper } from '../../../application/player/recently-player-mapper';
-import { title } from 'process';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
 import { CurrentlyPlayingMapper } from '../../../application/player/currently-playing-mapper';
 import { CurrentlyPlayingComponent } from '../../components/molecules/currently-playing/currently-playing/currently-playing.component';
-import { ListeningHeatmapComponent } from '../../components/organisms/listening-heatmap/listening-heatmap.component';
 import { RepeatAndStatsComponent } from '../../components/organisms/repeat-and-stats/repeat-and-stats.component';
 
 @Component({
@@ -45,14 +39,12 @@ import { RepeatAndStatsComponent } from '../../components/organisms/repeat-and-s
     MainLayoutComponent,
     NavbarComponent,
     TopItemsComponent,
-    MusicDnaComponent,
     RepeatAndStatsComponent,
     RadarChartComponent,
     CardComponent,
     SectionHeaderComponent,
     ListOfSongsComponent,
-    CurrentlyPlayingComponent,
-    ListeningHeatmapComponent
+    CurrentlyPlayingComponent
   ]
 })
 export class DashboardComponent implements OnInit {
@@ -74,11 +66,11 @@ export class DashboardComponent implements OnInit {
   selectedArtistsRange: TimeRange = 'short_term';
   selectedTracksRange: TimeRange = 'short_term';
 
-  radarChartData = signal<RadarChartData | null>(null);
+  // radarChartData = signal<RadarChartData | null>(null);
   radarChartTopGenres = signal<RadarChartData | null>(null);
-  musicInsights = signal<string[]>([]);
+  // musicInsights = signal<string[]>([]);
 
-  personality = signal<MusicPersonality | null>(null);
+  // personality = signal<MusicPersonality | null>(null);
 
   topGenres: { genre: string; count: number }[] = [];
 
@@ -130,53 +122,7 @@ export class DashboardComponent implements OnInit {
         this.profileUseCase.getTopItems(params)
       );
       this.tracks.set(result as TopTracksModel);
-      const dna = mapTracksToMusicDNA(result as TopTracksModel);
-      this.radarChartData.set({
-        title: 'Your Music DNA',
-        labels: [
-          'Energy',
-          'Mainstream',
-          'Freshness',
-          'Intensity',
-          'Explicit',
-          'Variety'
-        ],
-        values: [
-          dna.energy,
-          dna.mainstream,
-          dna.freshness,
-          dna.intensity,
-          dna.explicitness,
-          dna.variety
-        ]
-      });
 
-      const insights: string[] = [];
-
-      if (dna.energy > 0.7) {
-        insights.push('🔥 High energy listener');
-      }
-
-      if (dna.mainstream > 0.6) {
-        insights.push('🎤 Loves popular music');
-      }
-
-      if (dna.variety > 0.5) {
-        insights.push('🌍 Diverse artist taste');
-      }
-
-      if (dna.explicitness > 0.4) {
-        insights.push('🧨 Enjoys explicit tracks');
-      }
-
-      if (dna.freshness > 0.6) {
-        insights.push('🆕 Likes recent music');
-      }
-
-      this.musicInsights.set(insights);
-      const personality = getMusicPersonality(dna);
-
-      this.personality.set(personality);
     } finally {
       this.tracksLoading.set(false);
     }

@@ -9,5 +9,6 @@ export const PRIVATE_ROUTES = {
   SEARCH: 'search',
   ALBUMS: 'album/:albumId',
   ARTIST: 'artist/:artistId',
-  TRACK: 'track/:trackId'
+  TRACK: 'track/:trackId',
+  MUSIC_DNA: 'music-dna'
 };

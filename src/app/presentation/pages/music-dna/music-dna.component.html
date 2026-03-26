@@ -1,0 +1,17 @@
+<app-main-layout>
+      <app-navbar [isSearchVisible]="false"></app-navbar>
+  <section class="px-8 flex flex-col gap-8 pb-8 w-full">
+        <header>
+      <h1 class="text-3xl font-semibold">Music DNA</h1>
+      <p class="text-neutral-400 text-sm">Generated from your top tracks</p>
+    </header>
+
+<div class="w-full">
+     <app-my-music-dna
+    [data]="radarChartData()!"
+    [personality]="personality()!"
+    [insights]="musicInsights()!"
+    ></app-my-music-dna>
+</div>
+  </section>
+</app-main-layout>

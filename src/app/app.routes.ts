@@ -12,6 +12,7 @@ import {
 } from './presentation/constants/routes-storage.constant';
 import { ArtistComponent } from './presentation/pages/artist/artist.component';
 import { TrackComponent } from './presentation/pages/track/track.component';
+import { MusicDnaComponent } from './presentation/pages/music-dna/music-dna.component';
 
 export const routes: Routes = [
   { path: PUBLIC_ROUTES.SIGN_IN, component: SignInComponent },
@@ -47,6 +48,11 @@ export const routes: Routes = [
   {
     path: PRIVATE_ROUTES.TRACK,
     component: TrackComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: PRIVATE_ROUTES.MUSIC_DNA,
+    component: MusicDnaComponent,
     canActivate: [authGuard]
   },
   { path: '**', component: PageNotFoundComponent }

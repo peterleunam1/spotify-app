@@ -1,20 +1,9 @@
-<section
-  class="px-6 mt-10 flex flex-col lg:flex-row gap-8 items-star">
-
-  <app-card>
-    <app-section-header
-      title="Your Music DNA"
-      description="Generated from your top tracks in this time range.">
-    </app-section-header>
-
-        <app-radar-chart
-            [data]="data!">
-        </app-radar-chart>
+<section class="flex flex-col lg:flex-row gap-8 items-star w-full">
+  <app-card class="w-full ">
+    <app-radar-chart [data]="data!"> </app-radar-chart>
   </app-card>
 
-  <div class="w-full flex flex-col gap-4">
-    <!-- INSIGHTS -->
-
+  <div class="w-full flex flex-col gap-8">
     <app-card>
       <app-section-header
         title="Your music profile"

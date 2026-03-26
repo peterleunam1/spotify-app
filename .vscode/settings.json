@@ -7,6 +7,7 @@
         "singers",
         "playlists",
         "tracks",
-        "dashboard"
+        "dashboard",
+        "player"
     ]
 }

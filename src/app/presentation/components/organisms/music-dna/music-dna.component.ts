@@ -5,13 +5,15 @@ import { RadarChartComponent, RadarChartData } from '../../atoms/radar-chart/rad
 import { MusicPersonality } from '../../../../domain/tracks/tracks.entity';
 
 @Component({
-  selector: 'app-music-dna',
+  selector: 'app-my-music-dna',
   imports: [CardComponent, SectionHeaderComponent, RadarChartComponent],
   templateUrl: './music-dna.component.html',
   styleUrl: './music-dna.component.css'
 })
-export class MusicDnaComponent {
+export class MyMusicDnaComponent {
   @Input() data!: RadarChartData | null;
   @Input() insights: string[] = [];
   @Input() personality: MusicPersonality | null = null;
+
+  
 }
