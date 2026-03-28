@@ -11,10 +11,11 @@ import {
 import { CommonModule } from '@angular/common';
 import { MainButtonComponent } from '../../atoms/main-button/main-button.component';
 import { LoaderComponent } from '../../atoms/loader/loader.component';
+import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
 
 @Component({
   selector: 'app-list-of-songs',
-  imports: [CommonModule, LoaderComponent],
+  imports: [CommonModule, LoaderComponent, SectionHeaderComponent],
   templateUrl: './list-of-songs.component.html'
 })
 export class ListOfSongsComponent {
@@ -23,7 +24,7 @@ export class ListOfSongsComponent {
   @Input() albumName = 'Songs';
   @Input() showLike = false;
   @Input() minTracks = 3;
-  @Input () titleSmall = false;
+  @Input() titleSmall = false;
   showAllTracks = false;
 
   get visibleTracks() {

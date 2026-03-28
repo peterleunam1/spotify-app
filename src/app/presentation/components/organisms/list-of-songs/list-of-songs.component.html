@@ -1,11 +1,12 @@
 <div *ngIf="tracks.length || !isLoading" class="w-full">
-  <h2 class="text-2xl font-bold mb-6"
+  <app-section-header [title]="albumName"></app-section-header>
+  <!-- <h2 class="text-2xl font-bold mb-6"
   [ngClass]="{
     'text-xl font-semibold': titleSmall
   }"
   >
     {{ albumName }}
-  </h2>
+  </h2> -->
 
   <div *ngIf="!isLoading; else loading">
     <div class="space-y-1">

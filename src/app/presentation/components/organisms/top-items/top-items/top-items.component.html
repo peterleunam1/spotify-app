@@ -1,27 +1,33 @@
-<section class="text-white flex flex-col gap-4">
-  <!-- HEADER -->
-  <div class="flex flex-col gap-1">
-    <h2 class="text-2xl md:text-3xl font-bold">
-      {{ title }}
-    </h2>
+<section class="text-white flex flex-col gap-6">
 
-    <p class="text-gray-400 text-sm">
-      {{ description }}
-    </p>
+  <!-- HEADER + FILTER -->
+  <div class="flex items-center justify-between flex-wrap gap-4">
+
+    <app-section-header 
+    [title]="title"
+    [description]="description"
+    ></app-section-header>
+
+    <!-- TIME RANGE (menos protagonista) -->
+    <div *ngIf="mode === 'interactive'" class="flex items-center gap-2">
+      <app-time-ranger-selector
+        class="scale-90 opacity-90"
+        (rangeChange)="onTimeRangeChange($event)">
+      </app-time-ranger-selector>
+    </div>
+
   </div>
 
-  <article class="flex flex-col gap-4">
-    <!-- TIME RANGE (ONLY INTERACTIVE) -->
-    <app-time-ranger-selector
-      *ngIf="mode === 'interactive'"
-      (rangeChange)="onTimeRangeChange($event)">
-    </app-time-ranger-selector>
+  <article class="flex flex-col gap-5">
 
     <!-- LOADING -->
-    <div *ngIf="isLoading" class="my-4 text-neutral-400">Loading...</div>
+    <div *ngIf="isLoading" class="my-4 text-neutral-400">
+      Loading...
+    </div>
 
     <!-- GRID -->
     <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+
       <!-- ARTISTS -->
       <ng-container *ngIf="type === 'artists'">
         <app-singer
@@ -66,6 +72,7 @@
           [showGenres]="false">
         </app-singer>
       </ng-container>
+
     </div>
 
     <!-- CTA (ONLY COMPACT) -->
@@ -76,5 +83,6 @@
         See all →
       </button>
     </div>
+
   </article>
 </section>

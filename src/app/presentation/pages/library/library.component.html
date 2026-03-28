@@ -1,0 +1,44 @@
+<app-main-layout>
+  <app-navbar [isSearchVisible]="false"></app-navbar>
+  <section class="px-8 flex flex-col gap-8 pb-8">
+    <header>
+      <h1 class="text-3xl font-semibold">Library</h1>
+      <p class="text-neutral-400 text-sm">Explore your music collection</p>
+    </header>
+    <!-- TABS -->
+    <app-tabs-nav [activeTab]="activeTab" (tabChange)="setTab($event)">
+    </app-tabs-nav>
+    <div *ngIf="activeTab === 'artists'" class="animate-fade-in">
+      <!-- TU COMPONENTE -->
+      <app-top-items
+        mode="interactive"
+        type="artists"
+        [title]="'Top Artists'"
+        [description]="''"
+        [artists]="artists()!"
+        (rangeChange)="getTopArtists($event)"></app-top-items>
+    </div>
+
+    <div *ngIf="activeTab === 'tracks'" class="animate-fade-in">
+      <app-top-items
+        mode="interactive"
+        type="tracks"
+        [title]="'Top Tracks'"
+        [description]="''"
+        [tracks]="tracks()!"
+        (rangeChange)="getTopTracks($event)"></app-top-items>
+    </div>
+    <div *ngIf="activeTab === 'playlists'" class="animate-fade-in">
+      <app-list-of-playlists
+        [playlists]="playlists()"
+        [isLoading]="isLoadingPlaylist()"></app-list-of-playlists>
+    </div>
+    <div *ngIf="activeTab === 'liked'" class="animate-fade-in">
+      <app-list-of-songs
+        [tracks]="likedTracksFromArtist"
+        [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
+        [isLoading]="isLoadingMyLikedTracks()!">
+      </app-list-of-songs>
+    </div>
+  </section>
+</app-main-layout>

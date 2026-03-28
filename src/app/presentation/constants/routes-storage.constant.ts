@@ -10,5 +10,6 @@ export const PRIVATE_ROUTES = {
   ALBUMS: 'album/:albumId',
   ARTIST: 'artist/:artistId',
   TRACK: 'track/:trackId',
-  MUSIC_DNA: 'music-dna'
+  MUSIC_DNA: 'music-dna',
+  LIBRARY: 'library'
 };

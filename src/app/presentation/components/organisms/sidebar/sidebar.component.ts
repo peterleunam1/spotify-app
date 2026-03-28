@@ -18,7 +18,8 @@ export class SidebarComponent {
   sidebarItems: SidebarItem[] = [
     { label: 'Home', icon: 'fa-home', route: '/dashboard' },
     { label: 'Search', icon: 'fa-search', route: '/search' },
-    { label: 'Your Music DNA', icon: 'fa-dna', route: '/music-dna' }
+    { label: 'Your Music DNA', icon: 'fa-dna', route: '/music-dna' },
+    { label: 'Your Library', icon: 'fa-library', route: '/library' }
   ];
   isActive(route: string): boolean {
     return this.router.url === route;
