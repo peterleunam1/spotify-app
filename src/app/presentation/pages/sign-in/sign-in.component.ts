@@ -1,10 +1,28 @@
-import { Component } from '@angular/core';
-import { SignInContentComponent } from '../../components/organisms/sign-in-content/sign-in-content.component';
+import { Component, inject } from '@angular/core';
+import { AuthUseCase } from '../../../application/auth/auth.use-case';
+import { CommonModule } from '@angular/common';
+import { MainButtonComponent } from '../../components/atoms/main-button/main-button.component';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [SignInContentComponent],
+  imports: [CommonModule, MainButtonComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
-export class SignInComponent {}
+export class SignInComponent {
+  private authUseCase = inject(AuthUseCase);
+  isLoading = false;
+
+  login() {
+    return this.authUseCase.login();
+  }
+
+  onLogin() {
+    this.isLoading = true;
+
+    // simula transición antes de login real
+    setTimeout(() => {
+      this.login(); // tu método real
+    }, 400);
+  }
+}
