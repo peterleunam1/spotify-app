@@ -1,5 +1,25 @@
-<li [routerLink]="route" [ngClass]="{ 'text-white': active }"
-  class="cursor-pointer flex items-center space-x-2 py-2 px-3 rounded text-[#B3B3B3] hover:text-white transition-colors duration-200 mb-0">
-  <i class="fas" [ngClass]="icon"></i>
-  <span class="hidden md:inline">{{ label }}</span>
+<li
+  [routerLink]="route"
+  class="group relative flex items-center gap-4 px-4 py-2.5 rounded-md cursor-pointer transition-all duration-200 ease-out"
+  [ngClass]="{
+    'text-white font-semibold scale-[1.02]': active,
+    'text-[#b3b3b3] hover:text-white hover:scale-[1.02]': !active
+  }"
+>
+  <!-- Active background -->
+  <div
+    *ngIf="active"
+    class="absolute inset-0 bg-[#ffffff0d] rounded-md"
+  ></div>
+
+  <!-- Icon -->
+  <i
+    class="fas text-lg transition-all duration-200 z-10"
+    [ngClass]="icon"
+  ></i>
+
+  <!-- Label -->
+  <span class="hidden md:inline text-sm z-10">
+    {{ label }}
+  </span>
 </li>
