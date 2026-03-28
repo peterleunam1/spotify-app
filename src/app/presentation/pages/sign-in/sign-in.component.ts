@@ -19,10 +19,8 @@ export class SignInComponent {
 
   onLogin() {
     this.isLoading = true;
-
-    // simula transición antes de login real
     setTimeout(() => {
-      this.login(); // tu método real
+      this.login();
     }, 400);
   }
 }

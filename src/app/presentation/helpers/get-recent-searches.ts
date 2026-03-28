@@ -8,10 +8,7 @@ export const saveRecentSearch = (singer: SingleSingerModel) => {
 
   let searches: SingleSingerModel[] = stored ? JSON.parse(stored) : [];
 
-  // evitar duplicados
   searches = searches.filter(item => item.id !== singer.id);
-
-  // agregar al inicio
   searches.unshift(singer);
 
   if (searches.length > MAX_ITEMS) {
@@ -23,6 +20,5 @@ export const saveRecentSearch = (singer: SingleSingerModel) => {
 
 export const getRecentSearches = (): SingleSingerModel[] => {
   const stored = localStorage.getItem(STORAGE_KEY);
-
   return stored ? JSON.parse(stored) : [];
 };

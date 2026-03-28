@@ -1,6 +1,6 @@
 .loader {
     border-radius: 50%;
-    background: #1DB954; /* Color verde Spotify */
+    background: #1DB954;
     animation: pulse 1.5s infinite ease-in-out;
   }
   

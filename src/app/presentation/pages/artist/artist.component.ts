@@ -18,7 +18,7 @@ import {
   TrackUIModel
 } from '../../../domain/tracks/tracks.entity';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
-import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar/percentage-bar.component';
+import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar.component';
 
 @Component({
   selector: 'app-artist',
@@ -46,6 +46,16 @@ export class ArtistComponent implements OnInit {
   isLoading = false;
   dominantColor = 'rgb(30,30,30)';
   
+  albumsResponse: AlbumsModel = {} as AlbumsModel;
+  albums: AlbumInfo[] = [];
+  isLoadingAlbum = false;
+  artistName = 'Unknown Artist';
+  
+  isLoadingTracks = false;
+  likedTracksFromArtist: TrackUIModel[] = [];
+  visibleTracks: TrackUIModel[] = [];
+  showAllTracks = false; 
+  
   async getArtist(singerId: string) {
     try {
       this.isLoading = true;
@@ -60,10 +70,6 @@ export class ArtistComponent implements OnInit {
     }
   }
 
-  albumsResponse: AlbumsModel = {} as AlbumsModel;
-  albums: AlbumInfo[] = [];
-  isLoadingAlbum = false;
-  artistName = 'Unknown Artist';
 
   async getAlbums(singerId: string) {
     try {
@@ -81,13 +87,7 @@ export class ArtistComponent implements OnInit {
     }
   }
 
-  isLoadingTracks = false;
 
-  likedTracksFromArtist: TrackUIModel[] = [];
-
-  visibleTracks: TrackUIModel[] = [];
-
-  showAllTracks = false; // topLikedTracksFromArtist: LikedTrackItem[] = [];
   async getMyTracks(artistId: string) {
     try {
       this.isLoadingTracks = true;

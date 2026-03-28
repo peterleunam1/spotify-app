@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProfileGateWay } from '../../domain/profile/profile.gateway';
-import { GetTopItemsParams, ProfileModel, TopItemsModel } from '../../domain/profile/profile.entity';
+import { GetTopItemsParams, ProfileModel } from '../../domain/profile/profile.entity';
 import { BASE_URL } from '../../presentation/constants/base-url.constant';
 import { TopTracksModel } from '../../domain/tracks/tracks.entity';
 import { TopArtistsModel } from '../../domain/artist/artist.entity';

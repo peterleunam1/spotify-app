@@ -12,7 +12,6 @@
             ? 'grid-cols-[40px_48px_1fr_40px_80px]'
             : 'grid-cols-[40px_48px_1fr_100px]'
         ">
-        <!-- NUMBER / PLAY -->
         <div class="flex items-center justify-center text-gray-400">
           <span class="group-hover:hidden">
             {{ i + 1 }}
@@ -25,13 +24,11 @@
           </svg>
         </div>
 
-        <!-- ALBUM COVER -->
         <img
           [src]="item.albumImage"
           class="w-10 h-10 object-cover rounded"
           alt="album cover" />
 
-        <!-- TRACK INFO -->
         <div class="truncate">
           <p class="truncate font-medium">
             {{ item.title }}
@@ -42,7 +39,6 @@
           </p>
         </div>
 
-        <!-- LIKE -->
         <div
           *ngIf="showLike"
           class="flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
@@ -59,7 +55,6 @@
           </svg>
         </div>
 
-        <!-- DURATION -->
         <div class="text-sm text-gray-400 text-right" *ngIf="item.duration">
           {{ formatDuration(item.duration) }}
         </div>
@@ -69,7 +64,6 @@
       </div>
     </div>
 
-    <!-- SHOW MORE / LESS -->
     <button
       *ngIf="tracks.length > minTracks"
       (click)="toggleTracks()"

@@ -20,7 +20,12 @@ import { DominantColorState } from '../../../states/dominantColor/dominant-color
 
 @Component({
   selector: 'app-navbar',
-  imports: [InputComponent, ReactiveFormsModule, CommonModule, ReactiveFormsModule],
+  imports: [
+    InputComponent,
+    ReactiveFormsModule,
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
@@ -28,8 +33,7 @@ export class NavbarComponent implements OnInit {
   @Input() keyword = '';
   @Output() keywordChange = new EventEmitter<string>();
   @Input() spotifyEffect = false;
-    @Input() dominantColor = 'rgb(30,30,30)';
-
+  @Input() dominantColor = 'rgb(30,30,30)';
 
   dominantColorService = inject(DominantColorState);
   private profileUseCase = inject(ProfileUseCase);
@@ -40,7 +44,7 @@ export class NavbarComponent implements OnInit {
   isDropdownOpen = false;
   scrolled = false;
 
-    @HostListener('window:scroll')
+  @HostListener('window:scroll')
   onScroll() {
     if (!this.spotifyEffect) return;
     this.scrolled = window.scrollY > 200;

@@ -4,21 +4,11 @@
   [ngClass]="{
     'text-white font-semibold scale-[1.02]': active,
     'text-[#b3b3b3] hover:text-white hover:scale-[1.02]': !active
-  }"
->
-  <!-- Active background -->
-  <div
-    *ngIf="active"
-    class="absolute inset-0 bg-[#ffffff0d] rounded-md"
-  ></div>
+  }">
+  <div *ngIf="active" class="absolute inset-0 bg-[#ffffff0d] rounded-md"></div>
 
-  <!-- Icon -->
-  <i
-    class="fas text-lg transition-all duration-200 z-10"
-    [ngClass]="icon"
-  ></i>
+  <i class="fas text-lg transition-all duration-200 z-10" [ngClass]="icon"></i>
 
-  <!-- Label -->
   <span class="hidden md:inline text-sm z-10">
     {{ label }}
   </span>

@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  TimeRange,
-  TimeRangerSelectorComponent
-} from '../../../molecules/timer-ranger-selector/time-ranger-selector/time-ranger-selector.component';
 import { SingerComponent } from '../../../molecules/singer/singer.component';
 import { TopArtistsModel } from '../../../../../domain/artist/artist.entity';
 import { TopTracksModel } from '../../../../../domain/tracks/tracks.entity';
 import { SectionHeaderComponent } from '../../../atoms/section-header/section-header.component';
 import { SkeletonComponent } from '../../../atoms/skeleton/skeleton.component';
+import {
+  TimeRange,
+  TimeRangerSelectorComponent
+} from '../../../molecules/timer-ranger-selector/time-ranger-selector.component';
 
 @Component({
   selector: 'app-top-items',
@@ -24,7 +24,6 @@ import { SkeletonComponent } from '../../../atoms/skeleton/skeleton.component';
   styleUrl: './top-items.component.css'
 })
 export class TopItemsComponent {
-  // 🔥 NEW: MODE
   @Input()
   mode: 'compact' | 'interactive' = 'compact';
 
@@ -49,7 +48,6 @@ export class TopItemsComponent {
   @Output()
   rangeChange = new EventEmitter<TimeRange>();
 
-  // 🔥 OPTIONAL: navegación externa
   @Output()
   seeAll = new EventEmitter<void>();
 
@@ -61,7 +59,6 @@ export class TopItemsComponent {
     this.seeAll.emit();
   }
 
-  // 🔥 CONTROL CENTRALIZADO
   getLimit(): number {
     return this.mode === 'compact' ? 5 : 30;
   }

@@ -5,11 +5,9 @@
       <h1 class="text-3xl font-semibold">Library</h1>
       <p class="text-neutral-400 text-sm">Explore your music collection</p>
     </header>
-    <!-- TABS -->
     <app-tabs-nav [activeTab]="activeTab" (tabChange)="setTab($event)">
     </app-tabs-nav>
     <div *ngIf="activeTab === 'artists'" class="animate-fade-in">
-      <!-- TU COMPONENTE -->
       <app-top-items
         mode="interactive"
         type="artists"
@@ -17,8 +15,7 @@
         [description]="''"
         [artists]="artists()!"
         (rangeChange)="getTopArtists($event)"
-        [isLoading]="artistsLoading()!"
-        ></app-top-items>
+        [isLoading]="artistsLoading()!"></app-top-items>
     </div>
 
     <div *ngIf="activeTab === 'tracks'" class="animate-fade-in">
@@ -29,8 +26,7 @@
         [description]="''"
         [tracks]="tracks()!"
         (rangeChange)="getTopTracks($event)"
-        [isLoading]="tracksLoading()!"
-        ></app-top-items>
+        [isLoading]="tracksLoading()!"></app-top-items>
     </div>
     <div *ngIf="activeTab === 'playlists'" class="animate-fade-in">
       <app-list-of-playlists
@@ -42,8 +38,7 @@
         [tracks]="likedTracksFromArtist"
         [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
         [isLoading]="isLoadingMyLikedTracks()!"
-        [minTracks]="10"
-        >
+        [minTracks]="10">
       </app-list-of-songs>
     </div>
   </section>

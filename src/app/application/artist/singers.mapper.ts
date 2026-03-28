@@ -3,8 +3,8 @@ import {
   SingleSingerModel,
   AlbumElement,
   TracksItem
-} from '../../../../domain/singers/singer.entity';
-import { Mapper } from '../../../interfaces/mapper';
+} from '../../domain/singers/singer.entity';
+import { Mapper } from '../../presentation/interfaces/mapper';
 
 export class SingersMapper implements Mapper<Singer, SingleSingerModel> {
   mapTo(param: Singer): SingleSingerModel {

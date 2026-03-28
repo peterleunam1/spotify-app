@@ -10,29 +10,27 @@
     [title]="artistInfo.name"
     [contentType]="'artist'"
     [description]="artistInfo.followers?.total + ' followers'"
-    [isLoading]="isLoading"
-    >
-<app-list-of-songs
-  [tracks]="likedTracksFromArtist"
-  [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
-  [isLoading]="isLoadingTracks">
-</app-list-of-songs>
-  
-       <app-percentage-bar
-        *ngIf="artistInfo.popularity !== undefined"
-        [title]="'Artist popularity'"
-        [percentage]="artistInfo.popularity">
-      </app-percentage-bar>
+    [isLoading]="isLoading">
 
+    <app-list-of-songs
+      [tracks]="likedTracksFromArtist"
+      [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
+      [isLoading]="isLoadingTracks">
+    </app-list-of-songs>
 
-      <!-- ===== DISCOGRAPHY ===== -->
-      <div>
-        <h2 class="text-2xl font-bold mb-6">Discography</h2>
+    <app-percentage-bar
+      *ngIf="artistInfo.popularity !== undefined"
+      [title]="'Artist popularity'"
+      [percentage]="artistInfo.popularity">
+    </app-percentage-bar>
 
-        <app-list-of-albums [albums]="albums">
-          <app-loader *ngIf="isLoadingAlbum" [message]="'Loading albums...'">
-          </app-loader>
-        </app-list-of-albums>
-      </div>
+    <div>
+      <h2 class="text-2xl font-bold mb-6">Discography</h2>
+      <app-list-of-albums [albums]="albums">
+        <app-loader *ngIf="isLoadingAlbum" [message]="'Loading albums...'">
+        </app-loader>
+      </app-list-of-albums>
+    </div>
+    
   </app-spotify-hero>
 </app-main-layout>

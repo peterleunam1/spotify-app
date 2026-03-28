@@ -1,29 +1,17 @@
 <app-main-layout>
-
-  <!-- NAVBAR -->
   <app-navbar
     [isSearchVisible]="false"
     [spotifyEffect]="true"
     [dominantColor]="dominantColor">
   </app-navbar>
-
-  <!-- HERO -->
   <app-spotify-hero
     [img]="track.album.images[0].url"
     [title]="track.name"
     [contentType]="'track'"
     [description]="track.artists[0].name"
-    [isLoading]="isLoading"
-    >
-
- <div
-      class="grid md:grid-cols-2 gap-10
-    "
-    >
-
-      <!-- LEFT -->
+    [isLoading]="isLoading">
+    <div class="grid md:grid-cols-2 gap-10">
       <div class="space-y-4 text-sm">
-
         <div>
           <p class="text-gray-400">Album</p>
           <p class="font-semibold">{{ track.album.name }}</p>
@@ -49,40 +37,26 @@
             {{ track.album.release_date }}
           </p>
         </div>
-
       </div>
 
-      <!-- RIGHT -->
       <div class="space-y-4 text-sm">
-
-        <!-- POPULARITY -->
         <app-percentage-bar
           [title]="'Popularity'"
-          [percentage]="track.popularity"
-          >
+          [percentage]="track.popularity">
         </app-percentage-bar>
 
-        <!-- EXPLICIT -->
         <div *ngIf="track.explicit">
           <p class="text-gray-400">Explicit</p>
-          <span
-            class="text-xs bg-zinc-700 px-2 py-1 rounded"
-          >
-            Explicit
-          </span>
+          <span class="text-xs bg-zinc-700 px-2 py-1 rounded"> Explicit </span>
         </div>
 
-        <!-- ISRC -->
         <div class="mt-4">
           <p class="text-gray-400">ISRC</p>
           <p class="font-mono text-xs">
             {{ track.external_ids.isrc }}
           </p>
         </div>
-
       </div>
-
     </div>
   </app-spotify-hero>
-
 </app-main-layout>

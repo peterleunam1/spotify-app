@@ -4,7 +4,7 @@ import { SectionHeaderComponent } from '../../atoms/section-header/section-heade
 import {
   RadarChartComponent,
   RadarChartData
-} from '../../atoms/radar-chart/radar-chart/radar-chart.component';
+} from '../../atoms/radar-chart/radar-chart.component';
 import { MusicPersonality } from '../../../../domain/tracks/tracks.entity';
 import { CommonModule } from '@angular/common';
 import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';

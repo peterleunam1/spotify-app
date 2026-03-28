@@ -1,81 +1,53 @@
-<div
-  class="relative rounded-xl p-4 overflow-hidden bg-neutral-900"
->
-
+<div class="relative rounded-xl p-4 overflow-hidden bg-neutral-900">
   <ng-container *ngIf="track() as t; else idle">
-
-    <!-- BLUR BACKGROUND -->
     <div
       class="absolute inset-0 opacity-20 blur-2xl scale-125"
       [style.backgroundImage]="'url(' + t.albumImage + ')'"
-      style="background-size: cover;"
-    ></div>
+      style="background-size: cover"></div>
 
     <div class="relative flex items-center gap-4">
-
-      <!-- COVER -->
       <img
         [src]="t.albumImage"
         [alt]="t.title"
-        class="w-19 h-19 rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-110"
-      />
+        class="w-19 h-19 rounded-lg object-cover shadow-lg transition-transform duration-300 hover:scale-110" />
 
-      <!-- INFO -->
       <div class="flex-1 min-w-0">
-
         <div class="flex items-center gap-2">
-
           <p class="text-white font-semibold truncate">
             {{ t.title }}
           </p>
 
-          <!-- equalizer -->
-          <div
-            *ngIf="t.isPlaying"
-            class="equalizer"
-          >
+          <div *ngIf="t.isPlaying" class="equalizer">
             <span></span>
             <span></span>
             <span></span>
           </div>
-
         </div>
 
         <p class="text-sm text-gray-300 truncate">
           {{ t.artists }}
         </p>
-
       </div>
 
-      <!-- PLAY STATE -->
       <div
         class="flex items-center justify-center w-10 h-10 rounded-full transition"
         [class.bg-green-500]="t.isPlaying"
-        [class.shadow-green]="t.isPlaying"
-      >
+        [class.shadow-green]="t.isPlaying">
         <i
           class="fa-solid text-white"
           [class.fa-pause]="t.isPlaying"
-          [class.fa-play]="!t.isPlaying"
-        ></i>
+          [class.fa-play]="!t.isPlaying"></i>
       </div>
-
     </div>
 
-    <!-- PROGRESS -->
     <div class="mt-4">
-
       <div class="w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
-
         <div
           class="h-full bg-green-500 transition-all duration-500"
-          [style.width.%]="progress()"
-        ></div>
-
+          [style.width.%]="progress()"></div>
       </div>
 
       <div class="flex justify-between text-xs text-gray-300 mt-2">
-
         <span>
           {{ formatDuration(progressMs()) }}
         </span>
@@ -83,25 +55,15 @@
         <span>
           {{ formatDuration(t.durationMs) }}
         </span>
-
       </div>
-
     </div>
-
   </ng-container>
 
   <ng-template #idle>
-
     <div class="flex items-center gap-3 text-gray-400">
-
       <i class="fa-solid fa-music text-lg"></i>
 
-      <span class="text-sm">
-        Nothing playing right now
-      </span>
-
+      <span class="text-sm"> Nothing playing right now </span>
     </div>
-
   </ng-template>
-
 </div>

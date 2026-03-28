@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecentlyPlayedTrackModel } from '../../../../domain/player/player.entity';
-
 import { SingerComponent } from '../../molecules/singer/singer.component';
 import { CardComponent } from '../../atoms/card/card.component';
 import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
@@ -23,7 +22,6 @@ export class RepeatAndStatsComponent {
   @Input()
   tracks: RecentlyPlayedTrackModel[] = [];
 
-  // 🔧 UTILS (solo para ON REPEAT)
   private getHoursAgo(date: Date): number {
     return (Date.now() - new Date(date).getTime()) / (1000 * 60 * 60);
   }
@@ -32,7 +30,6 @@ export class RepeatAndStatsComponent {
     return 1 / (hoursAgo + 2);
   }
 
-  // 🔁 ON REPEAT
   get onRepeatTracks(): RecentlyPlayedTrackModel[] {
     const map = new Map<
       string,
@@ -63,7 +60,6 @@ export class RepeatAndStatsComponent {
       .map(item => item.track);
   }
 
-  // opcional (solo si lo quieres seguir mostrando en el header)
   get todayLabel(): string {
     return new Date().toLocaleDateString('en-US', {
       weekday: 'long'

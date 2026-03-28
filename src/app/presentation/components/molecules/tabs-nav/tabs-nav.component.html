@@ -1,8 +1,8 @@
-   <div class="flex gap-3  rounded-full w-fit backdrop-blur-md">
-      <app-tab-button
-        *ngFor="let tab of tabs"
-        [label]="tab.label"
-        [active]="activeTab === tab.key"
- (select)="selectTab(tab.key)"        >
-      </app-tab-button>
-    </div>
+<div class="flex gap-3 rounded-full w-fit backdrop-blur-md">
+  <app-tab-button
+    *ngFor="let tab of tabs"
+    [label]="tab.label"
+    [active]="activeTab === tab.key"
+    (select)="selectTab(tab.key)">
+  </app-tab-button>
+</div>

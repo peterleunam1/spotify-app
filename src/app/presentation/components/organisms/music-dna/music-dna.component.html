@@ -2,7 +2,10 @@
   <app-card class="w-full flex items-center justify-center" *ngIf="!isLoading">
     <app-radar-chart [data]="data!"> </app-radar-chart>
   </app-card>
-  <app-skeleton *ngIf="isLoading" [type]="'big-circle'" [count]="1"></app-skeleton>
+  <app-skeleton
+    *ngIf="isLoading"
+    [type]="'big-circle'"
+    [count]="1"></app-skeleton>
 
   <div class="w-full flex flex-col gap-8">
     <app-card>
@@ -19,10 +22,11 @@
         }
       </ul>
 
-      <app-skeleton *ngIf="isLoading" [type]="'text'" [count]="3"></app-skeleton>
+      <app-skeleton
+        *ngIf="isLoading"
+        [type]="'text'"
+        [count]="3"></app-skeleton>
     </app-card>
-
-    <!-- PERSONALITY -->
 
     <app-card>
       <app-section-header
@@ -46,7 +50,10 @@
         </div>
       </div>
 
-      <app-skeleton *ngIf="isLoading" [type]="'text'" [count]="5"></app-skeleton>
+      <app-skeleton
+        *ngIf="isLoading"
+        [type]="'text'"
+        [count]="5"></app-skeleton>
     </app-card>
   </div>
 </section>

@@ -21,17 +21,14 @@ export class SingerComponent {
     singerNameFromTrack: ''
   };
 
-    @Input()
-  showRemoveButton = false;
-@Input() showRank?: boolean = false; // mostrar ranking tipo Wrapped
-@Input() rank?: number; // posición en top artists
-@Input() highlightOnHover?: boolean = true; // escala y sombra al hover
-@Input() showGenres?: boolean = false; // mostrar géneros del artista
-@Input() showLinkIcon?: boolean = false; // ícono de Spotify al lado del nombre
-@Input() isSmall?: boolean = false; // versión más compacta para playlists
-  // 🔹 evento para eliminar
-  @Output()
-  remove = new EventEmitter<string>();
+  @Input() showRemoveButton = false;
+  @Input() showRank?: boolean = false;
+  @Input() rank?: number;
+  @Input() highlightOnHover?: boolean = true;
+  @Input() showGenres?: boolean = false;
+  @Input() showLinkIcon?: boolean = false;
+  @Input() isSmall?: boolean = false;
+  @Output() remove = new EventEmitter<string>();
 
   handleRemove(event: MouseEvent) {
     event.preventDefault();
@@ -40,16 +37,17 @@ export class SingerComponent {
     this.remove.emit(this.singer.id);
   }
 
+  formatGenres(genres?: string[]): string {
+    if (!genres || genres.length === 0) return 'No genres specified';
 
-formatGenres(genres?: string[]): string {
-  if (!genres || genres.length === 0) return 'No genres specified';
-
-  const formattedGenres = genres.map(g => g.charAt(0).toUpperCase() + g.slice(1));
-  return formattedGenres.length > 3
-    ? `${formattedGenres.slice(0, 2).join(', ')} etc.`
-    : formattedGenres.join(', ');
-}
+    const formattedGenres = genres.map(
+      g => g.charAt(0).toUpperCase() + g.slice(1)
+    );
+    return formattedGenres.length > 3
+      ? `${formattedGenres.slice(0, 2).join(', ')} etc.`
+      : formattedGenres.join(', ');
+  }
   handleClick() {
-  saveRecentSearch(this.singer);
-}
+    saveRecentSearch(this.singer);
+  }
 }

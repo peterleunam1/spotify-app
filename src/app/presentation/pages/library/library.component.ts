@@ -12,7 +12,6 @@ import {
   TopTracksModel,
   TrackUIModel
 } from '../../../domain/tracks/tracks.entity';
-import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector/time-ranger-selector.component';
 import { GetTopItemsParams } from '../../../domain/profile/profile.entity';
 import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -22,6 +21,7 @@ import { PlaylistItem } from '../../../domain/playlists/playlists.entity';
 import { ListOfPlaylistsComponent } from '../../components/organisms/list-of-playlists/list-of-playlists.component';
 import { TracksUseCase } from '../../../application/tracks/tracks.use-case';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
+import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector.component';
 
 @Component({
   selector: 'app-library',

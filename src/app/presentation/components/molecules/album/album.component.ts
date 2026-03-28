@@ -18,15 +18,4 @@ export class AlbumComponent {
     releaseYear: 0,
     artistName: ''
   };
-  // isModalOpen = false;
-
-  // openModal(): void {
-  //   this.isModalOpen = true;
-  // }
-
-  // closeModal(): void {
-  //   this.isModalOpen = false;
-  // }
-
- 
 }

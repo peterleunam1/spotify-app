@@ -1,19 +1,15 @@
 <section
   class="relative w-full min-h-screen bg-[#0a0a0a] text-white overflow-hidden"
   [class.zooming]="isLoading">
-  <!-- 🎵 BACKGROUND PREVIEW (DASHBOARD BLURRED) -->
   <div class="absolute inset-0">
-    <!-- imagen de tu dashboard -->
     <img
       src="https://res.cloudinary.com/dxnwtczsm/image/upload/v1774738235/preview_dtmtsp.png"
       class="w-full h-full object-cover scale-110 blur-[12px] opacity-70"
       alt="dashboard preview" />
-    <!-- overlay oscuro -->
     <div
       class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50"></div>
   </div>
 
-  <!-- 🌫️ GLOW DECORATIVO -->
   <div class="absolute inset-0">
     <div
       class="absolute w-[400px] h-[400px] bg-[#1DB954]/10 blur-[120px] rounded-full top-[-100px] left-[-100px]"></div>
@@ -21,23 +17,18 @@
       class="absolute w-[300px] h-[300px] bg-[#1DB954]/5 blur-[120px] rounded-full bottom-[-100px] right-[-100px]"></div>
   </div>
 
-  <!-- 🧠 CONTENIDO PRINCIPAL -->
   <div
     class="relative z-10 flex flex-col justify-center min-h-screen px-8 lg:px-20">
-    <!-- 🔲 GLASS CONTAINER -->
     <div class="glass max-w-3xl p-10 rounded-2xl">
-      <!-- TITLE -->
       <h1 class="text-5xl lg:text-6xl font-bold leading-tight reveal">
         Spotify <span class="text-[#1DB954]">Insight</span>
       </h1>
 
-      <!-- SUBTEXT -->
       <p class="text-gray-400 text-lg mt-6 max-w-xl reveal delay-1">
         Dive into your listening habits with clear insights on your top artists,
         tracks and trends — all in one clean experience.
       </p>
 
-      <!-- MINI STATS -->
       <div class="flex gap-6 mt-8 reveal delay-2 mb-10">
         <div class="stat flex items-center gap-3">
           <span class="stat-number">128</span>

@@ -16,9 +16,8 @@ interface QuickStats {
   styleUrl: './stats.component.css'
 })
 export class StatsComponent {
- @Input() tracks: RecentlyPlayedTrackModel[] = [];
+  @Input() tracks: RecentlyPlayedTrackModel[] = [];
 
-  // 🔧 utils
   private getHoursAgo(date: Date): number {
     return (Date.now() - new Date(date).getTime()) / (1000 * 60 * 60);
   }

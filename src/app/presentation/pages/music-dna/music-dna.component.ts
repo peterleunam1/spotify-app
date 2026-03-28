@@ -1,13 +1,12 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { RadarChartData } from '../../components/atoms/radar-chart/radar-chart/radar-chart.component';
+import { RadarChartData } from '../../components/atoms/radar-chart/radar-chart.component';
 import {
   MusicPersonality,
   TopTracksModel
 } from '../../../domain/tracks/tracks.entity';
 import { getMusicPersonality } from '../../helpers/get-music-personality';
-import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector/time-ranger-selector.component';
 import { GetTopItemsParams } from '../../../domain/profile/profile.entity';
 import { lastValueFrom } from 'rxjs';
 import { ProfileUseCase } from '../../../application/profile/profile.use-case';
@@ -17,6 +16,7 @@ import { MyMusicDnaComponent } from '../../components/organisms/music-dna/music-
 import { PlayerUseCase } from '../../../application/player/player.use-case';
 import { RecentlyPlayedTrackModel } from '../../../domain/player/player.entity';
 import { RecentlyPlayedMapper } from '../../../application/player/recently-player-mapper';
+import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector.component';
 
 @Component({
   selector: 'app-music-dna-page',
@@ -37,7 +37,6 @@ export class MusicDnaComponent implements OnInit {
   musicInsights = signal<string[]>([]);
   tracksLoading = signal<boolean>(false);
   personality = signal<MusicPersonality | null>(null);
-
   recentlyPlayedTracks = signal<RecentlyPlayedTrackModel[]>([]);
   async getTopTracks(range: TimeRange) {
     this.tracksLoading.set(true);

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { TabButtonComponent } from '../../../atoms/tab-button/tab-button.component';
+import { TabButtonComponent } from '../../atoms/tab-button/tab-button.component';
 
 export type TimeRange = 'short_term' | 'medium_term' | 'long_term';
 

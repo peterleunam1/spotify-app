@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { getColorSync } from 'colorthief';
 import { DominantColorState } from '../../../states/dominantColor/dominant-color.service';
-import { LoaderComponent } from '../../atoms/loader/loader.component';
 import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-spotify-hero',
-  imports: [CommonModule, LoaderComponent, SkeletonComponent],
+  imports: [CommonModule, SkeletonComponent],
   templateUrl: './spotify-hero.component.html',
   styleUrl: './spotify-hero.component.css'
 })

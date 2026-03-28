@@ -1,43 +1,29 @@
 <section class="text-white flex flex-col gap-6">
-
-  <!-- HEADER + FILTER -->
   <div class="flex items-center justify-between flex-wrap gap-4">
-
-    <app-section-header 
-    [title]="title"
-    [description]="description"
-    ></app-section-header>
-
-    <!-- TIME RANGE (menos protagonista) -->
+    <app-section-header
+      [title]="title"
+      [description]="description"></app-section-header>
     <div *ngIf="mode === 'interactive'" class="flex items-center gap-2">
       <app-time-ranger-selector
         class="scale-90 opacity-90"
         (rangeChange)="onTimeRangeChange($event)">
       </app-time-ranger-selector>
     </div>
-
   </div>
 
   <article class="flex flex-col gap-5">
+    <app-skeleton
+      *ngIf="isLoading && type === 'artists'"
+      [count]="5"
+      [type]="'circle'"></app-skeleton>
+    <app-skeleton
+      *ngIf="isLoading && type === 'tracks'"
+      [count]="5"
+      [type]="'card'"></app-skeleton>
 
-    <!-- LOADING -->
-    <!-- <div *ngIf="isLoading" class="my-4 text-neutral-400">
-      Loading...
-    </div> -->
-
-    <app-skeleton *ngIf="isLoading && type === 'artists'" 
-    [count]="5"
-    [type]="'circle'"
-    ></app-skeleton>
-    <app-skeleton *ngIf="isLoading && type === 'tracks'" 
-    [count]="5"
-    [type]="'card'"
-    ></app-skeleton>
-
-    <!-- GRID -->
-    <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5" *ngIf="!isLoading">
-
-      <!-- ARTISTS -->
+    <div
+      class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5"
+      *ngIf="!isLoading">
       <ng-container *ngIf="type === 'artists'">
         <app-singer
           *ngFor="
@@ -58,8 +44,6 @@
           [showGenres]="mode === 'interactive'">
         </app-singer>
       </ng-container>
-
-      <!-- TRACKS -->
       <ng-container *ngIf="type === 'tracks'">
         <app-singer
           *ngFor="
@@ -81,10 +65,7 @@
           [showGenres]="false">
         </app-singer>
       </ng-container>
-
     </div>
-
-    <!-- CTA (ONLY COMPACT) -->
     <div *ngIf="mode === 'compact'" class="flex justify-end">
       <button
         class="text-sm text-neutral-400 hover:text-white transition"
@@ -92,6 +73,5 @@
         See all →
       </button>
     </div>
-
   </article>
 </section>

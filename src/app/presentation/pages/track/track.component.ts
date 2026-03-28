@@ -6,7 +6,7 @@ import { SingleTrackModel } from '../../../domain/tracks/tracks.entity';
 import { SpotifyHeroComponent } from '../../components/organisms/spotify-hero/spotify-hero.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
-import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar/percentage-bar.component';
+import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

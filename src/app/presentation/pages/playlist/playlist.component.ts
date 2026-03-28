@@ -50,21 +50,18 @@ export class PlaylistComponent implements OnInit {
       this.songs.set(normalizedTracks);
     } catch {
       throw new Error('An unexpected error has been ocurred.');
-    }finally {
+    } finally {
       this.isLoading.set(false);
     }
   }
 
   get totalDuration(): string {
     const tracks = this.playlist()?.tracks?.items;
-
     if (!tracks?.length) return '';
-
     const totalMs = tracks.reduce(
       (sum, t) => sum + (t.track?.duration_ms ?? 0),
       0
     );
-
     return formatDuration(totalMs);
   }
 

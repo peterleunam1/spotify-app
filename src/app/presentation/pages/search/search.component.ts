@@ -15,14 +15,12 @@ import {
 } from '../../../domain/singers/singer.entity';
 import {
   AlbumsMapper,
-  AudiobooksMapper,
   SingersMapper,
   TracksMapper
-} from './mappers/singers.mapper';
+} from '../../../application/artist/singers.mapper';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import { ListOfSingersComponent } from '../../components/organisms/list-of-singers/list-of-singers.component';
-import { LoaderComponent } from '../../components/atoms/loader/loader.component';
 import { categories } from '../../constants/categories.constant';
 import { mergeSearchResults } from '../../helpers/get-merged-result';
 import { tap, filter } from 'rxjs';
@@ -37,7 +35,6 @@ import { SkeletonComponent } from '../../components/atoms/skeleton/skeleton.comp
     CommonModule,
     NavbarComponent,
     ListOfSingersComponent,
-    LoaderComponent,
     SkeletonComponent
   ]
 })
@@ -46,7 +43,6 @@ export class SearchComponent {
   private singerMapper = new SingersMapper();
   private albumsMapper = new AlbumsMapper();
   private tracksMapper = new TracksMapper();
-  private audioBooksMapper = new AudiobooksMapper();
   recentSearches: SingleSingerModel[] = [];
 
   private keywordSubject = new BehaviorSubject<string>('');
@@ -106,8 +102,6 @@ export class SearchComponent {
           result?.tracks?.items?.map(this.tracksMapper.mapTo) ?? [];
 
         this.listSingers = mergeSearchResults(artists, albums, tracks);
-        // this.listSingers =
-        //   result?.artists?.items?.map(this.singerMapper.mapTo) ?? [];
       });
   }
 

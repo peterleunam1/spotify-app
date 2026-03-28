@@ -1,18 +1,20 @@
 <div *ngIf="singers.length > 0 && !isLoading">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
-    <app-singer *ngFor="let artist of singers" [singer]="artist"
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
+    <app-singer
+      *ngFor="let artist of singers"
+      [singer]="artist"
       (remove)="remove.emit($event)"
-  [showRemoveButton]="showRemoveButton"
-
-    ></app-singer>
+      [showRemoveButton]="showRemoveButton"></app-singer>
   </div>
 </div>
 
-  <p class="text-center text-gray-400 text-lg font-medium py-10" *ngIf="singers.length === 0 && !isLoading">
-    No se encontraron artistas.
-  </p>
+<p
+  class="text-center text-gray-400 text-lg font-medium py-10"
+  *ngIf="singers.length === 0 && !isLoading">
+  No se encontraron artistas.
+</p>
 
-  <div *ngIf="isLoading" class="p-8">
-
-    <app-skeleton  [type]="'card'" [count]="5"></app-skeleton>
-  </div>
+<div *ngIf="isLoading" class="p-8">
+  <app-skeleton [type]="'card'" [count]="5"></app-skeleton>
+</div>

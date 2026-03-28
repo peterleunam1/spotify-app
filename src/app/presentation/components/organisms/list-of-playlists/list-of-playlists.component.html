@@ -1,10 +1,15 @@
-  <div *ngIf="!isLoading && playlists.length > 0" class="flex flex-wrap gap-4">
-    <app-playlist *ngFor="let playlist of playlists" [playlist]="playlist" (playlistClick)="openPlaylist($event)">
-    </app-playlist>
-  </div>
+<div *ngIf="!isLoading && playlists.length > 0" class="flex flex-wrap gap-4">
+  <app-playlist
+    *ngFor="let playlist of playlists"
+    [playlist]="playlist"
+    (playlistClick)="openPlaylist($event)">
+  </app-playlist>
+</div>
 
-  <div *ngIf="!isLoading && playlists.length === 0" class="text-center text-lg text-gray-400 mt-6">
-    There are no playlists available.
-  </div>
+<div
+  *ngIf="!isLoading && playlists.length === 0"
+  class="text-center text-lg text-gray-400 mt-6">
+  There are no playlists available.
+</div>
 
-  <app-skeleton *ngIf="isLoading" [count]="5" [type]="'card'"></app-skeleton>
+<app-skeleton *ngIf="isLoading" [count]="5" [type]="'card'"></app-skeleton>

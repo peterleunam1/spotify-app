@@ -1,13 +1,18 @@
-/* 🎬 ANIMACIÓN PRO */
 .reveal {
   opacity: 0;
   transform: translateY(20px) scale(0.98);
   animation: fadeUp 0.8s ease forwards;
 }
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
+.delay-1 {
+  animation-delay: 0.1s;
+}
+.delay-2 {
+  animation-delay: 0.2s;
+}
+.delay-3 {
+  animation-delay: 0.3s;
+}
 
 @keyframes fadeUp {
   to {
@@ -16,19 +21,15 @@
   }
 }
 
-
-/* 🧊 GLASS EFFECT */
 .glass {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
-
-/* 🎯 BOTÓN PRO */
 .spotify-btn {
-  background: linear-gradient(135deg, #1DB954, #1ed760);
+  background: linear-gradient(135deg, #1db954, #1ed760);
   color: #000;
   font-weight: 600;
   padding: 14px 28px;
@@ -40,15 +41,14 @@
 
 .spotify-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(29,185,84,0.3);
+  box-shadow: 0 10px 30px rgba(29, 185, 84, 0.3);
 }
 
-/* efecto glow interno */
 .spotify-btn::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
   opacity: 0;
   transition: 0.3s;
 }
@@ -57,18 +57,16 @@
   opacity: 1;
 }
 
-
-/* 📊 STATS */
 .stat {
   padding: 12px 16px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.25s ease;
 }
 
 .stat:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .stat-number {
@@ -89,14 +87,16 @@
 .loader {
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(0,0,0,0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   border-top: 2px solid black;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spotify-btn:active {
@@ -108,6 +108,10 @@
 }
 
 @keyframes zoomBg {
-  from { transform: scale(1.1); }
-  to { transform: scale(1.2); }
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1.2);
+  }
 }

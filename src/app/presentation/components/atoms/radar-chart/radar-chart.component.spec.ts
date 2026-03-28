@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PercentageBarComponent } from './percentage-bar.component';
+import { RadarChartComponent } from './radar-chart/radar-chart.component';
 
-describe('PercentageBarComponent', () => {
-  let component: PercentageBarComponent;
-  let fixture: ComponentFixture<PercentageBarComponent>;
+describe('RadarChartComponent', () => {
+  let component: RadarChartComponent;
+  let fixture: ComponentFixture<RadarChartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PercentageBarComponent]
+      imports: [RadarChartComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PercentageBarComponent);
+    fixture = TestBed.createComponent(RadarChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,4 @@
 import {
-  HttpEventType,
   HttpInterceptorFn,
   HttpStatusCode,
   HttpErrorResponse
@@ -14,7 +13,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenGateway = inject(TokenGateway);
   const router = inject(Router);
 
-  // 🚨 NO interceptar peticiones de autenticación de Spotify
  if (req.url.startsWith('https://accounts.spotify.com')) {
   return next(req);
 }

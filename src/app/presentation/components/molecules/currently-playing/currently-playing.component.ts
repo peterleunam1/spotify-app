@@ -6,7 +6,7 @@ import {
   signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CurrentlyPlayingModel } from '../../../../../domain/player/player.entity';
+import { CurrentlyPlayingModel } from '../../../../domain/player/player.entity';
 
 @Component({
   selector: 'app-currently-playing',

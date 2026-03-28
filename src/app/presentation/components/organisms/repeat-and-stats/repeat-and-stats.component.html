@@ -1,6 +1,4 @@
 <section class="flex flex-col gap-8 w-full">
-
-  <!-- 🔁 ON REPEAT -->
   <app-card>
     <app-section-header
       title="On Repeat"
@@ -25,14 +23,12 @@
     </div>
   </app-card>
 
-  <!-- 📊 STATS (REUTILIZABLE) -->
   <app-card>
-    <app-section-header 
+    <app-section-header
       title="Your Stats"
       description="Your activity for {{ todayLabel }}">
     </app-section-header>
 
     <app-stats [tracks]="tracks"></app-stats>
   </app-card>
-
 </section>

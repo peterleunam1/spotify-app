@@ -17,11 +17,9 @@ export const getTopGenres = (artists: ArtistItem[]) => {
 
   artists.forEach(artist => {
     artist.genres.forEach(rawGenre => {
-
       const genre = normalizeGenre(rawGenre);
 
       genreCount[genre] = (genreCount[genre] || 0) + 1;
-
     });
   });
 
@@ -29,4 +27,4 @@ export const getTopGenres = (artists: ArtistItem[]) => {
     .map(([genre, count]) => ({ genre, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 5);
-}; 
+};
