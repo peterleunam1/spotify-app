@@ -9,9 +9,9 @@
     [img]="artistInfo.images[0].url"
     [title]="artistInfo.name"
     [contentType]="'artist'"
-    [description]="artistInfo.followers?.total + ' followers'">
-    <app-loader *ngIf="isLoadingTracks" [message]="'Loading liked songs...'">
-    </app-loader>
+    [description]="artistInfo.followers?.total + ' followers'"
+    [isLoading]="isLoading"
+    >
 <app-list-of-songs
   [tracks]="likedTracksFromArtist"
   [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"

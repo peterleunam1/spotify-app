@@ -1,7 +1,8 @@
 <section class="flex flex-col lg:flex-row gap-8 items-star w-full">
-  <app-card class="w-full ">
+  <app-card class="w-full flex items-center justify-center" *ngIf="!isLoading">
     <app-radar-chart [data]="data!"> </app-radar-chart>
   </app-card>
+  <app-skeleton *ngIf="isLoading" [type]="'big-circle'" [count]="1"></app-skeleton>
 
   <div class="w-full flex flex-col gap-8">
     <app-card>
@@ -10,13 +11,15 @@
         description="Insights generated from your listening behavior.">
       </app-section-header>
 
-      <ul class="space-y-2">
+      <ul class="space-y-2" *ngIf="!isLoading">
         @for (insight of insights; track insight) {
           <li class="text-[#b3b3b3] text-sm flex items-center gap-2">
             {{ insight }}
           </li>
         }
       </ul>
+
+      <app-skeleton *ngIf="isLoading" [type]="'text'" [count]="3"></app-skeleton>
     </app-card>
 
     <!-- PERSONALITY -->
@@ -27,7 +30,7 @@
         description="A summary of your music taste.">
       </app-section-header>
 
-      <div class="flex items-start gap-3">
+      <div class="flex items-start gap-3" *ngIf="!isLoading">
         <span class="text-3xl">
           {{ personality?.emoji }}
         </span>
@@ -42,6 +45,8 @@
           </p>
         </div>
       </div>
+
+      <app-skeleton *ngIf="isLoading" [type]="'text'" [count]="5"></app-skeleton>
     </app-card>
   </div>
 </section>

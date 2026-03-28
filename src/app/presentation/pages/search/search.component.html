@@ -1,17 +1,18 @@
 <app-main-layout>
   <app-navbar [(keyword)]="keyword"></app-navbar>
-  <div *ngIf="isLoading" class="my-4">
-    <app-loader [message]="'Loading ...'" />
+  <div *ngIf="isLoading &&  listSingers.length === 0" class="p-8">
+    <app-skeleton [type]="'card'" [count]="10"></app-skeleton>
   </div>
-<section class="flex flex-col px-8 gap-8 mt-2 pb-8"  *ngIf="!keyword && recentSearches.length > 0">
+  <section
+    class="flex flex-col px-8 gap-8 mt-2 pb-8"
+    *ngIf="!keyword && recentSearches.length > 0">
     <div
       *ngIf="
         !keyword &&
         recentSearches.length > 0 &&
         !isLoading &&
         listSingers.length === 0
-      "
-     >
+      ">
       <div class="flex justify-between items-center">
         <h1 class="text-2xl font-semibold">Recent searches</h1>
 
@@ -27,17 +28,17 @@
         [showRemoveButton]="true"
         (remove)="removeRecentSearch($event)"></app-list-of-singers>
     </div>
-  <div
-    *ngIf="!keyword && !isLoading && listSingers.length === 0"
-    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div
-      *ngFor="let category of categories"
-      class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
-      [ngStyle]="{ 'background-color': category.color }">
-      {{ category.name }}
+      *ngIf="!keyword && !isLoading && listSingers.length === 0"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div
+        *ngFor="let category of categories"
+        class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
+        [ngStyle]="{ 'background-color': category.color }">
+        {{ category.name }}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
   <app-list-of-singers
     *ngIf="listSingers.length > 0"
     [singers]="listSingers"

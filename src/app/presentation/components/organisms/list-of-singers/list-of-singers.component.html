@@ -1,4 +1,4 @@
-<div *ngIf="singers.length > 0; else noResults">
+<div *ngIf="singers.length > 0 && !isLoading">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
     <app-singer *ngFor="let artist of singers" [singer]="artist"
       (remove)="remove.emit($event)"
@@ -8,8 +8,11 @@
   </div>
 </div>
 
-<ng-template #noResults>
-  <p class="text-center text-gray-400 text-lg font-medium py-10">
+  <p class="text-center text-gray-400 text-lg font-medium py-10" *ngIf="singers.length === 0 && !isLoading">
     No se encontraron artistas.
   </p>
-</ng-template>
+
+  <div *ngIf="isLoading" class="p-8">
+
+    <app-skeleton  [type]="'card'" [count]="5"></app-skeleton>
+  </div>

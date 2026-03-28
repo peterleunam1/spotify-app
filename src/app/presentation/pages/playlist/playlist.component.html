@@ -8,7 +8,9 @@
     [img]="playlist()!.images[0].url || ''"
     [title]="playlist()!.name"
     [contentType]="'playlist'"
-    [description]="description || ''">
+    [description]="description || ''"
+    [isLoading]="isLoading()!"
+    >
     <app-list-of-songs 
       [tracks]="songs()!"
       [albumName]="'Songs'"

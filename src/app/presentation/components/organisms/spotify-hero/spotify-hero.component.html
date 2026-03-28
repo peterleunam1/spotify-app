@@ -12,14 +12,16 @@
         [src]="img"
         class="w-54 h-54 shadow-2xl object-cover rounded"
         alt="Artist" 
+        *ngIf="!isLoading"
         />
-
+        <app-skeleton *ngIf="isLoading" [type]="'circle'" [count]="1"></app-skeleton>
       <div>
         <p class="text-sm uppercase tracking-widest text-gray-300">{{contentType | uppercase}}</p>
 
-        <h1 class="text-6xl font-bold leading-tight">
+        <h1 class="text-6xl font-bold leading-tight" *ngIf="!isLoading">
           {{ title }}
         </h1>
+        <app-skeleton *ngIf="isLoading" [type]="'text'" [count]="1"></app-skeleton>
 
         <p class="text-sm text-gray-300 mt-2">
           {{ description }}

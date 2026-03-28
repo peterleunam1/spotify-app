@@ -12,10 +12,16 @@ import { CommonModule } from '@angular/common';
 import { MainButtonComponent } from '../../atoms/main-button/main-button.component';
 import { LoaderComponent } from '../../atoms/loader/loader.component';
 import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
+import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-list-of-songs',
-  imports: [CommonModule, LoaderComponent, SectionHeaderComponent],
+  imports: [
+    CommonModule,
+    LoaderComponent,
+    SectionHeaderComponent,
+    SkeletonComponent
+  ],
   templateUrl: './list-of-songs.component.html'
 })
 export class ListOfSongsComponent {

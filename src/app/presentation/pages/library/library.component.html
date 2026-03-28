@@ -16,7 +16,9 @@
         [title]="'Top Artists'"
         [description]="''"
         [artists]="artists()!"
-        (rangeChange)="getTopArtists($event)"></app-top-items>
+        (rangeChange)="getTopArtists($event)"
+        [isLoading]="artistsLoading()!"
+        ></app-top-items>
     </div>
 
     <div *ngIf="activeTab === 'tracks'" class="animate-fade-in">
@@ -26,7 +28,9 @@
         [title]="'Top Tracks'"
         [description]="''"
         [tracks]="tracks()!"
-        (rangeChange)="getTopTracks($event)"></app-top-items>
+        (rangeChange)="getTopTracks($event)"
+        [isLoading]="tracksLoading()!"
+        ></app-top-items>
     </div>
     <div *ngIf="activeTab === 'playlists'" class="animate-fade-in">
       <app-list-of-playlists

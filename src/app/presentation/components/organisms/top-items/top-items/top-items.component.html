@@ -21,12 +21,21 @@
   <article class="flex flex-col gap-5">
 
     <!-- LOADING -->
-    <div *ngIf="isLoading" class="my-4 text-neutral-400">
+    <!-- <div *ngIf="isLoading" class="my-4 text-neutral-400">
       Loading...
-    </div>
+    </div> -->
+
+    <app-skeleton *ngIf="isLoading && type === 'artists'" 
+    [count]="5"
+    [type]="'circle'"
+    ></app-skeleton>
+    <app-skeleton *ngIf="isLoading && type === 'tracks'" 
+    [count]="5"
+    [type]="'card'"
+    ></app-skeleton>
 
     <!-- GRID -->
-    <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+    <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5" *ngIf="!isLoading">
 
       <!-- ARTISTS -->
       <ng-container *ngIf="type === 'artists'">

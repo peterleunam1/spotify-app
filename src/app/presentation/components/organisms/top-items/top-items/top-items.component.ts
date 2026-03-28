@@ -8,6 +8,7 @@ import { SingerComponent } from '../../../molecules/singer/singer.component';
 import { TopArtistsModel } from '../../../../../domain/artist/artist.entity';
 import { TopTracksModel } from '../../../../../domain/tracks/tracks.entity';
 import { SectionHeaderComponent } from '../../../atoms/section-header/section-header.component';
+import { SkeletonComponent } from '../../../atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-top-items',
@@ -16,7 +17,8 @@ import { SectionHeaderComponent } from '../../../atoms/section-header/section-he
     CommonModule,
     SingerComponent,
     TimeRangerSelectorComponent,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    SkeletonComponent
   ],
   templateUrl: './top-items.component.html',
   styleUrl: './top-items.component.css'

@@ -12,7 +12,9 @@
     [img]="track.album.images[0].url"
     [title]="track.name"
     [contentType]="'track'"
-    [description]="track.artists[0].name">
+    [description]="track.artists[0].name"
+    [isLoading]="isLoading"
+    >
 
  <div
       class="grid md:grid-cols-2 gap-10

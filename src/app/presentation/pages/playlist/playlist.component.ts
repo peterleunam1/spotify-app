@@ -26,10 +26,12 @@ export class PlaylistComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private playlistUseCase = inject(PlaylistsUseCase);
   playlist = signal<OnePlaylistModel | null>(null);
+  isLoading = signal<boolean>(false);
   songs = signal<TrackUIModel[]>([]);
 
   async getPlaylist(playlistId: string) {
     try {
+      this.isLoading.set(true);
       const result = await lastValueFrom(
         this.playlistUseCase.getOnePlaylist(playlistId)
       );
@@ -48,6 +50,8 @@ export class PlaylistComponent implements OnInit {
       this.songs.set(normalizedTracks);
     } catch {
       throw new Error('An unexpected error has been ocurred.');
+    }finally {
+      this.isLoading.set(false);
     }
   }
 

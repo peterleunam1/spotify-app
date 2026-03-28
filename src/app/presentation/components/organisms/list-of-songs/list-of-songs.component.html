@@ -1,14 +1,8 @@
+<app-skeleton *ngIf="isLoading" [type]="'song'" [count]="3"></app-skeleton>
+
 <div *ngIf="tracks.length || !isLoading" class="w-full">
   <app-section-header [title]="albumName"></app-section-header>
-  <!-- <h2 class="text-2xl font-bold mb-6"
-  [ngClass]="{
-    'text-xl font-semibold': titleSmall
-  }"
-  >
-    {{ albumName }}
-  </h2> -->
-
-  <div *ngIf="!isLoading; else loading">
+  <div *ngIf="!isLoading">
     <div class="space-y-1">
       <div
         *ngFor="let item of visibleTracks; let i = index"
@@ -72,7 +66,6 @@
         <div class="text-sm text-gray-400 text-right" *ngIf="item.timeAgo">
           {{ item.timeAgo }}
         </div>
-
       </div>
     </div>
 
@@ -85,7 +78,3 @@
     </button>
   </div>
 </div>
-
-<ng-template #loading>
-  <app-loader [message]="'Loading liked songs...'" />
-</ng-template>

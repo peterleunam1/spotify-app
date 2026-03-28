@@ -10,7 +10,9 @@
     [img]="albumResponse.images?.[0]?.url || ''"
     [title]="albumResponse.name || ''"
     [contentType]="'album'"
-    [description]="albumDescription">
+    [description]="albumDescription"
+    [isLoading]="isLoading"
+    >
     <app-list-of-songs
       [tracks]="tracks"
       [albumName]="'Songs'"
