@@ -37,7 +37,9 @@
       <app-list-of-songs
         [tracks]="likedTracksFromArtist"
         [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
-        [isLoading]="isLoadingMyLikedTracks()!">
+        [isLoading]="isLoadingMyLikedTracks()!"
+        [minTracks]="10"
+        >
       </app-list-of-songs>
     </div>
   </section>

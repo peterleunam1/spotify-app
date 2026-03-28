@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { getColorSync } from 'colorthief';
 import { DominantColorState } from '../../../states/dominantColor/dominant-color.service';
+import { LoaderComponent } from '../../atoms/loader/loader.component';
 
 @Component({
   selector: 'app-spotify-hero',
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   templateUrl: './spotify-hero.component.html',
   styleUrl: './spotify-hero.component.css'
 })
 export class SpotifyHeroComponent implements OnInit {
-
- @Input() img = '';
+  @Input() img = '';
   @Input() title = '';
   @Input() description = '';
   @Input() contentType = '';
@@ -49,11 +49,11 @@ export class SpotifyHeroComponent implements OnInit {
     img.onload = () => {
       const color = getColorSync(img);
 
-  this.dominantColor = color ? color.css() : 'rgb(30,30,30)';
-  this.darkDominantColor = this.darkenColor(this.dominantColor, 0.45);
-  this.contentColor = this.darkenColor(this.dominantColor, 0.65);
+      this.dominantColor = color ? color.css() : 'rgb(30,30,30)';
+      this.darkDominantColor = this.darkenColor(this.dominantColor, 0.45);
+      this.contentColor = this.darkenColor(this.dominantColor, 0.65);
 
-  this.dominantColorService.setDominantColor(this.dominantColor);
+      this.dominantColorService.setDominantColor(this.dominantColor);
     };
   }
 }

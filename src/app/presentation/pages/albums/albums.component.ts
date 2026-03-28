@@ -13,6 +13,7 @@ import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/l
 import { TrackUIModel } from '../../../domain/tracks/tracks.entity';
 import { AlbumTrackMapper } from '../../components/organisms/list-of-songs/mappers/list-of-song.mapper';
 import { PercentageBarComponent } from '../../components/atoms/percentage-bar/percentage-bar/percentage-bar.component';
+import { formatDuration } from '../../helpers/get-format-duration';
 
 @Component({
   selector: 'app-albums',
@@ -83,16 +84,12 @@ export class AlbumsComponent implements OnInit {
     }
   }
   get totalDuration(): string {
-    const tracks = this.albumResponse?.tracks?.items;
+  const tracks = this.albumResponse?.tracks?.items;
+  if (!tracks?.length) return '';
 
-    if (!tracks || !tracks.length) return '';
+  const totalMs = tracks.reduce((sum, t) => sum + (t.duration_ms ?? 0), 0);
 
-    const totalMs = tracks.reduce((sum, track) => sum + track.duration_ms, 0);
-
-    const minutes = Math.floor(totalMs / 60000);
-    const seconds = Math.floor((totalMs % 60000) / 1000);
-
-    return `${minutes} min ${seconds} sec`;
+  return formatDuration(totalMs);
   }
   // name = this.albumResponse.name || 'Unknown Artist';
   // nameArtist = this.albumResponse.artists[0].name || 'Unknown Artist';

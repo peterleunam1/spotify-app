@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PlaylistsGateWay } from '../../domain/playlists/playlists.gateway';
-import { PlaylistsModel } from '../../domain/playlists/playlists.entity';
+import { OnePlaylistModel, PlaylistsModel } from '../../domain/playlists/playlists.entity';
 import { BASE_URL } from '../../presentation/constants/base-url.constant';
 
 @Injectable({
@@ -19,6 +19,12 @@ export class PlaylistsService implements PlaylistsGateWay {
 
   getPlaylists(): Observable<PlaylistsModel> {
     return this.httpClient.get<PlaylistsModel>(`${BASE_URL}/me/playlists`, {
+      headers: this.getHeaders()
+    });
+  }
+
+  getOnePlaylist(playlistId: string): Observable<OnePlaylistModel> {
+    return this.httpClient.get<OnePlaylistModel>(`${BASE_URL}/playlists/${playlistId}`, {
       headers: this.getHeaders()
     });
   }

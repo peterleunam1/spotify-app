@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { PlaylistItem } from '../../../../domain/playlists/playlists.entity';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-playlist',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './playlist.component.html'
 })
 export class PlaylistComponent {

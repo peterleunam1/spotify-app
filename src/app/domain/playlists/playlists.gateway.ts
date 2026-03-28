@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
-import { PlaylistsModel } from './playlists.entity';
+import { OnePlaylistModel, PlaylistsModel } from './playlists.entity';
 
 export abstract class PlaylistsGateWay {
   abstract getPlaylists(): Observable<PlaylistsModel>;
+  abstract getOnePlaylist(playlistId: string): Observable<OnePlaylistModel>;
 }

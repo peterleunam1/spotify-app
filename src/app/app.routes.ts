@@ -14,6 +14,7 @@ import { ArtistComponent } from './presentation/pages/artist/artist.component';
 import { TrackComponent } from './presentation/pages/track/track.component';
 import { MusicDnaComponent } from './presentation/pages/music-dna/music-dna.component';
 import { LibraryComponent } from './presentation/pages/library/library.component';
+import { PlaylistComponent } from './presentation/pages/playlist/playlist.component';
 
 export const routes: Routes = [
   { path: PUBLIC_ROUTES.SIGN_IN, component: SignInComponent },
@@ -59,6 +60,11 @@ export const routes: Routes = [
   {
     path: PRIVATE_ROUTES.LIBRARY,
     component: LibraryComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: PRIVATE_ROUTES.PLAYLIST,
+    component: PlaylistComponent,
     canActivate: [authGuard]
   },
   { path: '**', component: PageNotFoundComponent }

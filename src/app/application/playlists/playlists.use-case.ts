@@ -19,4 +19,15 @@ export class PlaylistsUseCase {
       })
     );
   }
+
+  getOnePlaylist(playlistId: string) {
+    return this.playlistsGateWay.getOnePlaylist(playlistId).pipe(
+      catchError(error => {
+        throw new PlaylistsError(
+          'A technical error occurred, please try again later',
+          error.status
+        );
+      })
+    );
+  }
 }

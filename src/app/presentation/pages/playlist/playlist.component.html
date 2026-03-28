@@ -1,0 +1,19 @@
+<app-main-layout>
+  <app-navbar
+    [isSearchVisible]="false"
+    [spotifyEffect]="true"
+    [dominantColor]="dominantColor">
+  </app-navbar>
+  <app-spotify-hero
+    [img]="playlist()!.images[0].url || ''"
+    [title]="playlist()!.name"
+    [contentType]="'playlist'"
+    [description]="description || ''">
+    <app-list-of-songs 
+      [tracks]="songs()!"
+      [albumName]="'Songs'"
+      [showLike]="true"
+      [minTracks]="5"
+    ></app-list-of-songs>
+  </app-spotify-hero>
+</app-main-layout>

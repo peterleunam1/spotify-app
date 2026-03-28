@@ -1,4 +1,9 @@
-<div (click)="openPlaylist(playlist.external_urls.spotify)" (keydown)="openPlaylist(playlist.external_urls.spotify)"
+<a 
+[routerLink]="['/', 'playlist', playlist.id]"  
+[attr.aria-label]="'Ir a ' + playlist.id"
+
+>
+<div
   tabindex="0"
   class="relative bg-[#181818] w-54 shadow-md rounded-lg p-4 transition-transform transform duration-300 hover:scale-105 hover:shadow-xl hover:bg-[#282828] cursor-pointer flex flex-col">
   <div class="relative w-full h-52">
@@ -13,4 +18,4 @@
       {{ playlist.owner.display_name }}
     </p>
   </div>
-</div>
+</div></a>
