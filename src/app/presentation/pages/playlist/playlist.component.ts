@@ -18,8 +18,7 @@ import { TrackUIModel } from '../../../domain/tracks/tracks.entity';
     SpotifyHeroComponent,
     ListOfSongsComponent
   ],
-  templateUrl: './playlist.component.html',
-  styleUrl: './playlist.component.css'
+  templateUrl: './playlist.component.html'
 })
 export class PlaylistComponent implements OnInit {
   dominantColor = 'rgb(30,30,30)';

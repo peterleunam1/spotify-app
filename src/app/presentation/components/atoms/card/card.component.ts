@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-card',
   imports: [CommonModule],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  templateUrl: './card.component.html'
 })
 export class CardComponent {
 

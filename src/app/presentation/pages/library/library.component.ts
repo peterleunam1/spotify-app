@@ -34,8 +34,7 @@ import { TimeRange } from '../../components/molecules/timer-ranger-selector/time
     ListOfPlaylistsComponent,
     ListOfSongsComponent
   ],
-  templateUrl: './library.component.html',
-  styleUrl: './library.component.css'
+  templateUrl: './library.component.html'
 })
 export class LibraryComponent implements OnInit {
   activeTab: LibraryTab = 'artists';

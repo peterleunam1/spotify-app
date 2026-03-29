@@ -4,8 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-tab-button',
   imports: [CommonModule],
-  templateUrl: './tab-button.component.html',
-  styleUrl: './tab-button.component.css'
+  templateUrl: './tab-button.component.html'
 })
 export class TabButtonComponent {
   @Input() label = '';

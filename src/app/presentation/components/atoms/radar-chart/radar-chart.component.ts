@@ -17,8 +17,7 @@ export interface RadarChartData {
 
 @Component({
   selector: 'app-radar-chart',
-  templateUrl: './radar-chart.component.html',
-  styleUrl: './radar-chart.component.css'
+  templateUrl: './radar-chart.component.html'
 })
 export class RadarChartComponent implements AfterViewInit, OnChanges {
 

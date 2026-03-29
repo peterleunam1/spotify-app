@@ -32,8 +32,7 @@ import { PercentageBarComponent } from '../../components/atoms/percentage-bar/pe
     ListOfSongsComponent,
     PercentageBarComponent
   ],
-  templateUrl: './artist.component.html',
-  styleUrl: './artist.component.css'
+  templateUrl: './artist.component.html'
 })
 export class ArtistComponent implements OnInit {
   private route = inject(ActivatedRoute);

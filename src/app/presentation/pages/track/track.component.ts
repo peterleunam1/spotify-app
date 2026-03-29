@@ -18,8 +18,7 @@ import { CommonModule } from '@angular/common';
     SpotifyHeroComponent,
     PercentageBarComponent
   ],
-  templateUrl: './track.component.html',
-  styleUrl: './track.component.css'
+  templateUrl: './track.component.html'
 })
 export class TrackComponent implements OnInit {
   private route = inject(ActivatedRoute);

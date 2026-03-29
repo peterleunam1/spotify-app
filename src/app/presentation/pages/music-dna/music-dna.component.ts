@@ -26,8 +26,7 @@ import { TimeRange } from '../../components/molecules/timer-ranger-selector/time
     CommonModule,
     MyMusicDnaComponent
   ],
-  templateUrl: './music-dna.component.html',
-  styleUrl: './music-dna.component.css'
+  templateUrl: './music-dna.component.html'
 })
 export class MusicDnaComponent implements OnInit {
   private profileUseCase = inject(ProfileUseCase);

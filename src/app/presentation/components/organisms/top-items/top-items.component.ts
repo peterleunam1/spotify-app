@@ -20,8 +20,7 @@ import {
     SectionHeaderComponent,
     SkeletonComponent
   ],
-  templateUrl: './top-items.component.html',
-  styleUrl: './top-items.component.css'
+  templateUrl: './top-items.component.html'
 })
 export class TopItemsComponent {
   @Input()

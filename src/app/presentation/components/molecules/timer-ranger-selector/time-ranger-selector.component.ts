@@ -7,8 +7,7 @@ export type TimeRange = 'short_term' | 'medium_term' | 'long_term';
 @Component({
   selector: 'app-time-ranger-selector',
   imports: [CommonModule, TabButtonComponent],
-  templateUrl: './time-ranger-selector.component.html',
-  styleUrl: './time-ranger-selector.component.css'
+  templateUrl: './time-ranger-selector.component.html'
 })
 export class TimeRangerSelectorComponent {
   @Output() rangeChange = new EventEmitter<TimeRange>();

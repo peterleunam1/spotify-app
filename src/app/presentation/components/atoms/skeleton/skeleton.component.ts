@@ -4,8 +4,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-skeleton',
   imports: [CommonModule],
-  templateUrl: './skeleton.component.html',
-  styleUrl: './skeleton.component.css'
+  templateUrl: './skeleton.component.html'
 })
 export class SkeletonComponent {
  @Input() count = 10;

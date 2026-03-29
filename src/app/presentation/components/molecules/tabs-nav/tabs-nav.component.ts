@@ -7,8 +7,7 @@ export type LibraryTab = 'artists' | 'tracks' | 'playlists' | 'liked';
 @Component({
   selector: 'app-tabs-nav',
   imports: [CommonModule, TabButtonComponent],
-  templateUrl: './tabs-nav.component.html',
-  styleUrl: './tabs-nav.component.css'
+  templateUrl: './tabs-nav.component.html'
 })
 export class TabsNavComponent {
   @Input() activeTab!: LibraryTab;

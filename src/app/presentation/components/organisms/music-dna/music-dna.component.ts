@@ -11,9 +11,14 @@ import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-my-music-dna',
-  imports: [CardComponent, SectionHeaderComponent, RadarChartComponent, CommonModule, SkeletonComponent],
-  templateUrl: './music-dna.component.html',
-  styleUrl: './music-dna.component.css'
+  imports: [
+    CardComponent,
+    SectionHeaderComponent,
+    RadarChartComponent,
+    CommonModule,
+    SkeletonComponent
+  ],
+  templateUrl: './music-dna.component.html'
 })
 export class MyMusicDnaComponent {
   @Input() data!: RadarChartData | null;
