@@ -4,23 +4,45 @@
     [spotifyEffect]="true"
     [dominantColor]="dominantColor">
   </app-navbar>
+
   <app-spotify-hero
     [img]="track.album.images[0].url"
     [title]="track.name"
     [contentType]="'track'"
-    [description]="track.artists[0].name"
-    [isLoading]="isLoading">
+    [description]="track.artists[0].name">
     <div class="grid md:grid-cols-2 gap-10">
       <div class="space-y-4 text-sm">
+        <div>
+          <p class="text-gray-400" *ngIf="track.artists.length > 1">Artists</p>
+          <p class="text-gray-400" *ngIf="track.artists.length === 1">Artist</p>
+          <p class="font-semibold">
+            {{ artistsNames }}
+          </p>
+        </div>
+
         <div>
           <p class="text-gray-400">Album</p>
           <p class="font-semibold">{{ track.album.name }}</p>
         </div>
 
         <div>
+          <p class="text-gray-400">Type</p>
+          <p class="font-semibold capitalize">
+            {{ track.album.album_type }}
+          </p>
+        </div>
+
+        <div>
           <p class="text-gray-400">Track</p>
           <p class="font-semibold">
             #{{ track.track_number }} of {{ track.album.total_tracks }}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-gray-400">Disc</p>
+          <p class="font-semibold">
+            {{ track.disc_number }}
           </p>
         </div>
 
@@ -37,6 +59,13 @@
             {{ track.album.release_date }}
           </p>
         </div>
+
+        <div>
+          <p class="text-gray-400">Available in</p>
+          <p class="font-semibold">
+            {{ track.available_markets.length }} countries
+          </p>
+        </div>
       </div>
 
       <div class="space-y-4 text-sm">
@@ -44,6 +73,8 @@
           [title]="'Popularity'"
           [percentage]="track.popularity">
         </app-percentage-bar>
+
+        <p class="text-gray-400 text-xs">Based on Spotify algorithm (0–100)</p>
 
         <div *ngIf="track.explicit">
           <p class="text-gray-400">Explicit</p>
@@ -54,6 +85,13 @@
           <p class="text-gray-400">ISRC</p>
           <p class="font-mono text-xs">
             {{ track.external_ids.isrc }}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-gray-400">Content Type</p>
+          <p class="font-semibold capitalize">
+            {{ track.type }}
           </p>
         </div>
       </div>

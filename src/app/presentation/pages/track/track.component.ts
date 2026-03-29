@@ -36,7 +36,7 @@ export class TrackComponent implements OnInit {
       this.track = result;
     } catch {
       throw new Error('An unexpected error has been ocurred.');
-    } finally{
+    } finally {
       this.isLoading = false;
     }
   }
@@ -44,6 +44,10 @@ export class TrackComponent implements OnInit {
     const minutes = Math.floor(ms / 60000);
     const seconds = Math.floor((ms % 60000) / 1000);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }
+  get artistsNames(): string {
+    if (!this.track?.artists) return '';
+    return this.track.artists.map(a => a.name).join(', ');
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
