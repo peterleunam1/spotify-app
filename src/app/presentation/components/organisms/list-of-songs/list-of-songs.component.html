@@ -11,7 +11,8 @@
           showLike
             ? 'grid-cols-[40px_48px_1fr_40px_80px]'
             : 'grid-cols-[40px_48px_1fr_100px]'
-        ">
+        "
+        (click)="handleRedirect(item.id)">
         <div class="flex items-center justify-center text-gray-400">
           <span class="group-hover:hidden">
             {{ i + 1 }}

@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { TrackUIModel } from '../../../../domain/tracks/tracks.entity';
 import { CommonModule } from '@angular/common';
 import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
 import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-of-songs',
@@ -10,6 +11,7 @@ import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
   templateUrl: './list-of-songs.component.html'
 })
 export class ListOfSongsComponent {
+  private router = inject(Router);
   @Input() tracks: TrackUIModel[] = [];
   @Input() isLoading = false;
   @Input() albumName = 'Songs';
@@ -26,7 +28,9 @@ export class ListOfSongsComponent {
   toggleTracks() {
     this.showAllTracks = !this.showAllTracks;
   }
-
+  handleRedirect(trackId: string) {
+    this.router.navigate([`/track/${trackId}`]);
+  }
   formatDuration(ms: number): string {
     const minutes = Math.floor(ms / 60000);
 

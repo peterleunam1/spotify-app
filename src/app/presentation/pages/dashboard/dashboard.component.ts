@@ -8,7 +8,7 @@ import { PlaylistItem } from '../../../domain/playlists/playlists.entity';
 import { PlaylistsError } from '../../../domain/playlists/playlists.errors';
 import { ProfileUseCase } from '../../../application/profile/profile.use-case';
 import { GetTopItemsParams } from '../../../domain/profile/profile.entity';
-import { TopItemsComponent } from '../../components/organisms/top-items/top-items/top-items.component';
+import { TopItemsComponent } from '../../components/organisms/top-items/top-items.component';
 import { TopArtistsModel } from '../../../domain/artist/artist.entity';
 import {
   TopTracksModel,
@@ -32,6 +32,7 @@ import { CurrentlyPlayingMapper } from '../../../application/player/currently-pl
 import { CurrentlyPlayingComponent } from '../../components/molecules/currently-playing/currently-playing.component';
 import { RepeatAndStatsComponent } from '../../components/organisms/repeat-and-stats/repeat-and-stats.component';
 import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,6 +52,7 @@ import { TimeRange } from '../../components/molecules/timer-ranger-selector/time
   ]
 })
 export class DashboardComponent implements OnInit {
+  private router = inject(Router);
   private playlistUseCase = inject(PlaylistsUseCase);
   private profileUseCase = inject(ProfileUseCase);
 
@@ -178,6 +180,17 @@ export class DashboardComponent implements OnInit {
     window.open(url, '_blank');
   }
 
+  goToLibraryTracks() {
+  this.router.navigate(['/library'], {
+    queryParams: { tab: 'tracks' }
+  });
+}
+
+goToLibraryArtists() {
+  this.router.navigate(['/library'], {
+    queryParams: { tab: 'artists' }
+  });
+}
   ngOnInit() {
     this.getPlaylists();
     this.getTopTracks('short_term');

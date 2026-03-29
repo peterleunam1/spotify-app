@@ -46,7 +46,9 @@
       description="Your favorites right now"
       [artists]="artists()"
       [isLoading]="artistsLoading()"
-      (rangeChange)="getTopArtists($event)">
+      (rangeChange)="getTopArtists($event)"
+      (seeAll)="goToLibraryArtists()">
+      >
     </app-top-items>
 
     <app-top-items
@@ -56,7 +58,9 @@
       description="Your most played songs"
       [tracks]="tracks()"
       [isLoading]="tracksLoading()"
-      (rangeChange)="getTopTracks($event)">
+      (rangeChange)="getTopTracks($event)"
+      (seeAll)="goToLibraryTracks()">
+      >
     </app-top-items>
   </section>
 </app-main-layout>

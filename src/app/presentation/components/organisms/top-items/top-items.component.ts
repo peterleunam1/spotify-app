@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SingerComponent } from '../../../molecules/singer/singer.component';
-import { TopArtistsModel } from '../../../../../domain/artist/artist.entity';
-import { TopTracksModel } from '../../../../../domain/tracks/tracks.entity';
-import { SectionHeaderComponent } from '../../../atoms/section-header/section-header.component';
-import { SkeletonComponent } from '../../../atoms/skeleton/skeleton.component';
+import { SingerComponent } from '../../molecules/singer/singer.component';
+import { TopArtistsModel } from '../../../../domain/artist/artist.entity';
+import { TopTracksModel } from '../../../../domain/tracks/tracks.entity';
+import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
+import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
 import {
   TimeRange,
   TimeRangerSelectorComponent
-} from '../../../molecules/timer-ranger-selector/time-ranger-selector.component';
+} from '../../molecules/timer-ranger-selector/time-ranger-selector.component';
 
 @Component({
   selector: 'app-top-items',
