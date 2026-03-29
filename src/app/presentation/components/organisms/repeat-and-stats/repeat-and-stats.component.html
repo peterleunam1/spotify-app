@@ -5,7 +5,7 @@
       description="Your most played tracks right now">
     </app-section-header>
 
-    <div class="flex gap-4">
+    <div class="flex gap-2 md:gap-4 flex-wrap">
       <app-singer
         *ngFor="let track of onRepeatTracks"
         [singer]="{

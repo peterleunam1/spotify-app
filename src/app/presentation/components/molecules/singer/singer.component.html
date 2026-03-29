@@ -32,14 +32,14 @@
       [ngClass]="{
         'rounded-lg mb-2': singer.type !== 'artist',
         'rounded-full mb-4 w-36 h-36': singer.type === 'artist',
-        'w-34 h-34': isSmall
+        'size-29 md:size-34': isSmall
       }" />
 
     <h2
       class="text-lg font-bold text-white hover:text-green-400 transition-colors duration-200"
       [ngClass]="{
         'text-sm': singer.type !== 'artist',
-        'max-w-[125px]': isSmall
+        'max-w-[115px]': isSmall
       }">
       {{ singer.name }}
       <span *ngIf="showLinkIcon" class="ml-1 text-green-400 text-xs">🔗</span>

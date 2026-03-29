@@ -1,10 +1,10 @@
 <app-main-layout>
   <app-navbar [(keyword)]="keyword"></app-navbar>
-  <div *ngIf="isLoading &&  listSingers.length === 0" class="p-8">
+  <div *ngIf="isLoading && listSingers.length === 0" class="p-8">
     <app-skeleton [type]="'card'" [count]="10"></app-skeleton>
   </div>
   <section
-    class="flex flex-col px-8 gap-8 mt-6 pb-8"
+    class="flex flex-col px-4 md:px-8 gap-8 mt-6 md:pb-8"
     *ngIf="!keyword && recentSearches.length > 0">
     <div
       *ngIf="
@@ -13,7 +13,7 @@
         !isLoading &&
         listSingers.length === 0
       ">
-      <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center w-full mb-4 md:mb-8">
         <h1 class="text-2xl font-semibold">Recent searches</h1>
 
         <button
@@ -24,21 +24,22 @@
       </div>
 
       <app-list-of-singers
+      class="w-full"
         [singers]="recentSearches"
         [showRemoveButton]="true"
         (remove)="removeRecentSearch($event)"></app-list-of-singers>
     </div>
-    <div
-      *ngIf="!keyword && !isLoading && listSingers.length === 0"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div
-        *ngFor="let category of categories"
-        class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
-        [ngStyle]="{ 'background-color': category.color }">
-        {{ category.name }}
-      </div>
-    </div>
   </section>
+  <div
+    *ngIf="!keyword && !isLoading && listSingers.length === 0"
+    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:p-8 pb-26 md:pb-0 mt-4 md:mt-0">
+    <div
+      *ngFor="let category of categories"
+      class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
+      [ngStyle]="{ 'background-color': category.color }">
+      {{ category.name }}
+    </div>
+  </div>
   <app-list-of-singers
     *ngIf="listSingers.length > 0"
     [singers]="listSingers"

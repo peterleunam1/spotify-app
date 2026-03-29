@@ -1,13 +1,13 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
-  <section class="px-8 flex flex-col gap-8 pb-8">
+  <section class="px-4 md:px-8 flex flex-col gap-8 pb-8">
     <header>
       <h1 class="text-3xl font-semibold">Dashboard</h1>
       <p class="text-neutral-400 text-sm">Your music at a glance.</p>
     </header>
 
-    <section class="flex gap-8 w-full">
-      <article class="flex flex-col gap-8 w-[45%]">
+    <section class="flex flex-col md:flex-row gap-8 w-full">
+      <article class="flex flex-col gap-8 w-full md:w-[45%]">
         <app-currently-playing
           class="w-full"
           [track]="currentlyPlaying"
@@ -26,7 +26,7 @@
           </app-radar-chart>
         </app-card>
       </article>
-      <app-repeat-and-stats class="w-[55%]" [tracks]="recentlyPlayedTracks()!">
+      <app-repeat-and-stats class="w-full md:w-[55%]" [tracks]="recentlyPlayedTracks()!">
       </app-repeat-and-stats>
     </section>
 

@@ -1,6 +1,5 @@
-<!-- HEADER -->
 <section
-  class="relative w-full h-[270px] flex-shrink-0"
+  class="relative w-full min-h-[350px] h-auto md:h-[270px] flex-shrink-0 pb-6 md:pb-0"
   [style.background]="
     'linear-gradient(to bottom,' +
     dominantColor +
@@ -8,10 +7,10 @@
     darkDominantColor +
     ' 100%)'
   ">
-  <div class="flex items-end gap-6 h-full p-8 text-white">
+  <div class="flex flex-col md:flex-row items-center md:items-end gap-6 h-full px-4 md:p-8 text-white">
     <img
       [src]="img"
-      class="w-54 h-54 shadow-2xl object-cover rounded"
+      class="size-54 shadow-2xl object-cover rounded"
       alt="Artist"
       *ngIf="!isLoading" />
     <app-skeleton
@@ -19,12 +18,12 @@
       [type]="'circle'"
       [count]="1"></app-skeleton>
 
-    <div>
+    <div class="w-full md:w-auto">
       <p class="text-sm uppercase tracking-widest text-gray-300">
         {{ contentType | uppercase }}
       </p>
 
-      <h1 class="text-6xl font-bold leading-tight" *ngIf="!isLoading">
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight" *ngIf="!isLoading">
         {{ title }}
       </h1>
 
@@ -40,9 +39,8 @@
   </div>
 </section>
 
-<!-- CONTENT -->
 <section
-  class="p-8 flex flex-col gap-6 flex-1 min-h-0 overflow-auto"
+  class="p-4 md:p-8 flex flex-col gap-6 flex-1 min-h-0 overflow-auto pb-24 md:pb-8"
   [style.background]="
     'linear-gradient(to bottom,' + contentColor + ' 0%,' + '#121212 100%)'
   ">
