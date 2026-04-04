@@ -43,13 +43,11 @@ export class AlbumsComponent implements OnInit {
 
   dominantColor = 'rgb(30,30,30)';
 
-  // 🔥 RESOURCE
   albumResource = useResource<{
     album: AlbumModel;
     tracks: TrackUIModel[];
   } | null>(null);
 
-  // 🧠 DERIVED STATE
 
   album = computed(() => this.albumResource.state().data?.album);
 
@@ -78,7 +76,6 @@ export class AlbumsComponent implements OnInit {
     return formatDuration(totalMs);
   });
 
-  // 🚀 LOAD
 
   async loadAlbum(albumId: string) {
     await this.albumResource.load(

@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SkeletonComponent {
  @Input() count = 10;
- @Input() type: 'card' | 'circle' | 'text' | 'song' | 'big-circle' | 'hero' | 'stats' | 'dna'= 'card';
+ @Input() type: 'card' | 'circle' | 'text' | 'song' | 'big-circle' | 'hero' | 'stats' | 'dna' | 'complete'= 'card';
 }

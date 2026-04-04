@@ -4,7 +4,7 @@
     spotifyEffect ? dominantColorService.dominantColor() : '#1e1e1e'
   ">
   <div class="flex items-center space-x-4 w-2/3">
-    <div class="space-x-3 hidden sm:flex">
+    <div class="hidden sm:flex sm:gap-3">
       <button
         (click)="goBack()"
         class="w-9 h-9 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/70 transition-all duration-200 cursor-pointer">
@@ -30,7 +30,7 @@
   <div class="relative text-white" *ngIf="profile.images">
     <button
       (click)="toggleDropdown()"
-      class="cursor-pointer flex items-center space-x-2 hover:bg-[#282828] md:p-2 rounded-lg transition">
+      class="cursor-pointer flex items-center gap-2 hover:bg-[#282828] md:p-2 rounded-lg transition">
       <img
         *ngIf="profile.images.length > 0"
         [src]="profile.images[0].url"
