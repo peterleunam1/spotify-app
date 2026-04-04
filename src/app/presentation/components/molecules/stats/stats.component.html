@@ -1,10 +1,4 @@
 <div class="bg-neutral-900 rounded-xl p-4">
-  <div class="mb-4">
-    <p class="text-sm text-neutral-400">
-      Your activity for {{ todayLabel }}
-    </p>
-  </div>
-
   <div class="grid grid-cols-2 gap-4">
     <div class="bg-neutral-800 rounded-lg p-3">
       <p class="text-xs text-neutral-400">Tracks</p>
@@ -35,9 +29,7 @@
 
     <div class="bg-neutral-800 rounded-lg p-3">
       <p class="text-xs text-neutral-400">Avg Session</p>
-      <p class="text-lg font-semibold">
-        {{ stats.avgSessionMinutes }} min
-      </p>
+      <p class="text-lg font-semibold">{{ stats.avgSessionMinutes }} min</p>
     </div>
   </div>
 </div>

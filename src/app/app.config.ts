@@ -11,8 +11,8 @@ import { AuthService } from './infrastructure/auth/auth.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TokenGateway } from './domain/token/token.gateway';
 import { TokenService } from './infrastructure/token/token.service';
-import { SingerGateway } from './domain/singers/singer.gateway';
-import { SingersService } from './infrastructure/singers/singers.service';
+import { SearchGateway } from './domain/search/search.gateway';
+import { SearchService } from './infrastructure/search/search.service';
 import { AlbumsGateWay } from './domain/albums/albums.gateway';
 import { AlbumsService } from './infrastructure/albums/albums.service';
 import { TracksService } from './infrastructure/tracks/tracks.service';
@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     { provide: AuthGateway, useClass: AuthService },
     { provide: TokenGateway, useClass: TokenService },
-    { provide: SingerGateway, useClass: SingersService },
+    { provide: SearchGateway, useClass: SearchService },
     { provide: AlbumsGateWay, useClass: AlbumsService },
     { provide: TracksGateWay, useClass: TracksService },
     { provide: ProfileGateWay, useClass: ProfileService },

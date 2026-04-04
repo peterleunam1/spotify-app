@@ -1,66 +1,162 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
+
   <section class="px-4 md:px-8 flex flex-col gap-8 pb-8">
-    <header>
-      <h1 class="text-3xl font-semibold">Dashboard</h1>
-      <p class="text-neutral-400 text-sm">Your music at a glance.</p>
+    <header class="space-y-1">
+      <h1 class="text-3xl font-semibold tracking-tight">Dashboard</h1>
+      <p class="text-neutral-400 text-sm">
+        Everything you’ve been listening to, in one place.
+      </p>
     </header>
 
-    <section class="flex flex-col md:flex-row gap-8 w-full">
-      <article class="flex flex-col gap-8 w-full md:w-[45%]">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <article class="flex flex-col gap-8">
         <app-currently-playing
           class="w-full"
           [track]="currentlyPlaying"
           [refresh]="getCurrentlyPlaying.bind(this)">
         </app-currently-playing>
 
-        <app-card class="w-full">
-          <app-section-header
-            title="Top Genres"
-            description="Your core sound profile">
-          </app-section-header>
+        <ng-container *ngIf="artistResources.state() as artistState">
+          <app-card>
+            <app-section-header
+              title="Top Genres"
+              description="A breakdown of the genres shaping your taste.">
+            </app-section-header>
 
-          <app-radar-chart
-            *ngIf="radarChartTopGenres()"
-            [data]="radarChartTopGenres()!">
-          </app-radar-chart>
-        </app-card>
+            <app-resource-state
+              [state]="artistState.state"
+              [error]="artistState.error"
+              [skeletonProps]="{ type: 'song', count: 7 }"
+              [emptyMessage]="
+                'Your music journey starts here. Play something and come back 🎧'
+              ">
+              <app-radar-chart
+                *ngIf="radarChartTopGenres()"
+                [data]="radarChartTopGenres()!">
+              </app-radar-chart>
+            </app-resource-state>
+          </app-card>
+        </ng-container>
       </article>
-      <app-repeat-and-stats class="w-full md:w-[55%]" [tracks]="recentlyPlayedTracks()!">
-      </app-repeat-and-stats>
+
+      <ng-container *ngIf="recentlyPlayedResource.state() as recentState">
+        <app-resource-state
+          [state]="recentState.state"
+          [error]="recentState.error"
+          [skeletonProps]="{ type: 'stats', count: 6 }"
+          [emptyMessage]="
+            'Nothing to show here yet. Start listening to see your activity 🎶'
+          ">
+          <app-repeat-and-stats class="w-full" [tracks]="recentState.data">
+          </app-repeat-and-stats>
+        </app-resource-state>
+      </ng-container>
     </section>
 
-    <app-list-of-songs
-      [tracks]="recentlyPlayed().slice(0, 5)"
-      [albumName]="'Recently Played'"
-      [showLike]="false"
-      [minTracks]="7"
-      [titleSmall]="true">
-    </app-list-of-songs>
+    <ng-container *ngIf="recentlyPlayedResource.state() as recentState">
+      <article class="flex flex-col gap-2">
+        <app-section-header
+          title="Your Recent Soundtrack"
+          description="What you’ve been listening to lately, in order.">
+        </app-section-header>
 
+        <app-resource-state
+          [state]="recentState.state"
+          [error]="recentState.error"
+          [skeletonProps]="{ type: 'song', count: 5 }"
+          [emptyMessage]="
+            'Nothing to show here yet. Start listening to see your recently played tracks 🎶'
+          ">
+          <app-list-of-songs
+            [tracks]="recentlyPlayed().slice(0, 5)"
+            [showLike]="false"
+            [minTracks]="7"
+            [titleSmall]="true">
+          </app-list-of-songs>
+        </app-resource-state>
+      </article>
+    </ng-container>
 
-    <app-top-items
-      mode="compact"
-      type="artists"
-      title="Top Artists"
-      description="Your favorites right now"
-      [artists]="artists()"
-      [isLoading]="artistsLoading()"
-      (rangeChange)="getTopArtists($event)"
-      (seeAll)="goToLibraryArtists()">
-      >
-    </app-top-items>
+    <ng-container *ngIf="artistResources.state() as artistState">
+      <article class="flex flex-col gap-2">
+        <app-section-header
+          title="Your Core Artists"
+          description="The artists that define your current vibe.">
+        </app-section-header>
 
-    <app-top-items
-      mode="compact"
-      type="tracks"
-      title="Top Tracks"
-      description="Your most played songs"
-      [tracks]="tracks()"
-      [isLoading]="tracksLoading()"
-      (rangeChange)="getTopTracks($event)"
-      (seeAll)="goToLibraryTracks()">
-      >
-    </app-top-items>
+        <app-resource-state
+          [state]="artistState.state"
+          [error]="artistState.error"
+          [skeletonProps]="{ type: 'circle', count: 5 }"
+          [emptyMessage]="
+            'Your music journey starts here. Play something and come back 🎧'
+          ">
+          <app-top-items
+            mode="compact"
+            type="artists"
+            [artists]="artistState.data"
+            (rangeChange)="getTopArtists($event)"
+            (seeAll)="goToLibraryArtists()">
+          </app-top-items>
+        </app-resource-state>
+      </article>
+    </ng-container>
+
+    <ng-container *ngIf="tracksResource.state() as tracksState">
+      <article class="flex flex-col gap-2">
+        <app-section-header
+          title="On Repeat"
+          description="Your most played tracks right now.">
+        </app-section-header>
+
+        <app-resource-state
+          [state]="tracksState.state"
+          [error]="tracksState.error"
+          [skeletonProps]="{ type: 'card', count: 5 }"
+          [emptyMessage]="
+            'Nothing to show here yet. Start listening to see your top tracks 🎶'
+          ">
+          <app-top-items
+            mode="compact"
+            type="tracks"
+            [tracks]="tracksState.data"
+            (rangeChange)="getTopTracks($event)"
+            (seeAll)="goToLibraryTracks()">
+          </app-top-items>
+        </app-resource-state>
+      </article>
+    </ng-container>
   </section>
+  <app-modal [isOpen]="isErrorPlaying()">
+    <div class="text-white rounded-2xl p-6 w-full max-w-md">
+      <div class="flex items-center justify-center mb-4">
+        <div class="bg-[#1DB954]/20 p-3 rounded-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-[#1DB954]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-xl font-semibold text-center mb-2">Access not granted</h3>
+      <p class="text-sm text-gray-400 text-center mb-4">
+        Your Spotify account doesn’t have access to this application yet.
+      </p>
+      <p class="text-sm text-gray-500 text-center mb-6">
+        Ask the developer to add your account in the Spotify Dashboard, then
+        sign in again.
+      </p>
+      <app-main-button
+        (click)="logout()"
+        label="Sign In Again"></app-main-button>
+    </div>
+  </app-modal>
 </app-main-layout>

@@ -1,45 +1,107 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
   <section class="px-4 md:px-8 flex flex-col gap-8 md:pb-8 pb-22">
-    <header>
-      <h1 class="text-3xl font-semibold">Library</h1>
+    <header class="space-y-1">
+      <h1 class="text-3xl font-semibold tracking-tight">Library</h1>
       <p class="text-neutral-400 text-sm">Explore your music collection</p>
     </header>
     <app-tabs-nav [activeTab]="activeTab" (tabChange)="setTab($event)">
     </app-tabs-nav>
     <div *ngIf="activeTab === 'artists'" class="animate-fade-in">
-      <app-top-items
-        mode="interactive"
-        type="artists"
-        [title]="'Top Artists'"
-        [description]="''"
-        [artists]="artists()!"
-        (rangeChange)="getTopArtists($event)"
-        [isLoading]="artistsLoading()!"></app-top-items>
+      <ng-container *ngIf="artistResources.state() as artistState">
+        <app-section-header
+          title="Your Sound Identity"
+          description="The artists that define your taste, based on what you play the most.">
+        </app-section-header>
+
+        <app-top-items
+          [type]="'artists'"
+          [artists]="artistState.data"
+          [mode]="'interactive'"
+          (rangeChange)="getTopArtists($event)"
+          [stateLoad]="artistState.state">
+        </app-top-items>
+
+        <p *ngIf="artistState.state === 'empty'">
+          Your music journey starts here. Play something and come back 🎧
+        </p>
+
+        <p *ngIf="artistState.state === 'error'">
+          {{ artistState.error }}
+        </p>
+      </ng-container>
     </div>
 
     <div *ngIf="activeTab === 'tracks'" class="animate-fade-in">
-      <app-top-items
-        mode="interactive"
-        type="tracks"
-        [title]="'Top Tracks'"
-        [description]="''"
-        [tracks]="tracks()!"
-        (rangeChange)="getTopTracks($event)"
-        [isLoading]="tracksLoading()!"></app-top-items>
+      <ng-container *ngIf="tracksResource.state() as tracksState">
+        <app-section-header
+          title="Your Most Played Tracks"
+          description="The songs you couldn’t stop playing, ranked by your listening habits.">
+        </app-section-header>
+
+        <app-top-items
+          mode="interactive"
+          type="tracks"
+          [tracks]="tracksState.data"
+          (rangeChange)="getTopTracks($event)"
+          [stateLoad]="tracksState.state">
+        </app-top-items>
+
+        <p *ngIf="tracksState.state === 'empty'">
+          Your music journey starts here. Play something and come back 🎧
+        </p>
+
+        <p *ngIf="tracksState.state === 'error'">
+          {{ tracksState.error }}
+        </p>
+      </ng-container>
     </div>
     <div *ngIf="activeTab === 'playlists'" class="animate-fade-in">
-      <app-list-of-playlists
-        [playlists]="playlists()"
-        [isLoading]="isLoadingPlaylist()"></app-list-of-playlists>
+      <ng-container *ngIf="playlistsResource.state() as playlistsState">
+        <app-section-header
+          [title]="
+            'Your Playlists' +
+            (playlistsState.data?.length
+              ? ' (' + playlistsState.data.length + ')'
+              : '')
+          "
+          description="Collections you’ve created or follow, ready to match any mood.">
+        </app-section-header>
+
+        <app-resource-state
+          [state]="playlistsState.state"
+          [error]="playlistsState.error"
+          [skeletonProps]="{ type: 'card', count: 5 }"
+          [emptyMessage]="
+            'Your music journey starts here. Create or follow a playlist 🎶'
+          ">
+          <app-list-of-playlists
+            *ngIf="playlistsState.state === 'success'"
+            [playlists]="playlistsState.data">
+          </app-list-of-playlists>
+        </app-resource-state>
+      </ng-container>
     </div>
-    <div *ngIf="activeTab === 'liked'" class="animate-fade-in">
-      <app-list-of-songs
-        [tracks]="likedTracksFromArtist"
-        [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
-        [isLoading]="isLoadingMyLikedTracks()!"
-        [minTracks]="10">
-      </app-list-of-songs>
+    <div [hidden]="activeTab !== 'liked'" class="animate-fade-in">
+      <ng-container *ngIf="likedTracksResource.state() as likedState">
+        <app-section-header
+          [title]="
+            'Your Liked Songs' +
+            (likedState.data?.length ? ' (' + likedState.data.length + ')' : '')
+          "
+          description="The songs you loved the most, ranked by your listening habits.">
+        </app-section-header>
+        <app-resource-state
+          [state]="likedState.state"
+          [error]="likedState.error"
+          [skeletonProps]="{ type: 'song', count: 4 }"
+          [emptyMessage]="
+            'Nothing to show here yet. Start listening to see your liked songs 🎶'
+          ">
+          <app-list-of-songs [tracks]="likedState.data" [minTracks]="5">
+          </app-list-of-songs>
+        </app-resource-state>
+      </ng-container>
     </div>
   </section>
 </app-main-layout>

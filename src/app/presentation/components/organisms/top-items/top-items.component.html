@@ -1,29 +1,22 @@
-<section class="text-white flex flex-col gap-6">
-  <div class="flex items-center justify-between flex-wrap gap-4">
-    <app-section-header
-      [title]="title"
-      [description]="description"></app-section-header>
-    <div *ngIf="mode === 'interactive'" class="flex items-center gap-2">
+<section class="text-white flex flex-col gap-6 ">
+    <div *ngIf="mode === 'interactive'" class="flex items-center justify-end gap-2 md:mt-[-2rem]">
       <app-time-ranger-selector
         class="scale-90 opacity-90"
         (rangeChange)="onTimeRangeChange($event)">
       </app-time-ranger-selector>
     </div>
-  </div>
 
-  <article class="flex flex-col gap-5">
-    <app-skeleton
-      *ngIf="isLoading && type === 'artists'"
-      [count]="5"
-      [type]="'circle'"></app-skeleton>
-    <app-skeleton
-      *ngIf="isLoading && type === 'tracks'"
-      [count]="5"
-      [type]="'card'"></app-skeleton>
+  <app-skeleton
+    [count]="5"
+    type="card"
+    *ngIf="stateLoad === 'loading' && type === 'tracks'"></app-skeleton>
+  <app-skeleton
+    [count]="5"
+    type="circle"
+    *ngIf="stateLoad === 'loading' && type === 'artists'"></app-skeleton>
 
-    <div
-      class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5"
-      *ngIf="!isLoading">
+  <article class="flex flex-col gap-5" *ngIf="stateLoad !== 'loading'">
+    <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
       <ng-container *ngIf="type === 'artists'">
         <app-singer
           *ngFor="
@@ -66,7 +59,11 @@
         </app-singer>
       </ng-container>
     </div>
-    <div *ngIf="mode === 'compact'" class="flex justify-end">
+    <div
+      *ngIf="
+        mode === 'compact' && (artists?.items?.length || tracks?.items?.length)
+      "
+      class="flex justify-end">
       <button
         class="text-sm text-neutral-400 hover:text-white transition cursor-pointer"
         (click)="onSeeAll()">

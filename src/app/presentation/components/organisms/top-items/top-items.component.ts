@@ -9,6 +9,7 @@ import {
   TimeRange,
   TimeRangerSelectorComponent
 } from '../../molecules/timer-ranger-selector/time-ranger-selector.component';
+import { LoadState, ResourceState } from '../../../../shared/state/resource-state.model';
 
 @Component({
   selector: 'app-top-items',
@@ -29,20 +30,18 @@ export class TopItemsComponent {
   @Input({ required: true })
   type!: 'artists' | 'tracks';
 
-  @Input({ required: true })
-  title!: string;
+  // @Input()
+  // title!: string;
 
-  @Input({ required: true })
-  description!: string;
+  // @Input()
+  // description!: string;
 
+  @Input() stateLoad!: LoadState; 
   @Input()
   artists: TopArtistsModel | null = null;
 
   @Input()
   tracks: TopTracksModel | null = null;
-
-  @Input()
-  isLoading = false;
 
   @Output()
   rangeChange = new EventEmitter<TimeRange>();

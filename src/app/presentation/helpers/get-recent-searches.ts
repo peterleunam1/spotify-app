@@ -1,7 +1,7 @@
-import { SingleSingerModel } from '../../domain/singers/singer.entity';
+import { SingleSingerModel } from '../../domain/search/search.entity';
 
 const STORAGE_KEY = 'recent_searches';
-const MAX_ITEMS = 5;
+const MAX_ITEMS = 10;
 
 export const saveRecentSearch = (singer: SingleSingerModel) => {
   const stored = localStorage.getItem(STORAGE_KEY);

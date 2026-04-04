@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
 import {
@@ -12,7 +12,6 @@ import {
   TopTracksModel,
   TrackUIModel
 } from '../../../domain/tracks/tracks.entity';
-import { GetTopItemsParams } from '../../../domain/profile/profile.entity';
 import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TopItemsComponent } from '../../components/organisms/top-items/top-items.component';
@@ -22,6 +21,11 @@ import { ListOfPlaylistsComponent } from '../../components/organisms/list-of-pla
 import { TracksUseCase } from '../../../application/tracks/tracks.use-case';
 import { ListOfSongsComponent } from '../../components/organisms/list-of-songs/list-of-songs.component';
 import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector.component';
+import { useResource } from '../../../shared/state/use-resource';
+import { mapDomainErrorToMessage } from '../../helpers/map-error';
+import { ResourceStateComponent } from '../../components/organisms/resource-state/resource-state.component';
+import { SectionHeaderComponent } from '../../components/atoms/section-header/section-header.component';
+import { SkeletonComponent } from '../../components/atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-library',
@@ -32,7 +36,10 @@ import { TimeRange } from '../../components/molecules/timer-ranger-selector/time
     TopItemsComponent,
     CommonModule,
     ListOfPlaylistsComponent,
-    ListOfSongsComponent
+    ListOfSongsComponent,
+    ResourceStateComponent,
+    SectionHeaderComponent,
+    SkeletonComponent
   ],
   templateUrl: './library.component.html'
 })
@@ -44,120 +51,141 @@ export class LibraryComponent implements OnInit {
   private tracksUseCase = inject(TracksUseCase);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  public playlists = signal<PlaylistItem[]>([]);
-  public isLoadingPlaylist = signal<boolean>(false);
 
-  artists = signal<TopArtistsModel | null>(null);
-  tracks = signal<TopTracksModel | null>(null);
+  public playlistsResource = useResource<PlaylistItem[], string>([]);
+  public tracksResource = useResource<TopTracksModel | null>(null);
+  public artistResources = useResource<TopArtistsModel | null>(null);
+  public likedTracksResource = useResource<TrackUIModel[]>([]);
 
-  artistsLoading = signal(false);
-  tracksLoading = signal(false);
-
-  isLoadingMyLikedTracks = signal(false);
-
-  likedTracksFromArtist: TrackUIModel[] = [];
+  
 
   async getTopArtists(range: TimeRange) {
-    this.artistsLoading.set(true);
-
-    try {
-      const params: GetTopItemsParams = {
-        item: 'artists',
-        timeRange: range
-      };
-
-      const result = await lastValueFrom(
-        this.profileUseCase.getTopItems(params)
-      );
-
-      const topArtists = result as TopArtistsModel;
-
-      this.artists.set(topArtists);
-    } finally {
-      this.artistsLoading.set(false);
-    }
+    await this.artistResources.load(
+      async () => {
+        const result = await lastValueFrom(
+          this.profileUseCase.getTopItems({
+            item: 'artists',
+            timeRange: range
+          })
+        );
+        return result as TopArtistsModel;
+      },
+      {
+        isEmpty: data => !data || data.items.length === 0,
+        mapError: mapDomainErrorToMessage
+      }
+    );
   }
 
-  async getTopTracks(range: TimeRange) {
-    this.tracksLoading.set(true);
-
-    try {
-      const params: GetTopItemsParams = {
-        item: 'tracks',
-        timeRange: range
-      };
-
-      const result = await lastValueFrom(
-        this.profileUseCase.getTopItems(params)
-      );
-      this.tracks.set(result as TopTracksModel);
-    } finally {
-      this.tracksLoading.set(false);
-    }
+  async getTopTracks(range: TimeRange): Promise<void> {
+    await this.tracksResource.load(
+      async () => {
+        const result = await lastValueFrom(
+          this.profileUseCase.getTopItems({
+            item: 'tracks',
+            timeRange: range
+          })
+        );
+        return result as TopTracksModel;
+      },
+      {
+        isEmpty: data => !data || data.items.length === 0,
+        mapError: mapDomainErrorToMessage
+      }
+    );
   }
-  async getPlaylists() {
-    this.isLoadingPlaylist.set(true);
-
-    try {
-      const result = await lastValueFrom(this.playlistUseCase.getPlaylists());
-      this.playlists.set(result.items);
-    } finally {
-      this.isLoadingPlaylist.set(false);
-    }
+  async getPlaylists(): Promise<void> {
+    await this.playlistsResource.load(
+      async () => {
+        const result = await lastValueFrom(this.playlistUseCase.getPlaylists());
+        return result?.items ?? [];
+      },
+      {
+        isEmpty: items => items.length === 0,
+        mapError: mapDomainErrorToMessage
+      }
+    );
   }
 
-  async getLikedTracks() {
-    try {
-      this.isLoadingMyLikedTracks.set(true);
+  async getLikedTracks(): Promise<void> {
+    await this.likedTracksResource.load(
+      async () => {
+        const tracks = await lastValueFrom(this.tracksUseCase.getMyTracks());
 
-      const tracks = await lastValueFrom(this.tracksUseCase.getMyTracks());
-
-      this.likedTracksFromArtist = tracks
-        .map(track => ({
+        return tracks.map(track => ({
           id: track.track.id,
           title: track.track.name,
           duration: track.track.duration_ms,
           albumName: track.track.album.name,
           albumImage:
-            track.track.album.images[2].url ||
-            track.track.album.images[0].url ||
+            track.track.album.images[2]?.url ||
+            track.track.album.images[0]?.url ||
             '',
           artists: track.track.artists.map(a => a.name).join(', '),
           link: track.track.external_urls.spotify
         }));
-    } catch {
-      throw new Error('An unexpected error has been ocurred.');
-    } finally {
-      this.isLoadingMyLikedTracks.set(false);
-    }
-  }
-  ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      const tab = params.get('tab');
-
-      if (this.isValidTab(tab)) {
-        this.activeTab = tab;
-      } else {
-        this.setTab('artists', false);
+      },
+      {
+        isEmpty: items => items.length === 0,
+        mapError: mapDomainErrorToMessage
       }
-    });
-    this.getTopTracks('short_term');
-    this.getTopArtists('short_term');
-    this.getPlaylists();
-    this.getLikedTracks();
+    );
   }
 
-  setTab(tab: LibraryTab, updateUrl = true) {
-    this.activeTab = tab;
+  private loadTabData(tab: LibraryTab) {
+  switch (tab) {
+    case 'artists':
+      if (!this.artistResources.state().data) {
+        this.getTopArtists('short_term');
+      }
+      break;
 
-    if (updateUrl) {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { tab },
-        queryParamsHandling: 'merge'
-      });
+    case 'tracks':
+      if (!this.tracksResource.state().data) {
+        this.getTopTracks('short_term');
+      }
+      break;
+
+    case 'playlists':
+      if (!this.playlistsResource.state().data.length) {
+        this.getPlaylists();
+      }
+      break;
+
+    case 'liked':
+      if (!this.likedTracksResource.state().data.length) {
+        this.getLikedTracks();
+      }
+      break;
+  }
+}
+ngOnInit() {
+  this.route.queryParamMap.subscribe(params => {
+    const tab = params.get('tab');
+
+    if (this.isValidTab(tab)) {
+      this.activeTab = tab;
+    } else {
+      this.activeTab = 'artists';
     }
+
+    // 🔥 SOLO cargar el tab inicial
+    this.loadTabData(this.activeTab);
+  });
+}
+setTab(tab: LibraryTab, updateUrl = true) {
+  this.activeTab = tab;
+
+  this.loadTabData(tab); // 🔥 usa cache inteligente
+
+  if (updateUrl) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab },
+      queryParamsHandling: 'merge'
+    });
   }
+}
 
   private isValidTab(tab: string | null): tab is LibraryTab {
     return ['artists', 'tracks', 'playlists', 'liked'].includes(tab || '');

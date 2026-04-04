@@ -30,7 +30,6 @@ export class CurrentlyPlayingComponent implements OnInit, OnDestroy {
   private progressInterval: ReturnType<typeof setInterval> | null = null;
 
   ngOnInit(): void {
-
     this.syncProgress();
     this.startAutoRefresh();
     this.startProgressAnimation();
@@ -45,11 +44,9 @@ export class CurrentlyPlayingComponent implements OnInit, OnDestroy {
   private startAutoRefresh(): void {
 
     this.refreshInterval = setInterval(async () => {
-
       await this.refresh();
       this.syncProgress();
-
-    }, 5000);
+    }, 6000);
   }
 
   private startProgressAnimation(): void {

@@ -1,0 +1,14 @@
+<!-- loading -->
+<app-skeleton
+  *ngIf="state === 'loading'"
+  [count]="skeletonProps.count"
+  [type]="skeletonProps.type"></app-skeleton>
+
+<!-- error -->
+<p *ngIf="state === 'error'">{{ error }}</p>
+
+<!-- empty -->
+<p *ngIf="state === 'empty'">{{ emptyMessage }}</p>
+
+<!-- success -->
+<ng-content *ngIf="state === 'success'"></ng-content>

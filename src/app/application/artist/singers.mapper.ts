@@ -3,7 +3,7 @@ import {
   SingleSingerModel,
   AlbumElement,
   TracksItem
-} from '../../domain/singers/singer.entity';
+} from '../../domain/search/search.entity';
 import { Mapper } from '../../presentation/interfaces/mapper';
 
 export class SingersMapper implements Mapper<Singer, SingleSingerModel> {

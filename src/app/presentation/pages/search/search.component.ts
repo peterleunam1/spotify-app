@@ -12,7 +12,7 @@ import { SingerUseCase } from '../../../application/singers/singers.use-case';
 import {
   SingerResponse,
   SingleSingerModel
-} from '../../../domain/singers/singer.entity';
+} from '../../../domain/search/search.entity';
 import {
   AlbumsMapper,
   SingersMapper,

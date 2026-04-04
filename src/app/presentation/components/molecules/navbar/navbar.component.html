@@ -35,7 +35,14 @@
         *ngIf="profile.images.length > 0"
         [src]="profile.images[0].url"
         alt="Profile Picture"
-        class="w-10 h-10 rounded-full" />
+        class="size-10 rounded-full" />
+
+        <span
+          *ngIf="profile.images.length === 0"
+          class="size-10 rounded-full bg-gray-500 flex items-center justify-center text-white"
+        >
+      {{ profile.display_name.charAt(0) }}
+      </span>
 
       <span class="hidden md:block font-semibold">{{ profile.display_name }}</span>
     </button>

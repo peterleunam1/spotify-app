@@ -1,17 +1,26 @@
 <app-main-layout>
   <app-navbar [isSearchVisible]="false"></app-navbar>
+
   <section class="px-4 md:px-8 flex flex-col gap-8 md:pb-8 pb-22 w-full">
     <header>
       <h1 class="text-3xl font-semibold">Music DNA</h1>
       <p class="text-neutral-400 text-sm">Generated from your top tracks</p>
     </header>
-
-    <div class="w-full">
-      <app-my-music-dna
-        [isLoading]="tracksLoading()!"
-        [data]="radarChartData()!"
-        [personality]="personality()!"
-        [insights]="musicInsights()!"></app-my-music-dna>
-    </div>
+    <ng-container *ngIf="tracksResource.state() as state">
+      <app-resource-state
+        [state]="state.state"
+        [error]="state.error"
+        [skeletonProps]="{ type: 'dna', count: 5 }"
+        [emptyMessage]="
+          'Nothing to show here yet. Start listening to see your music DNA 🎶'
+        ">
+        <app-my-music-dna
+          *ngIf="radarChartData() && personality()"
+          [data]="radarChartData()!"
+          [personality]="personality()!"
+          [insights]="musicInsights()!">
+        </app-my-music-dna>
+      </app-resource-state>
+    </ng-container>
   </section>
 </app-main-layout>

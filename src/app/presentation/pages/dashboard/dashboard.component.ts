@@ -2,12 +2,9 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
 import { NavbarComponent } from '../../components/molecules/navbar/navbar.component';
-import { PlaylistsUseCase } from '../../../application/playlists/playlists.use-case';
 import { lastValueFrom } from 'rxjs';
 import { PlaylistItem } from '../../../domain/playlists/playlists.entity';
-import { PlaylistsError } from '../../../domain/playlists/playlists.errors';
 import { ProfileUseCase } from '../../../application/profile/profile.use-case';
-import { GetTopItemsParams } from '../../../domain/profile/profile.entity';
 import { TopItemsComponent } from '../../components/organisms/top-items/top-items.component';
 import { TopArtistsModel } from '../../../domain/artist/artist.entity';
 import {
@@ -33,6 +30,13 @@ import { CurrentlyPlayingComponent } from '../../components/molecules/currently-
 import { RepeatAndStatsComponent } from '../../components/organisms/repeat-and-stats/repeat-and-stats.component';
 import { TimeRange } from '../../components/molecules/timer-ranger-selector/time-ranger-selector.component';
 import { Router } from '@angular/router';
+import { useResource } from '../../../shared/state/use-resource';
+import { mapDomainErrorToMessage } from '../../helpers/map-error';
+import { ResourceStateComponent } from '../../components/organisms/resource-state/resource-state.component';
+import { ModalComponent } from '../../components/atoms/modal/modal.component';
+import { MainButtonComponent } from '../../components/atoms/main-button/main-button.component';
+import {  PUBLIC_ROUTES } from '../../constants/routes-storage.constant';
+import { TokenUseCase } from '../../../application/token/token.use-case';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,120 +52,104 @@ import { Router } from '@angular/router';
     CardComponent,
     SectionHeaderComponent,
     ListOfSongsComponent,
-    CurrentlyPlayingComponent
+    CurrentlyPlayingComponent,
+    ResourceStateComponent,
+    ModalComponent,
+    MainButtonComponent
   ]
 })
 export class DashboardComponent implements OnInit {
   private router = inject(Router);
-  private playlistUseCase = inject(PlaylistsUseCase);
   private profileUseCase = inject(ProfileUseCase);
-
-  public playlists = signal<PlaylistItem[]>([]);
+  private tokenUseCase = inject(TokenUseCase);
   public playerUseCase = inject(PlayerUseCase);
-  public isLoading = signal<boolean>(false);
   public errorMessages = signal<string>('');
 
-  isLoadingTop = false;
-  artists = signal<TopArtistsModel | null>(null);
-  tracks = signal<TopTracksModel | null>(null);
-  artistsLoading = signal(false);
-  tracksLoading = signal(false);
   selectedArtistsRange: TimeRange = 'short_term';
   selectedTracksRange: TimeRange = 'short_term';
 
   radarChartTopGenres = signal<RadarChartData | null>(null);
   topGenres: { genre: string; count: number }[] = [];
 
-  recentlyPlayed = signal<TrackUIModel[]>([]);
-  recentlyPlayedTracks = signal<RecentlyPlayedTrackModel[]>([]);
-  recentPlayedLoading = signal(false);
-
   currentlyPlaying = signal<CurrentlyPlayingModel | null>(null);
 
+  public tracksResource = useResource<TopTracksModel | null>(null);
+  public artistResources = useResource<TopArtistsModel | null>(null);
+  public playlistsResource = useResource<PlaylistItem[], string>([]);
+  public recentlyPlayedResource = useResource<RecentlyPlayedTrackModel[]>([]);
+  recentlyPlayed = signal<TrackUIModel[]>([]);
+
+  isErrorPlaying = signal<boolean>(false);
+
   async getTopArtists(range: TimeRange) {
-    this.artistsLoading.set(true);
+    await this.artistResources.load(
+      async () => {
+        const result = await lastValueFrom(
+          this.profileUseCase.getTopItems({
+            item: 'artists',
+            timeRange: range
+          })
+        );
+        const topArtists = result as TopArtistsModel;
 
-    try {
-      const params: GetTopItemsParams = {
-        item: 'artists',
-        timeRange: range
-      };
+        this.topGenres = getTopGenres(topArtists.items);
 
-      const result = await lastValueFrom(
-        this.profileUseCase.getTopItems(params)
-      );
-
-      const topArtists = result as TopArtistsModel;
-
-      this.topGenres = getTopGenres(topArtists.items);
-
-      this.radarChartTopGenres.set({
-        title: 'Top Genres',
-        labels: this.topGenres.map(genre => genre.genre),
-        values: this.topGenres.map(genre => genre.count)
-      });
-
-      this.artists.set(topArtists);
-    } finally {
-      this.artistsLoading.set(false);
-    }
+        this.radarChartTopGenres.set({
+          title: 'Top Genres',
+          labels: this.topGenres.map(genre => genre.genre),
+          values: this.topGenres.map(genre => genre.count)
+        });
+        return result as TopArtistsModel;
+      },
+      {
+        isEmpty: data => !data || data.items.length === 0,
+        mapError: mapDomainErrorToMessage
+      }
+    );
   }
-
-  async getTopTracks(range: TimeRange) {
-    this.tracksLoading.set(true);
-
-    try {
-      const params: GetTopItemsParams = {
-        item: 'tracks',
-        timeRange: range
-      };
-
-      const result = await lastValueFrom(
-        this.profileUseCase.getTopItems(params)
-      );
-      this.tracks.set(result as TopTracksModel);
-    } finally {
-      this.tracksLoading.set(false);
-    }
-  }
-
-  async getPlaylists() {
-    this.isLoading.set(true);
-    this.errorMessages.set('');
-
-    try {
-      this.recentPlayedLoading.set(true);
-      const result = await lastValueFrom(this.playlistUseCase.getPlaylists());
-      this.playlists.set(result.items);
-    } catch (error) {
-      this.errorMessages.set((error as PlaylistsError).message);
-    } finally {
-      this.isLoading.set(false);
-      this.recentPlayedLoading.set(false);
-    }
+  async getTopTracks(range: TimeRange): Promise<void> {
+    await this.tracksResource.load(
+      async () => {
+        const result = await lastValueFrom(
+          this.profileUseCase.getTopItems({
+            item: 'tracks',
+            timeRange: range
+          })
+        );
+        return result as TopTracksModel;
+      },
+      {
+        isEmpty: data => !data || data.items.length === 0,
+        mapError: mapDomainErrorToMessage
+      }
+    );
   }
 
   async getRecentlyPlayed() {
-    try {
-      const result = await lastValueFrom(
-        this.playerUseCase.getRecentlyPlayed()
-      );
-      const recently = RecentlyPlayedMapper.toModel(result);
-      this.recentlyPlayedTracks.set(recently);
-      const normalizedTracks: TrackUIModel[] = recently.map(track => ({
-        id: track.id,
-        title: track.name,
-        albumName: track.artist,
-        albumImage: track.albumImage,
-        artists: track.artist,
-        link: track.spotifyUrl,
-        timeAgo: track.playedAgo
-      }));
+    await this.recentlyPlayedResource.load(
+      async () => {
+        const result = await lastValueFrom(
+          this.playerUseCase.getRecentlyPlayed()
+        );
+        const recently = RecentlyPlayedMapper.toModel(result);
+        const normalizedTracks: TrackUIModel[] = recently.map(track => ({
+          id: track.id,
+          title: track.name,
+          albumName: track.artist,
+          albumImage: track.albumImage,
+          artists: track.artist,
+          link: track.spotifyUrl,
+          timeAgo: track.playedAgo
+        }));
 
-      this.recentlyPlayed.set(normalizedTracks);
-    } catch (error) {
-      console.error(error);
-    }
+        this.recentlyPlayed.set(normalizedTracks);
+        return recently;
+      },
+      {
+        isEmpty: data => !data || data.length === 0,
+        mapError: mapDomainErrorToMessage
+      }
+    );
   }
 
   async getCurrentlyPlaying() {
@@ -172,7 +160,7 @@ export class DashboardComponent implements OnInit {
       const currentPlaying = CurrentlyPlayingMapper.toModel(result);
       this.currentlyPlaying.set(currentPlaying);
     } catch (error) {
-      console.error(error);
+      this.isErrorPlaying.set(true);
     }
   }
 
@@ -181,18 +169,22 @@ export class DashboardComponent implements OnInit {
   }
 
   goToLibraryTracks() {
-  this.router.navigate(['/library'], {
-    queryParams: { tab: 'tracks' }
-  });
-}
+    this.router.navigate(['/library'], {
+      queryParams: { tab: 'tracks' }
+    });
+  }
 
-goToLibraryArtists() {
-  this.router.navigate(['/library'], {
-    queryParams: { tab: 'artists' }
-  });
-}
+  goToLibraryArtists() {
+    this.router.navigate(['/library'], {
+      queryParams: { tab: 'artists' }
+    });
+  }
+  logout() {
+    this.tokenUseCase.removeToken();
+    this.router.navigate([PUBLIC_ROUTES.SIGN_IN]);
+  }
+
   ngOnInit() {
-    this.getPlaylists();
     this.getTopTracks('short_term');
     this.getTopArtists('short_term');
     this.getRecentlyPlayed();

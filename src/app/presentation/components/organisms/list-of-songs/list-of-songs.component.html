@@ -1,8 +1,6 @@
-<app-skeleton *ngIf="isLoading" [type]="'song'" [count]="3"></app-skeleton>
 
-<div *ngIf="tracks.length || !isLoading" class="w-full">
-  <app-section-header [title]="albumName"></app-section-header>
-  <div *ngIf="!isLoading">
+<div *ngIf="tracks.length" class="w-full">
+  <!-- <app-section-header [title]="albumName"></app-section-header> -->
     <div class="space-y-1">
       <div
         *ngFor="let item of visibleTracks; let i = index"
@@ -71,5 +69,4 @@
       class="mt-4 text-sm font-semibold text-gray-400 hover:text-white transition cursor-pointer">
       {{ showAllTracks ? 'Show less' : 'Show more' }}
     </button>
-  </div>
 </div>

@@ -27,28 +27,34 @@ export class RadarChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('chartCanvas')
   chartCanvas!: ElementRef<HTMLCanvasElement>;
 
-  chart?: Chart;
-  viewReady = false;
+  private chart?: Chart;
+  private viewReady = false;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.viewReady = true;
     this.tryCreateChart();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.tryCreateChart();
     }
   }
 
-  private tryCreateChart() {
-    if (!this.viewReady || !this.data) return;
+  private tryCreateChart(): void {
+    // 🛑 Evita errores de timing (clave)
+    if (!this.viewReady || !this.data || !this.chartCanvas) return;
 
+    // 🔥 destruir instancia previa (best practice)
     if (this.chart) {
       this.chart.destroy();
     }
 
     const ctx = this.chartCanvas.nativeElement;
+
+    // 🔥 normalizar valores (evita bug de escala invisible)
+    const max = Math.max(...this.data.values, 1);
+    const normalizedValues = this.data.values.map(v => v / max);
 
     this.chart = new Chart(ctx, {
       type: 'radar',
@@ -57,7 +63,7 @@ export class RadarChartComponent implements AfterViewInit, OnChanges {
         datasets: [
           {
             label: this.data.title ?? 'Music DNA',
-            data: this.data.values,
+            data: normalizedValues,
 
             backgroundColor: 'rgba(29,185,84,0.15)',
             borderColor: '#1DB954',
@@ -95,8 +101,8 @@ export class RadarChartComponent implements AfterViewInit, OnChanges {
 
         scales: {
           r: {
-            suggestedMin: 0,
-            suggestedMax: 1,
+            min: 0,
+            max: 1,
 
             grid: {
               circular: true,
@@ -104,16 +110,16 @@ export class RadarChartComponent implements AfterViewInit, OnChanges {
             },
 
             angleLines: {
-  display: false
-},
+              display: false
+            },
 
-     pointLabels: {
-  color: '#9ca3af',
-  font: {
-    size: 12,
-    weight: 'bold'
-  }
-},
+            pointLabels: {
+              color: '#9ca3af',
+              font: {
+                size: 12,
+                weight: 'bold'
+              }
+            },
 
             ticks: {
               display: false,
@@ -123,29 +129,25 @@ export class RadarChartComponent implements AfterViewInit, OnChanges {
         }
       },
 
-    plugins: [
-  {
-    id: 'lineGlow',
-    beforeDatasetDraw(chart, args) {
-      const { ctx } = chart;
+      plugins: [
+        {
+          id: 'lineGlow',
+          beforeDatasetDraw(chart, args) {
+            if (args.index !== 0) return;
 
-      if (args.index !== 0) return;
+            const { ctx } = chart;
+            ctx.save();
+            ctx.shadowColor = '#1DB954';
+            ctx.shadowBlur = 10;
+          },
+          afterDatasetDraw(chart, args) {
+            if (args.index !== 0) return;
 
-      ctx.save();
-      ctx.shadowColor = '#1DB954';
-      ctx.shadowBlur = 10;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
-    },
-    afterDatasetDraw(chart, args) {
-      const { ctx } = chart;
-
-      if (args.index !== 0) return;
-
-      ctx.restore();
-    }
-  }
-]
+            const { ctx } = chart;
+            ctx.restore();
+          }
+        }
+      ]
     });
   }
 }

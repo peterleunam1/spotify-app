@@ -1,4 +1,4 @@
-import { SingleSingerModel } from '../../domain/singers/singer.entity';
+import { SingleSingerModel } from '../../domain/search/search.entity';
 
 export function mergeSearchResults(
   artists: SingleSingerModel[],

@@ -8,10 +8,11 @@ import {
 import { PlaylistItem } from '../../../../domain/playlists/playlists.entity';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-playlist',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SkeletonComponent],
   templateUrl: './playlist.component.html'
 })
 export class PlaylistComponent {

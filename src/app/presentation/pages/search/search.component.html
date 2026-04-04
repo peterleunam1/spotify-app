@@ -4,7 +4,7 @@
     <app-skeleton [type]="'card'" [count]="10"></app-skeleton>
   </div>
   <section
-    class="flex flex-col px-4 md:px-8 gap-8 mt-6 md:pb-8"
+    class="flex flex-col px-4 md:px-8 gap-8 mt-6 pb-22 md:pb-8"
     *ngIf="!keyword && recentSearches.length > 0">
     <div
       *ngIf="
@@ -24,24 +24,33 @@
       </div>
 
       <app-list-of-singers
-      class="w-full"
+        class="w-full"
         [singers]="recentSearches"
         [showRemoveButton]="true"
         (remove)="removeRecentSearch($event)"></app-list-of-singers>
     </div>
   </section>
-  <div
+  <!-- <div
     *ngIf="!keyword && !isLoading && listSingers.length === 0"
-    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:p-8 pb-26 md:pb-0 mt-4 md:mt-0">
+    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:p-8 pb-26 md:pb-8 mt-12 md:mt-0">
     <div
       *ngFor="let category of categories"
       class="h-32 flex items-end p-4 rounded-xl text-white font-bold text-xl cursor-pointer transition-transform transform hover:scale-105"
       [ngStyle]="{ 'background-color': category.color }">
       {{ category.name }}
     </div>
+  </div> -->
+  <div class="p-4 md:p-8" *ngIf="listSingers.length > 0">
+    <app-list-of-singers
+      [singers]="listSingers"
+      [showRemoveButton]="false"></app-list-of-singers>
   </div>
-  <app-list-of-singers
-    *ngIf="listSingers.length > 0"
-    [singers]="listSingers"
-    [showRemoveButton]="false"></app-list-of-singers>
+  <p
+    *ngIf="listSingers.length === 0 && !isLoading && keyword"
+    class="text-center text-gray-400 text-lg font-medium py-8">
+    We couldn’t find anything in artists, albums, or songs.
+    <span class="block text-sm text-gray-500 mt-2">
+      Try a different search term or explore the categories below 👇
+    </span>
+  </p>
 </app-main-layout>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RecentlyPlayedTrackModel } from '../../../../domain/player/player.entity';
+import { CommonModule } from '@angular/common';
 
 interface QuickStats {
   totalTracks: number;
@@ -11,9 +12,8 @@ interface QuickStats {
 }
 @Component({
   selector: 'app-stats',
-  imports: [],
-  templateUrl: './stats.component.html',
-  styleUrl: './stats.component.css'
+  imports: [CommonModule],
+  templateUrl: './stats.component.html'
 })
 export class StatsComponent {
   @Input() tracks: RecentlyPlayedTrackModel[] = [];

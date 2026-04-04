@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SingleSingerModel } from '../../../../domain/singers/singer.entity';
+import { SingleSingerModel } from '../../../../domain/search/search.entity';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { saveRecentSearch } from '../../../helpers/get-recent-searches';

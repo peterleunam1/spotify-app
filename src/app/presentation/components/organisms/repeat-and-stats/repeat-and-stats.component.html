@@ -5,7 +5,7 @@
       description="Your most played tracks right now">
     </app-section-header>
 
-    <div class="flex gap-2 md:gap-4 flex-wrap">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <app-singer
         *ngFor="let track of onRepeatTracks"
         [singer]="{
@@ -28,7 +28,6 @@
       title="Your Stats"
       description="Your activity for {{ todayLabel }}">
     </app-section-header>
-
-    <app-stats [tracks]="tracks"></app-stats>
+    <app-stats *ngIf="tracks.length > 0" [tracks]="tracks"></app-stats>
   </app-card>
 </section>

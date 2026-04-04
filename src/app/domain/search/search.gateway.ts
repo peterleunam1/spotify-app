@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { SingerResponse } from './singer.entity';
+import { SingerResponse } from './search.entity';
 
-export abstract class SingerGateway {
+export abstract class SearchGateway {
   abstract getAnArtist(name: string): Observable<SingerResponse>;
 }

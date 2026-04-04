@@ -1,22 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import { SingerGateway } from '../../domain/singers/singer.gateway';
-import { catchError } from 'rxjs';
-import { SingerError } from '../../domain/singers/singer.error';
+import { BaseUseCase } from '../base/base.use-case';
+import { SearchGateway } from '../../domain/search/search.gateway';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SingerUseCase {
-  private singerGateway = inject(SingerGateway);
+export class SingerUseCase extends BaseUseCase{
+  private singerGateway = inject(SearchGateway);
 
   getAnArtist(name: string) {
-    return this.singerGateway.getAnArtist(name).pipe(
-      catchError(error => {
-        throw new SingerError(
-          'A technical error occurred, please try again later',
-          error.status
-        );
-      })
-    );
+    return this.execute(this.singerGateway.getAnArtist(name));
   }
 }

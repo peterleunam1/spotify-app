@@ -5,32 +5,62 @@
     [dominantColor]="dominantColor">
   </app-navbar>
 
-  <app-spotify-hero
-    [img]="artistInfo.images[0].url"
-    [title]="artistInfo.name"
-    [contentType]="'artist'"
-    [description]="artistInfo.followers?.total + ' followers'"
-    [isLoading]="isLoading">
+  <!-- ARTIST RESOURCE -->
+  <ng-container *ngIf="artistResource.state() as artistState">
+    <app-resource-state
+      [state]="artistState.state"
+      [error]="artistState.error"
+      [skeletonProps]="{ type: 'hero', count: 5 }"
+      [emptyMessage]="'Artist not found'">
+      <!-- HERO -->
+      <app-spotify-hero
+        *ngIf="artist() as artist"
+        [img]="artist.images[0]?.url || ''"
+        [title]="artist.name"
+        [contentType]="'artist'"
+        [description]="artist.followers?.total + ' followers'">
+        <!-- TRACKS RESOURCE -->
+        <ng-container *ngIf="tracksResource.state() as tracksState">
+          <app-section-header
+            [title]="
+              'Top Tracks' +
+              (tracksState.data?.length
+                ? ' (' + tracksState.data.length + ')'
+                : '')
+            "
+            description="The songs you’ve played the most from this artist, based on your listening habits.">
+          </app-section-header>
+          <app-resource-state
+            [state]="tracksState.state"
+            [error]="tracksState.error"
+            [skeletonProps]="{ type: 'song', count: 3 }"
+            [emptyMessage]="'No liked tracks from this artist yet'">
+            <app-list-of-songs [tracks]="likedTracks()"> </app-list-of-songs>
+          </app-resource-state>
+        </ng-container>
 
-    <app-list-of-songs
-      [tracks]="likedTracksFromArtist"
-      [albumName]="'Liked Songs' + ' (' + likedTracksFromArtist.length + ')'"
-      [isLoading]="isLoadingTracks">
-    </app-list-of-songs>
+        <!-- POPULARITY -->
+        <app-percentage-bar
+          *ngIf="artist.popularity !== undefined"
+          [title]="'Artist popularity'"
+          [percentage]="artist.popularity">
+        </app-percentage-bar>
 
-    <app-percentage-bar
-      *ngIf="artistInfo.popularity !== undefined"
-      [title]="'Artist popularity'"
-      [percentage]="artistInfo.popularity">
-    </app-percentage-bar>
+        <!-- ALBUMS RESOURCE -->
+        <ng-container *ngIf="albumsResource.state() as albumsState">
+          <app-resource-state
+            [state]="albumsState.state"
+            [error]="albumsState.error"
+            [skeletonProps]="{ type: 'card', count: 6 }"
+            [emptyMessage]="'No albums available'">
+            <div>
+              <h2 class="text-2xl font-bold mb-6">Discography</h2>
 
-    <div>
-      <h2 class="text-2xl font-bold mb-6">Discography</h2>
-      <app-list-of-albums [albums]="albums">
-        <app-loader *ngIf="isLoadingAlbum" [message]="'Loading albums...'">
-        </app-loader>
-      </app-list-of-albums>
-    </div>
-    
-  </app-spotify-hero>
+              <app-list-of-albums [albums]="albums()"> </app-list-of-albums>
+            </div>
+          </app-resource-state>
+        </ng-container>
+      </app-spotify-hero>
+    </app-resource-state>
+  </ng-container>
 </app-main-layout>

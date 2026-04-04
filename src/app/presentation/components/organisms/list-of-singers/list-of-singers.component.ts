@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SingleSingerModel } from '../../../../domain/singers/singer.entity';
+import { SingleSingerModel } from '../../../../domain/search/search.entity';
 import { SingerComponent } from '../../molecules/singer/singer.component';
 import { CommonModule } from '@angular/common';
 import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
