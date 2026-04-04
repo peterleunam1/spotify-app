@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SingerComponent } from '../../molecules/singer/singer.component';
 import { TopArtistsModel } from '../../../../domain/artist/artist.entity';
 import { TopTracksModel } from '../../../../domain/tracks/tracks.entity';
-import { SectionHeaderComponent } from '../../atoms/section-header/section-header.component';
 import { SkeletonComponent } from '../../atoms/skeleton/skeleton.component';
 import {
   TimeRange,
   TimeRangerSelectorComponent
 } from '../../molecules/timer-ranger-selector/time-ranger-selector.component';
-import { LoadState, ResourceState } from '../../../../shared/state/resource-state.model';
+import { LoadState } from '../../../../shared/state/resource-state.model';
 
 @Component({
   selector: 'app-top-items',
@@ -18,7 +17,6 @@ import { LoadState, ResourceState } from '../../../../shared/state/resource-stat
     CommonModule,
     SingerComponent,
     TimeRangerSelectorComponent,
-    SectionHeaderComponent,
     SkeletonComponent
   ],
   templateUrl: './top-items.component.html'

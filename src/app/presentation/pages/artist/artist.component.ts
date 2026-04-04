@@ -48,12 +48,10 @@ export class ArtistComponent implements OnInit {
 
   dominantColor = 'rgb(30,30,30)';
 
-  // 🔥 RESOURCES
   artistResource = useResource<OneArtistModel | null>(null);
   albumsResource = useResource<AlbumInfo[]>([]);
   tracksResource = useResource<TrackUIModel[]>([]);
 
-  // 🧠 DERIVED STATE
   artist = computed(() => this.artistResource.state().data);
 
   albums = computed(() => this.albumsResource.state().data);
@@ -70,7 +68,6 @@ export class ArtistComponent implements OnInit {
 
   showAllTracks = false;
 
-  // 🚀 LOADERS
 
   async loadArtist(id: string) {
     await this.artistResource.load(
@@ -126,7 +123,6 @@ export class ArtistComponent implements OnInit {
     );
   }
 
-  // 🎯 ACTIONS
 
   toggleTracks() {
     this.showAllTracks = !this.showAllTracks;
@@ -142,8 +138,6 @@ export class ArtistComponent implements OnInit {
     const seconds = Math.floor((ms % 60000) / 1000);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }
-
-  // 🔁 INIT
 
   ngOnInit() {
     this.route.params.subscribe(params => {

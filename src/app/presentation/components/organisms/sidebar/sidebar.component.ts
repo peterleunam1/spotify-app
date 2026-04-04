@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { SidebarItemComponent } from '../../molecules/sidebar-item/sidebar-item.component';
 import { CommonModule } from '@angular/common';
+import { PRIVATE_ROUTES } from '../../../constants/routes-storage.constant';
 
 interface SidebarItem {
   label: string;
@@ -23,5 +24,8 @@ export class SidebarComponent {
   ];
   isActive(route: string): boolean {
     return this.router.url === route;
+  }
+  goToHome() {
+    this.router.navigate([PRIVATE_ROUTES.DASHBOARD]);
   }
 }

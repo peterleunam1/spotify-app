@@ -8,7 +8,6 @@ export class InputComponent {
   @Input() type = 'text';
   @Input() placeholder = '';
   @Input() value = '';
-
   @Output() valueChange = new EventEmitter<string>();
 
   onInputChange(event: Event) {

@@ -13,7 +13,7 @@
       [emptyMessage]="'Playlist not found'">
       <app-spotify-hero
         *ngIf="playlist() as playlist"
-        [img]="playlist.images?.[0]?.url || ''"
+        [img]="playlist.images[0].url || ''"
         [title]="playlist.name"
         [contentType]="'playlist'"
         [description]="description()">

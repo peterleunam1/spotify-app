@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './card.component.html'
 })
-export class CardComponent {
-
-}
+export class CardComponent {}

@@ -35,7 +35,7 @@ import { mapDomainErrorToMessage } from '../../helpers/map-error';
 import { ResourceStateComponent } from '../../components/organisms/resource-state/resource-state.component';
 import { ModalComponent } from '../../components/atoms/modal/modal.component';
 import { MainButtonComponent } from '../../components/atoms/main-button/main-button.component';
-import {  PUBLIC_ROUTES } from '../../constants/routes-storage.constant';
+import { PUBLIC_ROUTES } from '../../constants/routes-storage.constant';
 import { TokenUseCase } from '../../../application/token/token.use-case';
 
 @Component({
@@ -93,6 +93,7 @@ export class DashboardComponent implements OnInit {
         const topArtists = result as TopArtistsModel;
 
         this.topGenres = getTopGenres(topArtists.items);
+    console.log(this.topGenres);
 
         this.radarChartTopGenres.set({
           title: 'Top Genres',

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { Component, inject, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MainLayoutComponent } from '../../components/templates/main-layout/main-layout.component';
@@ -43,17 +43,14 @@ export class MusicDnaComponent implements OnInit {
   private profileUseCase = inject(ProfileUseCase);
   private playerUseCase = inject(PlayerUseCase);
 
-  // 🔥 RESOURCE PRINCIPAL
   tracksResource = useResource<{
     dna: ReturnType<typeof mapTracksToMusicDNA>;
     personality: MusicPersonality;
     insights: string[];
   } | null>(null);
 
-  // 🔥 RESOURCE SECUNDARIO
   recentlyPlayedResource = useResource<RecentlyPlayedTrackModel[]>([]);
 
-  // 🧠 DERIVED STATE (nivel senior)
   radarChartData = computed(() => {
     const data = this.tracksResource.state().data;
     if (!data) return null;
@@ -88,8 +85,6 @@ export class MusicDnaComponent implements OnInit {
   musicInsights = computed(
     () => this.tracksResource.state().data?.insights ?? []
   );
-
-  // 🚀 LOADERS
 
   async getTopTracks(range: TimeRange) {
     await this.tracksResource.load(

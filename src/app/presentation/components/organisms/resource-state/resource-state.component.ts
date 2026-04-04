@@ -11,8 +11,7 @@ interface SkeletonProps {
 @Component({
   selector: 'app-resource-state',
   imports: [CommonModule, SkeletonComponent],
-  templateUrl: './resource-state.component.html',
-  styleUrl: './resource-state.component.css'
+  templateUrl: './resource-state.component.html'
 })
 export class ResourceStateComponent {
   @Input() state!: LoadState;

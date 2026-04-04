@@ -6,68 +6,50 @@
   </app-navbar>
 
   <ng-container *ngIf="trackResource.state() as state">
-
     <app-resource-state
       [state]="state.state"
       [error]="state.error"
       [skeletonProps]="{ type: 'hero', count: 5 }"
       [emptyMessage]="'Track not found'">
-
       <app-spotify-hero
         *ngIf="track() as track"
-        [img]="track.album.images?.[0]?.url || ''"
+        [img]="track.album.images[0].url || ''"
         [title]="track.name"
         [contentType]="'track'"
         [description]="artistsNames()">
-
         <div class="grid md:grid-cols-2 gap-10">
-
-          <!-- LEFT COLUMN -->
           <div class="space-y-4 text-sm">
-
-            <!-- ARTISTS -->
             <div>
               <p class="text-gray-400">
                 {{ track.artists.length > 1 ? 'Artists' : 'Artist' }}
               </p>
               <p class="font-semibold">{{ artistsNames() }}</p>
             </div>
-
-            <!-- ALBUM -->
             <div>
               <p class="text-gray-400">Album</p>
               <p class="font-semibold">{{ track.album.name }}</p>
             </div>
-
-            <!-- ALBUM TYPE -->
             <div>
               <p class="text-gray-400">Type</p>
               <p class="font-semibold capitalize">
                 {{ track.album.album_type }}
               </p>
             </div>
-
-            <!-- TRACK POSITION -->
             <div>
+              POSITION
               <p class="text-gray-400">Track</p>
               <p class="font-semibold">
                 #{{ track.track_number }} of {{ track.album.total_tracks }}
               </p>
             </div>
-
-            <!-- DISC -->
             <div>
               <p class="text-gray-400">Disc</p>
               <p class="font-semibold">{{ track.disc_number }}</p>
             </div>
-
-            <!-- DURATION -->
             <div>
               <p class="text-gray-400">Duration</p>
               <p class="font-semibold">{{ duration() }}</p>
             </div>
-
-            <!-- RELEASE DATE -->
             <div>
               <p class="text-gray-400">Release Date</p>
               <p class="font-semibold">
@@ -75,20 +57,15 @@
               </p>
             </div>
 
-            <!-- MARKETS -->
             <div>
               <p class="text-gray-400">Available in</p>
               <p class="font-semibold">
                 {{ track.available_markets.length }} countries
               </p>
             </div>
-
           </div>
 
-          <!-- RIGHT COLUMN -->
           <div class="space-y-4 text-sm">
-
-            <!-- POPULARITY -->
             <app-percentage-bar
               [title]="'Popularity'"
               [percentage]="track.popularity">
@@ -97,32 +74,24 @@
             <p class="text-gray-400 text-xs">
               Based on Spotify algorithm (0–100)
             </p>
-
-            <!-- EXPLICIT -->
             <div *ngIf="track.explicit">
               <p class="text-gray-400">Explicit</p>
               <span class="text-xs bg-zinc-700 px-2 py-1 rounded">
                 Explicit
               </span>
             </div>
-
-            <!-- ISRC -->
             <div>
               <p class="text-gray-400">ISRC</p>
               <p class="font-mono text-xs">
-                {{ track.external_ids?.isrc }}
+                {{ track.external_ids.isrc }}
               </p>
             </div>
-
-            <!-- TYPE -->
             <div>
               <p class="text-gray-400">Content Type</p>
               <p class="font-semibold capitalize">
                 {{ track.type }}
               </p>
             </div>
-
-            <!-- 🔥 NUEVO: SPOTIFY LINK -->
             <div>
               <p class="text-gray-400">Open in Spotify</p>
               <button
@@ -131,22 +100,15 @@
                 Open track ↗
               </button>
             </div>
-
-            <!-- 🔥 NUEVO: PREVIEW -->
             <div *ngIf="track.preview_url">
               <p class="text-gray-400">Preview</p>
               <audio controls class="w-full mt-1">
                 <source [src]="track.preview_url" type="audio/mpeg" />
               </audio>
             </div>
-
           </div>
-
         </div>
-
       </app-spotify-hero>
-
     </app-resource-state>
-
   </ng-container>
 </app-main-layout>

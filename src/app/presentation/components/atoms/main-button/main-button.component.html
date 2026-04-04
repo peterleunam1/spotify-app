@@ -1,12 +1,13 @@
-<button [disabled]="disabled || isLoading" (click)="handleClick()" [ngClass]="{
-    'hover:bg-[#1AA34A]': !disabled && !isLoading, 
+<button
+  [disabled]="disabled || isLoading"
+  (click)="handleClick()"
+  [ngClass]="{
+    'hover:bg-[#1AA34A]': !disabled && !isLoading,
     'disabled:opacity-25 disabled:cursor-not-allowed': disabled || isLoading
   }"
   class="cursor-pointer flex items-center justify-center w-full px-4 py-3 rounded-full font-semibold transition-colors duration-200 bg-[#1DB954] ease-in-out text-black text-lg">
   <ng-container *ngIf="!isLoading; else loading">
     {{ label }}
   </ng-container>
-  <ng-template #loading>
-    Loading ...
-  </ng-template>
+  <ng-template #loading> Loading ... </ng-template>
 </button>

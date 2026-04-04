@@ -26,8 +26,8 @@
           [singer]="{
             id: artist.id,
             name: artist.name,
-            image: artist.images?.[0]?.url ?? '',
-            followers: artist.followers?.total ?? 0,
+            image: artist.images[0].url || '',
+            followers: artist.followers.total || 0,
             type: 'artist',
             artistNamefromAlbum: ''
           }"
@@ -46,11 +46,11 @@
           [singer]="{
             id: track.id,
             name: track.name,
-            image: track.album.images?.[0]?.url ?? '',
+            image: track.album.images[0].url,
             followers: 0,
             genres: [],
             type: 'track',
-            singerNameFromTrack: track.artists?.[0]?.name ?? ''
+            singerNameFromTrack: track.artists[0].name || ''
           }"
           [showRank]="true"
           [rank]="i + 1"

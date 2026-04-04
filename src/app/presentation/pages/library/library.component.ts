@@ -25,7 +25,6 @@ import { useResource } from '../../../shared/state/use-resource';
 import { mapDomainErrorToMessage } from '../../helpers/map-error';
 import { ResourceStateComponent } from '../../components/organisms/resource-state/resource-state.component';
 import { SectionHeaderComponent } from '../../components/atoms/section-header/section-header.component';
-import { SkeletonComponent } from '../../components/atoms/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-library',
@@ -38,8 +37,7 @@ import { SkeletonComponent } from '../../components/atoms/skeleton/skeleton.comp
     ListOfPlaylistsComponent,
     ListOfSongsComponent,
     ResourceStateComponent,
-    SectionHeaderComponent,
-    SkeletonComponent
+    SectionHeaderComponent
   ],
   templateUrl: './library.component.html'
 })
@@ -56,8 +54,6 @@ export class LibraryComponent implements OnInit {
   public tracksResource = useResource<TopTracksModel | null>(null);
   public artistResources = useResource<TopArtistsModel | null>(null);
   public likedTracksResource = useResource<TrackUIModel[]>([]);
-
-  
 
   async getTopArtists(range: TimeRange) {
     await this.artistResources.load(
@@ -168,15 +164,12 @@ ngOnInit() {
     } else {
       this.activeTab = 'artists';
     }
-
-    // 🔥 SOLO cargar el tab inicial
     this.loadTabData(this.activeTab);
   });
 }
 setTab(tab: LibraryTab, updateUrl = true) {
   this.activeTab = tab;
-
-  this.loadTabData(tab); // 🔥 usa cache inteligente
+  this.loadTabData(tab);
 
   if (updateUrl) {
     this.router.navigate([], {

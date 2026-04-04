@@ -61,7 +61,7 @@
         <app-section-header
           [title]="
             'Your Playlists' +
-            (playlistsState.data?.length
+            (playlistsState.data.length
               ? ' (' + playlistsState.data.length + ')'
               : '')
           "
@@ -87,7 +87,7 @@
         <app-section-header
           [title]="
             'Your Liked Songs' +
-            (likedState.data?.length ? ' (' + likedState.data.length + ')' : '')
+            (likedState.data.length ? ' (' + likedState.data.length + ')' : '')
           "
           description="The songs you loved the most, ranked by your listening habits.">
         </app-section-header>

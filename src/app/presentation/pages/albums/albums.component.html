@@ -6,44 +6,37 @@
   </app-navbar>
 
   <ng-container *ngIf="albumResource.state() as state">
-
     <app-resource-state
       [state]="state.state"
       [error]="state.error"
       [skeletonProps]="{ type: 'hero', count: 5 }"
       [emptyMessage]="'Album not found'">
-
       <app-spotify-hero
         *ngIf="album() as album"
-        [img]="album.images?.[0]?.url || ''"
+        [img]="album.images[0].url || ''"
         [title]="album.name || ''"
         [contentType]="'album'"
         [description]="albumDescription()">
-
-        <!-- HEADER -->
         <span class="flex flex-col">
           <app-section-header
-          [title]="'Tracks' + (tracks().length ? ' (' + tracks().length + ')' : '')"
-          >
-        </app-section-header>
+            [title]="
+              'Tracks' + (tracks().length ? ' (' + tracks().length + ')' : '')
+            ">
+          </app-section-header>
 
-        <!-- TRACKS -->
-        <app-list-of-songs
-          [tracks]="tracks()"
-          [showLike]="true"
-          [minTracks]="5">
-        </app-list-of-songs>
-
+          <app-list-of-songs
+            [tracks]="tracks()"
+            [showLike]="true"
+            [minTracks]="5">
+          </app-list-of-songs>
         </span>
-        <!-- POPULARITY -->
         <app-percentage-bar
           *ngIf="album.popularity !== undefined"
           [title]="'Album popularity'"
           [percentage]="album.popularity">
         </app-percentage-bar>
 
-        <!-- GENRES -->
-        <div *ngIf="album.genres?.length" class="text-sm text-gray-300">
+        <div *ngIf="album.genres.length" class="text-sm text-gray-300">
           <span class="font-semibold text-white">Genres:</span>
 
           <span *ngFor="let genre of album.genres; let last = last">
@@ -51,22 +44,17 @@
           </span>
         </div>
 
-        <!-- LABEL -->
         <div class="text-sm text-gray-400">
           <span class="font-semibold text-white">Label:</span>
           {{ album.label }}
         </div>
 
-        <!-- COPYRIGHT -->
         <div class="text-xs text-gray-400 space-y-1">
           <p *ngFor="let copyright of album.copyrights">
             {{ copyright.text }}
           </p>
         </div>
-
       </app-spotify-hero>
-
     </app-resource-state>
-
   </ng-container>
 </app-main-layout>
