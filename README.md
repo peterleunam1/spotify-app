@@ -2,7 +2,6 @@
 
 A modern web application that lets you explore your Spotify data in a clean, interactive, and visually engaging way. Discover your listening habits, favorite artists, albums, and tracks — all in one place.
 
----
 
 ## Important: Spotify API Access
 
@@ -18,20 +17,18 @@ If you want access:
 
 Once added, you'll be able to log in and use the app without restrictions.
 
----
 
 ## Overview
 
 ![Dashboard](/public/assets/images/home.PNG)
 ![Artist](/public/assets/images/artist.png)
-![Albums](/public/assets/images/album.PNG)
-![Tracks](/public/assets/images/song.PNG)
+![Albums](/public/assets/images/album.png)
+![Tracks](/public/assets/images/song.png)
 ![Search](/public/assets/images/searched-init.PNG)
 ![Search Results](/public/assets/images/search-result.png)
 ![Library](/public/assets/images/libray.png)
 ![Auth](/public/assets/images/sign-in.PNG)
 
----
 
 ## Built With
 
@@ -41,7 +38,6 @@ Once added, you'll be able to log in and use the app without restrictions.
 * [Spotify Web API](https://developer.spotify.com/)
 * [Angular Router](https://angular.io/guide/router)
 
----
 
 ## Features
 
@@ -55,7 +51,6 @@ Once added, you'll be able to log in and use the app without restrictions.
 * Music DNA (listening behavior insights)
 * Deep Library 
 
----
 
 ## Inspiration
 
@@ -63,7 +58,6 @@ This project is inspired by the
 [Spotify UI Kit on Figma](https://www.figma.com/design/eFrlbCLS6zHD9xGj7RmSse/Spotify-UI---Free-UI-Kit-%28Recreated%29-%28Community%29?node-id=0-346&t=1BPhx9bfPPgAnpI6-0),
 aiming to replicate and enhance the Spotify experience with a modern frontend architecture.
 
----
 
 ## Setup & Installation
 
@@ -74,7 +68,6 @@ Make sure you have installed:
 * [Node.js](https://nodejs.org/)
 * [Git](https://git-scm.com/)
 
----
 
 ### 2. Clone the repository
 
@@ -83,15 +76,11 @@ git clone https://github.com/peterleunam1/spotify-app
 cd spotify-app
 ```
 
----
-
 ### 3. Install dependencies
 
 ```bash
 npm install
 ```
-
----
 
 ### 4. Run in development mode
 
@@ -105,15 +94,11 @@ Then open:
 http://localhost:4200
 ```
 
----
-
 ### 5. Build for production
 
 ```bash
 ng build --configuration=production
 ```
-
----
 
 ### 6. Run tests
 
@@ -121,15 +106,12 @@ ng build --configuration=production
 npm run test
 ```
 
----
-
 ## Notes
 
 * This app requires a valid Spotify account.
 * Access is restricted to authorized users configured in the Spotify Developer Dashboard.
 * If you cannot log in, make sure your email has been registered.
 
----
 
 ## Contact
 
@@ -137,7 +119,6 @@ For access requests or questions:
 
 WhatsApp: **+57 300 385 5478**
 
----
 
 ## Author
 
